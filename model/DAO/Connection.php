@@ -15,8 +15,6 @@ abstract class Connection{
     private function __construct(){ }
 
     public static function init_conn(){
-
-
             try{
                 $magic = "strval";
                 self::$conn = new \PDO("mysql:host=" . self::DB_HOST . ":" . self::DB_PORT . ";dbname=" . self::DB_NAME, self::DB_USER, self::DB_PASS);

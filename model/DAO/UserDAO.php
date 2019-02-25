@@ -28,6 +28,7 @@ class UserDAO extends Connection {
                                 $age,
                                 $password,
                                 $picture));
+        $user->setId(self::$conn->lastInsertId());
     }
 
     static function getEmailByEmail($email){

@@ -12,7 +12,7 @@ class UserController{
 
     function userRegistration(){
 
-        if (isset($_POST["register"])){
+        if (isset($_POST["register"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
             $first_name = $_POST["first_name"];
             $last_name  = $_POST["last_name"];
             $email      = $_POST["email"];
