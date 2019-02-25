@@ -31,7 +31,7 @@ class UserDAO extends Connection {
         $user->setId(self::$conn->lastInsertId());
     }
 
-    static function getEmailByEmail($email){
+    static function getIdByEmail($email){
         $stmt = self::$conn->prepare("SELECT email FROM users WHERE email = ?");
         $stmt->execute(array($email));
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -39,7 +39,7 @@ class UserDAO extends Connection {
             return false;
         }
         else{
-            return true;
+            return $row["id"];
         }
     }
 
@@ -52,6 +52,18 @@ class UserDAO extends Connection {
         }
         else{
             return $row["password"];
+        }
+    }
+    static function getInfoById($id){
+        $stmt = self::$conn->prepare("SELECT first_name,last_name,email,picture,age 
+                              FROM users WHERE id = ?");
+        $stmt->execute(array($id));
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if(empty($row)){
+            return null;
+        }
+        else{
+            return $row;
         }
     }
 }
