@@ -11,11 +11,12 @@ namespace model\DAO;
 use model\Account;
 
 class AccountDAO extends Connection {
-    static function addAccount(Account $account, $user_id){
+    static function addAccount(Account $account){
         $name = $account->getAccName();
         $type = $account->getAccType();
         $balance = $account->getBalance();
         $currency = $account->getCurrency();
+        $user_id = $account->getUserId();
 
         $stmt = self::$conn->prepare("INSERT INTO accounts (acc_name, 
                                                               acc_type,
