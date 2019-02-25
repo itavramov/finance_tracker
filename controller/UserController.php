@@ -35,14 +35,14 @@ class UserController{
                 }
                 $cleanVars = DataValidator::validateRegistration($email,$password_1,$password_2,$first_name,$last_name,$age);
                 if ($cleanVars){
-                    if(UserDAO::getEmailByEmail($cleanVars["email"])){
+                    if(UserDAO::getIdByEmail($cleanVars["email"])){
                         throw new \Exception("User already exists");
                     }
                     else{
                         $user = new User($cleanVars["first_name"], $cleanVars["last_name"],
                             $cleanVars["email"], $cleanVars["age"], password_hash($cleanVars["pass"], PASSWORD_BCRYPT, ['cost'=>12]), $image_url);
                         UserDAO::addUser($user);
-                        header('Location: view/main.html');
+                        header('Location: view/dashboard.html');
                     }
                 }else{
                     throw new \Exception("Invalid credentials...");
@@ -52,9 +52,33 @@ class UserController{
             }
         }
     }
-    
+
     function userLogin(){
 
+        //TODO REFRESH LOGIC
+
+        if (isset($_SESSION["logged"]) && $_SESSION["logged"]){
+            require_once "view/dashboard.html";
+        }
+
+        if (isset($_POST["login"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = $_POST["email"];
+            $password = $_POST["pass"];
+            $db_pass = UserDAO::getPassByEmail($email);
+            if (password_verify($password, $db_pass)) {
+                //TODO UserDAO getUserInfoByMail() -> insert in the session array
+                $_SESSION["logged"] = true;
+                $_SESSION["email"] = $email;
+                $_SESSION["user_id"] = UserDAO::getIdByEmail($email);
+                require_once "view/dashboard.html";
+            } else {
+                throw new \Exception("Wrong email or password");
+            }
+        }
+    }
+
+    function userData(){
+        echo json_encode(UserDAO::getInfoById($_SESSION["id"]));
     }
 
     function logout(){
