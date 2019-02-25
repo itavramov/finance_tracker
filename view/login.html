@@ -1,22 +1,27 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Log in</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
-<form action="../index.php?target=User&action=UserLogin">
+<form action="../index.php?target=user&action=userLogin" method="post">
     <table>
         <tr>
             <td>E-mail:</td>
-            <td><input type="email" name="email"></td>
+            <td><input type="email" name="email" required></td>
         </tr>
+
         <tr>
             <td>Password:</td>
-            <td><input type="password" name="password"></td>
+            <td><input type="password" name="password_1"></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" name="login" value="Log in"></td>
+            <td colspan="2"><input type="submit" name="register" value="Register"></td>
         </tr>
     </table>
 </form>
