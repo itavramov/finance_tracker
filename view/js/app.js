@@ -27,7 +27,18 @@ function addAccount() {
             return response.json();
         })
         .then(function (myJson) {
-            
+            if(myJson.success === true){
+                var h = document.createElement("H1");
+                var t = document.createTextNode("Hello World");
+                h.appendChild(t);
+                document.body.appendChild(h);
+            }
+            else{
+                var h = document.createElement("H1");
+                var t = document.createTextNode("Sorry bro");
+                h.appendChild(t);
+                document.body.appendChild(h);
+            }
         })
         .catch(function (e) {
             alert(e.message);
