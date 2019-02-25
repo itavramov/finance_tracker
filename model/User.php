@@ -9,20 +9,15 @@ class User{
     private $email;
     private $password;
     private $img_url;
+    private $age;
     private $user_type;
 
-    /**
-     * User constructor.
-     * @param $first_name
-     * @param $last_name
-     * @param $email
-     * @param $password
-     */
-    public function __construct($first_name, $last_name, $email, $password, $img_url)
+    public function __construct($first_name, $last_name, $email, $age, $password, $img_url)
     {
         $this->first_name = $first_name;
         $this->last_name  = $last_name;
         $this->email      = $email;
+        $this->age        = $age;
         $this->password   = $password;
         $this->img_url    = $img_url;
     }
@@ -123,4 +118,24 @@ class User{
         $this->img_url = $img_url;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param mixed $age
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+    }
+
+    //unsetting private field-password
+    public function removePass(){
+        unset($this->password);
+    }
 }
