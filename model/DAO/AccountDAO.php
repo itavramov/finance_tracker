@@ -16,7 +16,7 @@ class AccountDAO extends Connection {
         $type = $account->getAccType();
         $balance = $account->getBalance();
         $currency = $account->getCurrency();
-        $user_id = $account->getUserId();
+        $user_id  = $account->getUserId();
 
         $stmt = self::$conn->prepare("INSERT INTO accounts (acc_name, 
                                                               acc_type,
@@ -25,7 +25,7 @@ class AccountDAO extends Connection {
                                                               user_id)
                                                               VALUES (?, ?, ?, ?, ?)");
         $stmt->execute(array($name, $type, $balance, $currency, $user_id));
-        if($stmt->rowCount() > 0){
+        if(self::$conn->lastInsertId() > 0){
             return true;
         }
         else{

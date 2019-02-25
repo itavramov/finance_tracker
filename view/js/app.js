@@ -13,15 +13,15 @@ function welcomeMessage() {
 }
 
 function addAccount() {
-    var acc_name = document.getElementById('acc_name');
-    var acc_type = document.getElementById('acc_type');
-    var balance = document.getElementById('balance');
-    var acc_currency = document.getElementById('acc_currency');
+    var acc_name = document.getElementById('acc_name').value;
+    var acc_type = document.getElementById('acc_type').value;
+    var balance = document.getElementById('balance').value;
+    var acc_currency = document.getElementById('acc_currency').value;
 
-    fetch("index.php?target=account&action=regAccount",{
+    fetch("../index.php?target=account&action=regAccount",{
         method: "POST",
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
-        body: "acc_name=" + acc_name + "acc_type=" + acc_type + "balance=" + balance + "acc_currency=" + acc_currency
+        body: "acc_name=" + acc_name + "&acc_type=" + acc_type + "&balance=" + balance + "&acc_currency=" + acc_currency
     })
         .then(function (response) {
             return response.json();
@@ -29,7 +29,7 @@ function addAccount() {
         .then(function (myJson) {
             if(myJson.success === true){
                 var h = document.createElement("H1");
-                var t = document.createTextNode("Hello World");
+                var t = document.createTextNode("You create successfully an account");
                 h.appendChild(t);
                 document.body.appendChild(h);
             }
