@@ -6,6 +6,7 @@ spl_autoload_register(function ($class){
     require_once __DIR__ . DIRECTORY_SEPARATOR . $class;
 });
 
+\model\DAO\Connection::init_conn();
 session_start();
 
 $fileNotExistsFlag = false;
