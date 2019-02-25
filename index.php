@@ -9,6 +9,12 @@ spl_autoload_register(function ($class){
 \model\DAO\Connection::init_conn();
 session_start();
 
+function exceptionHandler($exception){
+    echo "<h1>Error</h1>" . $exception->getMessage();
+}
+
+set_exception_handler("exceptionHandler");
+
 $fileNotExistsFlag = false;
 $controllerName = isset($_GET["target"]) ? $_GET["target"] : "base";
 $methodName     = isset($_GET["action"]) ? $_GET["action"] : "baseFunc";
@@ -27,7 +33,7 @@ if (class_exists($controllerClassName)){
         try{
             $controller->$methodName();
         }catch (Exception $exception){
-            header("Location: view/error.html");
+            echo "error -> " . $exception->getMessage();
             die();
         }
     }else{

@@ -11,8 +11,7 @@ class UserController{
 
     function userRegistration(){
 
-        if (isset($_POST["register"]) && $_SERVER["REQUEST_METHOD"] == "post"){
-
+        if (isset($_POST["register"])){
             $first_name = $_POST["first_name"];
             $last_name  = $_POST["last_name"];
             $email      = $_POST["email"];
@@ -25,7 +24,7 @@ class UserController{
             //$image_url = "view/uploads/user_image/noPicture.png";
             if (!empty($first_name) && !empty($last_name) && !empty($last_name) && !empty($email)
                 && !empty($age) && !empty($password_1) && !empty($password_2)){
-                if (!isset($_FILES["user_image"]["tmp_name"])){
+                if (empty($_FILES["user_image"]["tmp_name"])){
                     //TODO MORE VALIDATIONS
                     $image_url = "view/uploads/user_image/noPicture.png";
                 }else{
@@ -36,26 +35,16 @@ class UserController{
                 $cleanVars = DataValidator::validateRegistration($email,$password_1,$password_2,$first_name,$last_name,$age);
                 if ($cleanVars){
                     $user = new User($cleanVars["first_name"], $cleanVars["last_name"],
-                        $cleanVars["email"], $cleanVars["age"], $cleanVars["pass"], $image_url);
+                        $cleanVars["email"], $cleanVars["age"], password_hash($cleanVars["pass"], PASSWORD_BCRYPT, ['cost'=>12]), $image_url);
                     UserDAO::addUser($user);
                     header('Location: view/main.html');
                 }else{
                     throw new \Exception("Invalid credentials...");
                 }
             }else{
-                throw new \Exception("Invalid credentials...");
+                throw new \Exception("Empty credentials...");
             }
         }
-
-        //TODO POST VARIABLES
-
-
-        //TODO VALIDATE VARIABLES
-
-
-
-
-
     }
 
     function userLogin(){
