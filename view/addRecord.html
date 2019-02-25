@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add record</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <td>Account name</td>
+        <td><input type="text" name="acc_name" id="acc_name"><br></td>
+    </tr>
+    <tr>
+        <td>Account name</td>
+        <td>
+            <select name="acc_type" id="acc_type">
+                <option value="cash">Cash</option>
+                <option value="common">Common</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Balance</td>
+        <td><input type="number" name="balance" id="balance"></td>
+    </tr>
+    <tr>
+        <td>Currency</td>
+        <td>
+            <select name="acc_currency" id="acc_currency">
+                <option value="bgn">BGN</option>
+                <option value="usd">USD</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"><button onclick="addAccount()"></button></td>
+    </tr>
+</table>
+<script src="view/js/app.js"></script>
+</body>
+</html>

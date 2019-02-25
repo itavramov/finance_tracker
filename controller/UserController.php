@@ -78,7 +78,7 @@ class UserController{
     }
 
     function userData(){
-        echo json_encode(UserDAO::getInfoById($_SESSION["id"]));
+        echo json_encode(UserDAO::getInfoById($_SESSION["user_id"]));
     }
 
     function logout(){
