@@ -5,6 +5,7 @@ namespace controller;
 use model\DAO\UserDAO;
 
 use model\User;
+use mysql_xdevapi\Exception;
 
 
 class UserController{
@@ -34,10 +35,15 @@ class UserController{
                 }
                 $cleanVars = DataValidator::validateRegistration($email,$password_1,$password_2,$first_name,$last_name,$age);
                 if ($cleanVars){
-                    $user = new User($cleanVars["first_name"], $cleanVars["last_name"],
-                        $cleanVars["email"], $cleanVars["age"], password_hash($cleanVars["pass"], PASSWORD_BCRYPT, ['cost'=>12]), $image_url);
-                    UserDAO::addUser($user);
-                    header('Location: view/main.html');
+                    if(UserDAO::getEmailByEmail($cleanVars["email"])){
+                        throw new \Exception("User already exists");
+                    }
+                    else{
+                        $user = new User($cleanVars["first_name"], $cleanVars["last_name"],
+                            $cleanVars["email"], $cleanVars["age"], password_hash($cleanVars["pass"], PASSWORD_BCRYPT, ['cost'=>12]), $image_url);
+                        UserDAO::addUser($user);
+                        header('Location: view/main.html');
+                    }
                 }else{
                     throw new \Exception("Invalid credentials...");
                 }

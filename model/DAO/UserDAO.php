@@ -29,4 +29,28 @@ class UserDAO extends Connection {
                                 $password,
                                 $picture));
     }
+
+    static function getEmailByEmail($email){
+        $stmt = self::$conn->prepare("SELECT email FROM users WHERE email = ?");
+        $stmt->execute(array($email));
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if(empty($row)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    static function getPassByEmail($email){
+        $stmt = self::$conn->prepare("SELECT pass FROM users WHERE email = ?");
+        $stmt->execute(array($email));
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if(empty($row)){
+            return null;
+        }
+        else{
+            return $row["password"];
+        }
+    }
 }
