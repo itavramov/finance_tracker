@@ -1,3 +1,4 @@
+//THIS IS JUST THE BEGINING
 function welcomeMessage() {
     fetch("index.php?target=user&action=userData")
         .then(function (response) {
