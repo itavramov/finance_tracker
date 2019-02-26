@@ -32,17 +32,19 @@ class RecordDAO extends Connection {
                 $acc_id]);
 
             if($cat_type["category_type"] == "income"){
-                $stmt = self::$conn->prepare("UPDATE accounts SET amount = amount + ? WHERE id = ?");
+                $stmt = self::$conn->prepare("UPDATE accounts SET balance = balance + ? WHERE acc_id = ?");
                 $stmt->execute(array($amount, $acc_id));
             }
             else{
-                $stmt = self::$conn->prepare("UPDATE accounts SET amount = amount - ? WHERE id = ?");
+                $stmt = self::$conn->prepare("UPDATE accounts SET balance = balance - ? WHERE acc_id = ?");
                 $stmt->execute(array($amount, $acc_id));
             }
-
+            self::$conn->commit();
             return true;
         }
         catch (\PDOException $exception){
+
+            echo "error -> " . $exception->getMessage();
             return false;
         }
 
