@@ -42,7 +42,7 @@ class UserController{
                         $user = new User($cleanVars["first_name"], $cleanVars["last_name"],
                             $cleanVars["email"], $cleanVars["age"], password_hash($cleanVars["pass"], PASSWORD_BCRYPT, ['cost'=>12]), $image_url);
                         UserDAO::addUser($user);
-                        header('Location: view/dashboard.html');
+                        header('Location: view/login.html');
                     }
                 }else{
                     throw new \Exception("Invalid credentials...");

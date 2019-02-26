@@ -12,13 +12,14 @@ class DataValidator{
             $clean["first_name"] = NULL;
             $clean["last_name"]  = NULL;
         }
-        if ($pass1 === $pass2){
+//        if ($pass1 === $pass2){
             if (preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $pass1)){
                 $clean["pass"] = $pass1;
             } else {
+                throw new \Exception("Wrong pass error");
                 $clean["pass"] = NULL;
             }
-        }
+       // }
         if (filter_var($age,FILTER_VALIDATE_INT,["options" => ["min_range" => 18]])){
             $clean["age"] = $age;
         }else{
