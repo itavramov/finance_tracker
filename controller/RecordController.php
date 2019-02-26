@@ -12,7 +12,7 @@ class RecordController{
         $record_desc = $_POST["record_desc"];
         $amount      = $_POST["amount"];
         $category_id = $_POST["category_id"];
-        $acc_id      = 1;
+        $acc_id      = 12;
 
         $new_record = new Record($record_name,$record_desc,$amount,$category_id,$acc_id);
         $response = [];

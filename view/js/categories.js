@@ -28,3 +28,22 @@ function addCategory(){
             alert(e.message);
         })
 }
+
+function fillCategories(){
+    fetch("index.php?target=category&action=allUserCategories")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            var cat_select = document.getElementById('categorySelect');
+            for (var i=0; i < myJson.length; i++){
+                var option = document.createElement('option');
+                option.value = myJson[i]["category_id"];
+                option.text = myJson[i]["category_name"];
+                cat_select.options.add(option,1);
+            }
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}

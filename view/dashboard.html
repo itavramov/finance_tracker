@@ -9,7 +9,7 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
 </head>
-<body onload="welcomeMessage()">
+<body onload="welcomeMessage(); fillCategories();">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
             <a href="index.html" class="navbar-brand">Finance Tracker</a>
@@ -102,10 +102,6 @@
                         <div class="form-group">
                             <label for="categorySelect">Category</label>
                             <select id="categorySelect" class="form-control">
-                                <option selected>Choose...</option>
-                                <option value="1">Car</option>
-                                <option value="2">Food</option>
-                                <option value="3">Vacation</option>
                             </select>
                         </div>
                 </div>
@@ -145,6 +141,7 @@
         </div>
     </div>
     <script src="view/js/app.js"></script>
+    <script src="view/js/categories.js"></script>
     <script src="view/js/recordJS.js"></script>
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
