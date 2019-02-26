@@ -2,6 +2,7 @@
 namespace model\DAO;
 abstract class Connection{
 
+    /** @var \PDO $conn*/
     protected static $conn = NULL;
 
     private function __construct(){ }
