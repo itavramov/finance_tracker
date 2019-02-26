@@ -9,7 +9,7 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
 </head>
-<body onload="welcomeMessage(); fillCategories();">
+<body onload="welcomeMessage(); fillCategories(); fillAccounts();">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
             <a href="index.html" class="navbar-brand">Finance Tracker</a>
@@ -102,8 +102,15 @@
                         <div class="form-group">
                             <label for="categorySelect">Category</label>
                             <select id="categorySelect" class="form-control">
+                                <option selected>Choose...</option>
                             </select>
                         </div>
+                    <div class="form-group">
+                        <label for="accSelect">Account</label>
+                        <select id="accSelect" class="form-control">
+                            <option selected>Choose...</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary btn-block" data-dismiss="modal" onclick="addRecord()">Add Record</button>
@@ -143,6 +150,7 @@
     <script src="view/js/app.js"></script>
     <script src="view/js/categories.js"></script>
     <script src="view/js/recordJS.js"></script>
+    <script src="view/js/accountsJS.js"></script>
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

@@ -19,4 +19,13 @@ class AccountController{
         $arr["success"] = AccountDAO::addAccount($acc);
         echo json_encode($arr);
     }
+
+    function allUserAccounts(){
+
+            $user_id = $_SESSION["user_id"];
+            $accounts = [];
+            $accounts = AccountDAO::getAllAccountsById($user_id);
+            echo json_encode($accounts);
+
+    }
 }

@@ -33,4 +33,20 @@ class AccountDAO extends Connection {
             return false;
         }
     }
+
+    static function getAllAccountsById($user_id){
+        try{
+            $stmt = self::$conn->prepare("SELECT acc_id,acc_name FROM accounts WHERE user_id = ?");
+            $stmt->execute(array($user_id));
+            $accounts = [];
+            $accounts = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+            return $accounts;
+        }
+        catch (\PDOException $exception){
+            echo 'Problem with db categories ->' . $exception->getMessage();
+        }
+
+    }
+
 }
