@@ -4,12 +4,13 @@ function addRecord(){
     var record_desc = document.getElementById("recordDesc").value;
     var amount      = document.getElementById("amount").value;
     var category_id = document.getElementById("categorySelect").value;
+    var acc_id      = document.getElementById("accSelect").value;
 
     fetch("index.php?target=record&action=recordRegistration",{
         method: "POST",
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
         body: "record_name=" + record_name + "&record_desc=" + record_desc + "&amount=" + amount +
-            "&category_id=" + category_id
+            "&category_id=" + category_id + "&acc_id=" + acc_id
     })
         .then(function (response) {
             return response.json();
