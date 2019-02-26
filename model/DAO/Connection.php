@@ -9,7 +9,6 @@ abstract class Connection{
 
     public static function init_conn(){
             try{
-                //$magic = "strval";
                 self::$conn = new \PDO("mysql:host=" . DB_HOST . ":" . DB_PORT . ";dbname=" .
                     DB_NAME, DB_USER, DB_PASS);
                 self::$conn->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
