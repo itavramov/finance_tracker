@@ -6,15 +6,17 @@ class Category{
     private $category_id;
     private $category_name;
     private $category_type;
+    private $user_id;
 
     /**
      * Category constructor.
      * @param $category_name
      * @param $category_type
      */
-    public function __construct($category_name, $category_type){
+    public function __construct($category_name, $category_type, $user_id){
         $this->category_name = $category_name;
         $this->category_type = $category_type;
+        $this->user_id = $user_id;
     }
 
     /**
@@ -63,5 +65,13 @@ class Category{
     public function setCategoryType($category_type)
     {
         $this->category_type = $category_type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
     }
 }
