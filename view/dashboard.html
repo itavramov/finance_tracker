@@ -35,7 +35,48 @@
         </div>
     </nav>
     <h1 id="hello_section">Success</h1>
-    <a href="view/addAccount.html">Add record</a>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAccount">Add Account</button>
+    <!-- MODAL window  ADD ACCOUNT -->
+    <div class="modal fade text-dark" id="addAccount">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Account</h5>
+                    <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                        <div class="form-group">
+                            <label>Account Name</label>
+                            <input type="text" name="acc_name" id="acc_name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="acc_type">Account type</label>
+                            <select id="acc_type" class="form-control">
+                                <option selected>Choose...</option>
+                                <option value="cash">Cash</option>
+                                <option value="common">Common</option>
+                                <option value="bank">Bank</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="acc_currency">Account type</label>
+                            <select id="acc_currency" class="form-control">
+                                <option selected>Choose...</option>
+                                <option value="bgn">BGN</option>
+                                <option value="usd">USD</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Balance</label>
+                            <input type="number" step="0.01" name="balance" id="balance" class="form-control">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-block" data-dismiss="modal" onclick="addAccount()">Add Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addRecord">Add Record</button>
     <!-- MODAL window  ADD RECORD -->
     <div class="modal fade text-dark" id="addRecord">
@@ -43,10 +84,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Add Record</h5>
-                    <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <button class="close" data-dismiss="modal" id="close_btn"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <form class="" action="index.html" method="post">
                         <div class="form-group">
                             <label>Record Name</label>
                             <input type="text" name="record_name" id="recordName" class="form-control">
@@ -68,7 +108,6 @@
                                 <option value="3">Vacation</option>
                             </select>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary btn-block">Add Record</button>
@@ -76,7 +115,37 @@
             </div>
         </div>
     </div>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addCategory">Add Category</button>
+    <!-- MODAL window  ADD CATEGORY -->
+    <div class="modal fade text-dark" id="addCategory">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Category</h5>
+                    <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Category Name</label>
+                        <input type="text" name="cat_name" id="cat_name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="cat_type">Category type</label>
+                        <select id="cat_type" class="form-control">
+                            <option selected>Choose...</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-block" data-dismiss="modal" onclick="addCategory()">Add Category</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="view/js/app.js"></script>
+    <script src="view/js/categories.js"></script>
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

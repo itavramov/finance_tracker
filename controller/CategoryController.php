@@ -14,14 +14,16 @@ use model\DAO\CategoryDAO;
 
 class CategoryController{
     function regCategory(){
-        $cat_name = $_POST["name"];
-        $cat_type = $_POST["type"];
+        $cat_name = $_POST["cat_name"];
+        $cat_type = $_POST["cat_type"];
         $user_id = $_SESSION["user_id"];
+
+        //TODO validations
 
         $category = new Category($cat_name, $cat_type, $user_id);
 
         $arr["success"] = CategoryDAO::addCategory($category);
-        echo json_encode($arr["success"]);
+        echo json_encode($arr);
     }
 
     function allUserCategories(){
