@@ -25,6 +25,7 @@ class AccountDAO extends Connection {
                                                               user_id)
                                                               VALUES (?, ?, ?, ?, ?)");
         $stmt->execute(array($name, $type, $balance, $currency, $user_id));
+
         if(self::$conn->lastInsertId() > 0){
             return true;
         }

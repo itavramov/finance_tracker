@@ -2,7 +2,6 @@
 namespace model\DAO;
 abstract class Connection{
 
-    /* @var $conn \PDO */
     protected static $conn = NULL;
 
     private function __construct(){ }
@@ -15,7 +14,5 @@ abstract class Connection{
             }catch (\PDOException $exception){
                 echo "We can't init a connection..." . $exception->getMessage();
             }
-
-
     }
 }
