@@ -38,6 +38,15 @@ class RecordDAO extends Connection {
                 $stmt->execute(array($amount, $acc_id));
             }
             else{
+                $stmt2 = self::$conn->prepare("SELECT budget_id FROM budgets WHERE category_id = ? AND 
+                                                          curdate() BETWEEN from_date AND to_date");
+                $stmt2->execute(array($category_id));
+                if($stmt2->rowCount() > 0){
+                    $row = $stmt2->fetch(\PDO::FETCH_ASSOC);
+                    $stmt = self::$conn->prepare("UPDATE budgets SET current_amount = current_amount - ? WHERE budget_id = ?");
+                    $stmt->execute(array($row["budget_id"]));
+                }
+
                 $stmt = self::$conn->prepare("UPDATE accounts SET balance = balance - ? WHERE acc_id = ?");
                 $stmt->execute(array($amount, $acc_id));
             }
@@ -51,5 +60,4 @@ class RecordDAO extends Connection {
         }
 
     }
-
 }
