@@ -1,19 +1,23 @@
-function addCategory(){
-    var cat_name = document.getElementById('acc_name').value;
-    var cat_type = document.getElementById('acc_type').value;
+function addRecord(){
 
-    fetch("../index.php?target=category&action=regCategory",{
+    var record_name = document.getElementById("recordName").value;
+    var record_desc = document.getElementById("recordDesc").value;
+    var amount      = document.getElementById("amount").value;
+    var category_id = document.getElementById("categorySelect").value;
+
+    fetch("index.php?target=record&action=recordRegistration",{
         method: "POST",
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
-        body: "cat_name=" + cat_name + "&cat_type=" + cat_type
+        body: "record_name=" + record_name + "&record_desc=" + record_desc + "&amount=" + amount +
+            "&category_id=" + category_id
     })
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
-            if(myJson.success === true){
+            if(myJson.message === "success"){
                 var h = document.createElement("H1");
-                var t = document.createTextNode("You create successfully an account");
+                var t = document.createTextNode("You create successfully an record!");
                 h.appendChild(t);
                 document.body.appendChild(h);
             }

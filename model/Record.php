@@ -20,12 +20,11 @@ class Record{
      * @param $category_id
      * @param $acc_id
      */
-    public function __construct($record_name, $record_desc, $amount, $date, $category_id, $acc_id)
+    public function __construct($record_name, $record_desc, $amount, $category_id, $acc_id)
     {
         $this->record_name = $record_name;
         $this->record_desc = $record_desc;
         $this->amount = $amount;
-        $this->date = $date;
         $this->category_id = $category_id;
         $this->acc_id = $acc_id;
     }

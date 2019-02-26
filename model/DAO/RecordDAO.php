@@ -14,15 +14,15 @@ class RecordDAO extends Connection {
         $category_id = $record->getCategoryId();
         $acc_id      = $record->getAccId();
 
-        $addRecord_query = "INSERT INTO records (record_name,record_desc,amount,category_id,acc_id,date)
-                                      VALUES (?,?,?,?,?,now())";
+        $addRecord_query = "INSERT INTO records (record_name,record_desc,amount,category_id,acc_id,action_date)
+                                      VALUES (?,?,?,?,?,curdate())";
 
         $stmt = self::$conn->prepare($addRecord_query);
-        $stmt->execute($record_name,
+        $stmt->execute([$record_name,
                         $record_desc,
                         $amount,
                         $category_id,
-                        $acc_id);
+                        $acc_id]);
 
         if(self::$conn->lastInsertId() > 0){
             return true;
