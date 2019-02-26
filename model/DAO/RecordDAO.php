@@ -13,7 +13,7 @@ class RecordDAO extends Connection {
         $amount      = $record->getAmount();
         $category_id = $record->getCategoryId();
         $acc_id      = $record->getAccId();
-
+        
         $addRecord_query = "INSERT INTO records (record_name,record_desc,amount,category_id,acc_id,action_date)
                                       VALUES (?,?,?,?,?,curdate())";
 
