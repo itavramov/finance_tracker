@@ -3,14 +3,12 @@
 namespace model\DAO;
 
 abstract class Connection{
+
     const DB_NAME = "financetracker";
     const DB_HOST = "127.0.0.1";
-    //3306 , 8889
-    const DB_PORT = "3306";
+    const DB_PORT = "8889";
     const DB_USER = "root";
-    //no pass
-    const DB_PASS = "";
-
+    const DB_PASS = "root";
     /* @var $conn \PDO */
     protected static $conn = NULL;
 
@@ -18,6 +16,7 @@ abstract class Connection{
 
     public static function init_conn(){
             try{
+
 //                $magic = "strval";
                 self::$conn = new \PDO("mysql:host=" . self::DB_HOST .
                     ":" . self::DB_PORT . ";dbname=" . self::DB_NAME, self::DB_USER, self::DB_PASS);
