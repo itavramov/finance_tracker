@@ -35,11 +35,7 @@ function addRecord(){
 }
 
 function fillRecordsTable() {
-    fetch("../index.php?target=record&action=listRecords",{
-        method: "POST",
-        headers: {'Content-type': 'application/x-www-form-urlencoded'},
-        body: "user_id=" + 4
-    })
+    fetch("../index.php?target=record&action=listRecords")
         .then(function (response) {
             return response.json();
         })
