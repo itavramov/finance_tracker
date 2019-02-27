@@ -7,7 +7,7 @@ function incomeExpenseDonut() {
             var ctx = document.getElementById("myChart");
             var data_arr = {
                 datasets: [{
-                    data: [myJson[0]["total_sum"], 54322312],
+                    data: [myJson[0]["total_sum"], myJson[1]["total_sum"]],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)'
@@ -20,32 +20,7 @@ function incomeExpenseDonut() {
                 ]
             };
             var options = {
-                animation: {
-                    duration: 5000,
-                    onProgress: function(animation) {
-                        progress.value = animation.currentStep / animation.numSteps;
-                    },
-                    onComplete: function() {
-                        window.setTimeout(function() {
-                            progress.value = 0;
-                        }, 2000);
-                    }
-                },
-                maintainAspectRatio: false,
-                scales: {
-                    yAxes: [{
-                        stacked: true,
-                        gridLines: {
-                            display: true,
-                            color: "rgba(255,99,132,0.2)"
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            display: false
-                        }
-                    }]
-                }
+                maintainAspectRatio: false
             };
             var firstDiagram = new Chart(ctx, {
                 type: 'doughnut',
