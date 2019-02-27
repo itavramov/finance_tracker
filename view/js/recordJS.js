@@ -35,7 +35,11 @@ function addRecord(){
 }
 
 function fillRecordsTable() {
-    fetch("index.php?target=record&action=listRecords")
+    fetch("../index.php?target=record&action=listRecords",{
+        method: "POST",
+        headers: {'Content-type': 'application/x-www-form-urlencoded'},
+        body: "user_id=" + 4
+    })
         .then(function (response) {
             return response.json();
         })
@@ -48,9 +52,10 @@ function fillRecordsTable() {
                         columns: [
                             {title: "Name"},
                             {title: "Description"},
-                            {title: "Category"},
                             {title: "Amount"},
-                            {title: "Date"}
+                            {title: "Date"},
+                            {title: "Category"},
+                            {title: "Category Type"}
                         ]
                     });
             });
