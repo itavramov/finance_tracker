@@ -43,8 +43,9 @@ class RecordDAO extends Connection {
                 $stmt2->execute(array($category_id));
                 if($stmt2->rowCount() > 0){
                     $row = $stmt2->fetch(\PDO::FETCH_ASSOC);
-                    $stmt = self::$conn->prepare("UPDATE budgets SET current_amount = current_amount - ? WHERE budget_id = ?");
-                    $stmt->execute(array($row["budget_id"]));
+                    $stmt = self::$conn->prepare("UPDATE budgets SET current_amount = current_amount - ? 
+                                                            WHERE budget_id = ?");
+                    $stmt->execute(array($amount, $row["budget_id"]));
                 }
 
                 $stmt = self::$conn->prepare("UPDATE accounts SET balance = balance - ? WHERE acc_id = ?");
@@ -59,5 +60,24 @@ class RecordDAO extends Connection {
             return false;
         }
 
+    }
+
+    static function getAllRecordsByUser($user_id){
+        $stmt = self::$conn->prepare("SELECT r.record_name, 
+                                                      r.record_desc, 
+                                                      r.amount, 
+                                                      r.action_date, 
+                                                      s.category_name, 
+                                                      s.category_type
+                                                FROM records r
+                                                JOIN categories s ON (r.category_id = s.category_id)
+                                                JOIN accounts a ON (a.acc_id = r.acc_id)
+                                                JOIN users u ON (u.user_id = a.user_id)
+                                                WHERE u.user_id = ?");
+        $stmt->execute(array($user_id));
+        $result = [];
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $result;
     }
 }

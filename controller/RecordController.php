@@ -23,4 +23,11 @@ class RecordController{
         }
         echo json_encode($response);
     }
+    function listRecords(){
+        $user_id = $_SESSION["user_id"];
+
+        $allRecords = RecordDAO::getAllRecordsByUser($user_id);
+
+        echo json_encode($allRecords);
+    }
 }
