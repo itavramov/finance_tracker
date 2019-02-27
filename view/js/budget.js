@@ -1,4 +1,4 @@
-function addRecord(){
+function addBudget(){
 
     var budget_name   = document.getElementById("budget_name").value;
     var budget_desc   = document.getElementById("budget_desc").value;
@@ -17,9 +17,9 @@ function addRecord(){
             return response.json();
         })
         .then(function (myJson) {
-            if(myJson.message === "success"){
+            if(myJson.response === "success"){
                 var h = document.createElement("H1");
-                var t = document.createTextNode("You create successfully an record!");
+                var t = document.createTextNode("You create successfully an budget!");
                 h.appendChild(t);
                 document.body.appendChild(h);
             }

@@ -17,6 +17,7 @@ class BudgetDAO extends Connection {
         $budget_name = $budget->getBudgetName();
         $budget_desc = $budget->getBudgetDesc();
         $current_amount = $budget->getCurrentAmount();
+        $init_amount    = $budget->getInitAmount();
         $category_id = $budget->getCategoryId();
         $from_date = $budget->getFromDate();
         $to_date = $budget->getToDate();
@@ -29,10 +30,13 @@ class BudgetDAO extends Connection {
                                                             category_id,
                                                             from_date,
                                                             to_date)
-                                                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                                                            VALUES (?, ?, ?, ?, ?, ?,
+                                                             STR_TO_DATE(?, '%Y-%m-%d'),
+                                                             STR_TO_DATE(?, '%Y-%m-%d'))");
         $stmt->execute(array($user_id,
                             $budget_name,
                             $budget_desc,
+                            $init_amount,
                             $current_amount,
                             $category_id,
                             $from_date,
