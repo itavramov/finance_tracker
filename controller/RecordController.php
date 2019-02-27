@@ -24,14 +24,19 @@ class RecordController{
         echo json_encode($response);
     }
     function listRecords(){
-        $user_id   =$_SESSION["user_id"];
-        //$user_id = $_POST["user_id"];
+        $user_id = $_SESSION["user_id"];
         $allRecords = RecordDAO::getAllRecordsByUser($user_id);
         $result = [];
         foreach ($allRecords as $allRecord) {
             $result[] = array_values(get_object_vars($allRecord));
-
         }
         echo json_encode(array_values($result));
+    }
+    function getSumTotal(){
+        $user_id = $_SESSION["user_id"];
+
+        $sum = RecordDAO::sumAllExpenses($user_id);
+
+        echo  json_encode($sum);
     }
 }

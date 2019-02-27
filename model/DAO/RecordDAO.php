@@ -63,21 +63,40 @@ class RecordDAO extends Connection {
     }
 
     static function getAllRecordsByUser($user_id){
-        $stmt = self::$conn->prepare("SELECT
-                                                      r.record_name, 
-                                                      r.record_desc, 
-                                                      r.amount, 
-                                                      r.action_date, 
-                                                      s.category_name, 
-                                                      s.category_type
-                                                FROM records r
-                                                JOIN categories s ON (r.category_id = s.category_id)
-                                                JOIN accounts a ON (a.acc_id = r.acc_id)
-                                                JOIN users u ON (u.user_id = a.user_id)
-                                                WHERE u.user_id = ?");
+
+        $records_query = "SELECT  r.record_name, 
+                                  r.record_desc, 
+                                  r.amount, 
+                                  r.action_date, 
+                                  s.category_name, 
+                                  s.category_type
+                            FROM records r
+                            JOIN categories s ON (r.category_id = s.category_id)
+                            JOIN accounts a ON (a.acc_id = r.acc_id)
+                            JOIN users u ON (u.user_id = a.user_id)
+                            WHERE u.user_id = ?";
+
+        $stmt = self::$conn->prepare($records_query);
         $stmt->execute(array($user_id));
         $result = [];
         $result = $stmt->fetchAll(\PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    static function sumAllExpenses($user_id){
+        $sum_query = "SELECT category_type, 
+                                SUM(r.amount) as total_sum
+                            FROM records r
+                            JOIN categories s ON (r.category_id = s.category_id)
+                            JOIN accounts a ON (a.acc_id = r.acc_id)
+                            JOIN users u ON (u.user_id = a.user_id)
+                            WHERE u.user_id = ?
+                            GROUP BY category_type";
+
+        $stmt = self::$conn->prepare($sum_query);
+        $stmt->execute(array($user_id));
+        $result = [];
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
     }
 }
