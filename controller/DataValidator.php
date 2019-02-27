@@ -37,4 +37,7 @@ class DataValidator{
             return false;
         }
     }
+    //TODO ADD BUDGET VALIDATION
+    //TODO ADD ACCOUNT VALIDATION
+    //TODO ADD CATEGORY VALIDATION
 }

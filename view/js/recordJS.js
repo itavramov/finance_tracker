@@ -33,3 +33,29 @@ function addRecord(){
             alert(e.message);
         })
 }
+
+function fillRecordsTable() {
+    fetch("index.php?target=record&action=listRecords")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            var recordSet = myJson;
+            $(document).ready(function () {
+                $('#records').DataTable(
+                    {
+                        data: recordSet,
+                        columns: [
+                            {title: "Name"},
+                            {title: "Description"},
+                            {title: "Category"},
+                            {title: "Amount"},
+                            {title: "Date"}
+                        ]
+                    });
+            });
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
