@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 </head>
-<body onload="welcomeMessage(); fillCategories(); fillAccounts(); incomeExpenseDonut();">
+<body onload="welcomeMessage(); fillCategories(); fillAccounts(); incomeExpenseDonut(); cashFlowBars();">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
             <a href="index.html" class="navbar-brand">Finance Tracker</a>
@@ -42,6 +42,19 @@
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addBudget">Add Budget</button>
     <h1>Charts</h1>
     <div style="width: 90%; height: 50vh;"><canvas id="myChart"></canvas></div>
+    <div style="width: 50%; margin: auto;">
+        <span class = "label label-default">Cash flow</span>
+        <hr>
+        <span class = "label label-default" id="cash_flow_value"></span><br><br>
+        <label for="progressBarIncome">Income</label>
+        <div class="progress" style="height: 30px; margin-bottom: 10px; margin-top: 10px;">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" id="progressBarIncome"></div>
+        </div>
+        <label for="progressBarExpense">Expense</label>
+        <div class="progress" style="height: 30px;">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progressBarExpense"></div>
+        </div>
+    </div>
 
     <!-- MODAL window  ADD BUDGET -->
     <div class="modal fade text-dark" id="addBudget">
@@ -209,5 +222,6 @@
     <script src="view/js/recordJS.js"></script>
     <script src="view/js/accountsJS.js"></script>
     <script src="view/js/chart.js"></script>
+    <script src="view/js/cashFlowBars.js"></script>
 </body>
 </html>

@@ -7,10 +7,10 @@ function incomeExpenseDonut() {
             var ctx = document.getElementById("myChart");
             var data_arr = {
                 datasets: [{
-                    data: [myJson[0]["total_sum"], myJson[1]["total_sum"]],
+                    data: [myJson[1]["total_sum"], myJson[0]["total_sum"]],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
                     ],
                 }],
 
