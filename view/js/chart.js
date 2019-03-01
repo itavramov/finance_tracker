@@ -34,10 +34,51 @@ function incomeExpenseDonut() {
             var options = {
                 maintainAspectRatio: false
             };
+
             var firstDiagram = new Chart(ctx, {
                 type: 'doughnut',
                 data: data_arr,
                 options: options
+            });
+
+
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
+
+function incomeVsExpenseLineChart() {
+    fetch("index.php?target=record&action=listIncomesAndExpense")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+
+            var ctx = document.getElementById("incomeVsExpenseLineChart");
+
+            var thirdDiagram = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: myJson[0],
+                    datasets: [{
+                        backgroundColor: "rgba(40, 203, 124, 0.3)",
+                        data: myJson[1],
+                        showLine: true,
+                    },
+                    {
+                        backgroundColor: "rgba(231, 76, 60,0.3)",
+                        data: myJson[3],
+                        showLine: true,
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            stacked: false
+                        }]
+                    }
+                }
             });
 
 

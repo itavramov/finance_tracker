@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="view/css/main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 </head>
-<body onload="welcomeMessage(); fillCategories(); fillAccounts(); incomeExpenseDonut(); cashFlowBars(); getLastFiveRecords();">
+<body onload="welcomeMessage(); fillCategories(); fillAccounts(); incomeExpenseDonut(); cashFlowBars(); getLastFiveRecords();
+    incomeVsExpenseLineChart();">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
             <a href="index.html" class="navbar-brand">Finance Tracker</a>
@@ -43,49 +44,53 @@
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addBudget">Add Budget</button>
 
     <div id="master_container">
-    <div class="box" id="box_content">
-        <div class="box-header with-border">
-            <h3 class="box-title">Last 5 transactions</h3>
-            <div class="box-tools pull-right">
-                <!-- Collapse Button -->
-                <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
+        <div class="box" id="box_content">
+            <div class="box-header with-border">
+                <h3 class="box-title">Last 5 transactions</h3>
+                <div class="box-tools pull-right">
+                    <!-- Collapse Button -->
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <!-- /.box-tools -->
             </div>
-            <!-- /.box-tools -->
+            <!-- /.box-header -->
+            <!--<div class="box-body">-->
+                <!--The body of the box1-->
+            <!--</div>-->
+            <!--<div class="box-body">-->
+                <!--The body of the box2-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /.box-body &ndash;&gt;-->
+            <!--<div class="box-footer">-->
+                <!--The footer of the box-->
+            <!--</div>-->
+            <!-- box-footer -->
         </div>
-        <!-- /.box-header -->
-        <!--<div class="box-body">-->
-            <!--The body of the box1-->
-        <!--</div>-->
-        <!--<div class="box-body">-->
-            <!--The body of the box2-->
-        <!--</div>-->
-        <!--&lt;!&ndash; /.box-body &ndash;&gt;-->
-        <!--<div class="box-footer">-->
-            <!--The footer of the box-->
-        <!--</div>-->
-        <!-- box-footer -->
-    </div>
-    <!-- /.box -->
-    <div style="width: 30%; margin: 10px 10px 10px 50px; display: inline-block;">
-        <span class = "label label-default">Cash flow</span>
-        <hr>
-        <span class = "label label-default" id="cash_flow_value"></span><br><br>
-        <label for="progressBarIncome">Income</label>
-        <div class="progress" style="height: 30px; margin-bottom: 10px; margin-top: 10px;">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" id="progressBarIncome"></div>
+        <!-- /.box -->
+        <div style="width: 30%; margin: 20px 20px 20px 20px; display: inline-block;">
+            <span class = "label label-default">Cash flow</span>
+            <hr>
+            <span class = "label label-default" id="cash_flow_value"></span><br><br>
+            <label for="progressBarIncome">Income</label>
+            <div class="progress" style="height: 30px; margin-bottom: 10px; margin-top: 10px;">
+                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" id="progressBarIncome"></div>
+            </div>
+            <label for="progressBarExpense">Expense</label>
+            <div class="progress" style="height: 30px;">
+                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progressBarExpense"></div>
+            </div>
         </div>
-        <label for="progressBarExpense">Expense</label>
-        <div class="progress" style="height: 30px;">
-            <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progressBarExpense"></div>
-        </div>
-    </div>
-        <div style="width: 30%; height: 50vh; display: inline-block; vertical-align: top; text-align: center;">
+        <div style="width: 30%; height: 50vh; display: inline-block; vertical-align: top; text-align: center; margin: 20px 20px 20px 20px;">
             <span class = "label label-default">Structure of expenses</span>
             <canvas id="myChart"> </canvas>
         </div>
-</div>
+        <div style="width: 30%; height: 50vh; display: inline-block; vertical-align: top; text-align: center; margin: 20px 20px 20px 20px;">
+            <span class = "label label-default">Trend incomes - last 31 days</span>
+            <canvas id="incomeVsExpenseLineChart"></canvas>
+        </div>
+    </div>
     <!-- MODAL window  ADD BUDGET -->
     <div class="modal fade text-dark" id="addBudget">
         <div class="modal-dialog">

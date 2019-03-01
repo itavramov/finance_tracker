@@ -79,7 +79,7 @@ class RecordDAO extends Connection {
         $stmt = self::$conn->prepare($records_query);
         $stmt->execute(array($user_id));
         $result = [];
-        $result = $stmt->fetchAll(\PDO::FETCH_OBJ);
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
     }
 
@@ -124,6 +124,7 @@ class RecordDAO extends Connection {
                         JOIN accounts a ON (r.acc_id = a.acc_id)
                         JOIN categories c ON (r.category_id = c.category_id)
                         WHERE a.user_id = 10
+                        ORDER BY r.action_date DESC
                         LIMIT 0, 5";
         $stmt = self::$conn->prepare($get_query);
         $stmt->execute(array($user_id));

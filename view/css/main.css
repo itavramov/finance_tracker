@@ -10,7 +10,7 @@
     margin-bottom: 20px;
     width: 30%;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
+    margin: 20px 20px 20px 20px;
     display: inline-block;
     vertical-align: top;
 }
@@ -507,4 +507,10 @@
 .box_acc_name{
     float: left;
     margin-right: 85%;
+}
+#progressBarIncome{
+    background-color: rgb(40, 203, 124);
+}
+#progressBarExpense{
+    background-color: rgb(231, 76, 60);
 }

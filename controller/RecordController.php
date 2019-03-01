@@ -65,4 +65,36 @@ class RecordController{
 
         echo json_encode($arr);
     }
+
+
+    function listIncomesAndExpense(){
+        $user_id = $_SESSION["user_id"];
+        $allRecords = RecordDAO::getAllRecordsByUser($user_id);
+
+        $labels_expense = [];
+        $labels_income = [];
+        $data_expense = [];
+        $data_income = [];
+        $arr = [];
+
+        foreach ($allRecords as $allRecord) {
+            if($allRecord["category_type"] == "expense"){
+                $labels_expense[] = $allRecord["action_date"];
+                $data_expense[] = $allRecord["amount"];
+            }
+            else{
+                $labels_income[] = $allRecord["action_date"];
+                $data_income[] = $allRecord["amount"];
+            }
+        }
+
+
+
+        $arr[] = $labels_expense;
+        $arr[] = $data_expense;
+        $arr[] = $labels_income;
+        $arr[] = $data_income;
+
+        echo json_encode(array_values($arr));
+    }
 }
