@@ -62,7 +62,7 @@ class RecordDAO extends Connection {
 
     }
 
-    static function getAllRecordsByUser($user_id){
+    static function getAllRecordsByUser($user_id, $start_date, $end_date){
 
         $records_query = "SELECT  r.record_name, 
                                   r.record_desc, 
@@ -74,10 +74,13 @@ class RecordDAO extends Connection {
                             JOIN categories s ON (r.category_id = s.category_id)
                             JOIN accounts a ON (a.acc_id = r.acc_id)
                             JOIN users u ON (u.user_id = a.user_id)
-                            WHERE u.user_id = ?";
+                            WHERE u.user_id = ? AND r.action_date BETWEEN STR_TO_DATE(?, '%Y-%m-%d') AND
+                                  STR_TO_DATE(?, '%Y-%m-%d')";
+
+
 
         $stmt = self::$conn->prepare($records_query);
-        $stmt->execute(array($user_id));
+        $stmt->execute(array($user_id, $start_date, $end_date));
         $result = [];
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;

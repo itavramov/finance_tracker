@@ -57,16 +57,18 @@ function incomeVsExpenseLineChart() {
 
             var ctx = document.getElementById("incomeVsExpenseLineChart");
 
-            var thirdDiagram = new Chart(ctx, {
+            var secondDiagram = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: myJson[0],
                     datasets: [{
+                        label: 'Income',
                         backgroundColor: "rgba(40, 203, 124, 0.3)",
                         data: myJson[1],
                         showLine: true,
                     },
                     {
+                        label: 'Expense',
                         backgroundColor: "rgba(231, 76, 60,0.3)",
                         data: myJson[3],
                         showLine: true,
@@ -80,8 +82,139 @@ function incomeVsExpenseLineChart() {
                     }
                 }
             });
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
 
+function redrawChart() {
+    $('input[name="daterange"]').daterangepicker({
+        opens: 'left'
+    }, function(start, end, label) {
+        var start_date = start.format('YYYY-MM-DD');
+        var end_date = end.format('YYYY-MM-DD');
+        console.log(start_date + " " + end_date);
+            fetch("index.php?target=record&action=listIncomesAndExpense",{
+                method: "POST",
+                headers: {'Content-type': 'application/x-www-form-urlencoded'},
+                body: "start_date=" + start_date + "end_date=" + end_date
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJson) {
 
+                    document.getElementById("incomeVsExpenseLineChart").innerHTML="";
+
+                    var ctx = document.getElementById("incomeVsExpenseLineChart");
+
+                    var thirdDiagram = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: myJson[0],
+                            datasets: [{
+                                label: 'Income',
+                                backgroundColor: "rgba(40, 203, 124, 0.3)",
+                                data: myJson[1],
+                                showLine: true,
+                            },
+                                {
+                                    label: 'Expense',
+                                    backgroundColor: "rgba(231, 76, 60,0.3)",
+                                    data: myJson[3],
+                                    showLine: true,
+                                }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    stacked: false
+                                }]
+                            }
+                        }
+                    });
+                })
+                .catch(function (e) {
+                    alert(e.message);
+                })
+    });
+}
+
+function incomeVsExpenseLineChart() {
+    fetch("index.php?target=record&action=listIncomesAndExpense")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+
+            var ctx = document.getElementById("incomeVsExpenseLineChart");
+
+            var secondDiagram = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: myJson[0],
+                    datasets: [{
+                        label: 'Income',
+                        backgroundColor: "rgba(40, 203, 124, 0.3)",
+                        data: myJson[1],
+                        showLine: true,
+                    },
+                        {
+                            label: 'Expense',
+                            backgroundColor: "rgba(231, 76, 60,0.3)",
+                            data: myJson[3],
+                            showLine: true,
+                        }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            stacked: false
+                        }]
+                    }
+                }
+            });
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
+
+function radarDiagram() {
+    fetch("index.php?target=record&action=listIncomesAndExpense")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+
+            var ctx = document.getElementById("incomeVsExpenseLineChart");
+
+            var secondDiagram = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: myJson[0],
+                    datasets: [{
+                        label: 'Income',
+                        backgroundColor: "rgba(40, 203, 124, 0.3)",
+                        data: myJson[1],
+                        showLine: true,
+                    },
+                        {
+                            label: 'Expense',
+                            backgroundColor: "rgba(231, 76, 60,0.3)",
+                            data: myJson[3],
+                            showLine: true,
+                        }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            stacked: false
+                        }]
+                    }
+                }
+            });
         })
         .catch(function (e) {
             alert(e.message);
