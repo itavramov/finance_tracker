@@ -123,7 +123,7 @@ class RecordDAO extends Connection {
                         FROM records r    
                         JOIN accounts a ON (r.acc_id = a.acc_id)
                         JOIN categories c ON (r.category_id = c.category_id)
-                        WHERE a.user_id = 10
+                        WHERE a.user_id = ?
                         ORDER BY r.action_date DESC
                         LIMIT 0, 5";
         $stmt = self::$conn->prepare($get_query);

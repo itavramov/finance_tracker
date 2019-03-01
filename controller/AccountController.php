@@ -28,4 +28,13 @@ class AccountController{
             echo json_encode($accounts);
 
     }
+
+    function listAllAccounts(){
+        $user_id = $_SESSION["user_id"];
+
+        $arr = AccountDAO::getAllAccountsById($user_id);
+
+        echo json_encode($arr);
+    }
 }
+
