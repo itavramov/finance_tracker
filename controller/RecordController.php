@@ -69,7 +69,14 @@ class RecordController{
 
     function listIncomesAndExpense(){
         $user_id = $_SESSION["user_id"];
-        $allRecords = RecordDAO::getAllRecordsByUser($user_id);
+        if(empty( $_POST["start_date"])){
+            $_POST["start_date"] = "2019-01-01";
+        }
+        if(empty( $_POST["end_date"])){
+            $_POST["end_date"] = "2019-03-01";
+        }
+
+        $allRecords = RecordDAO::getAllRecordsByUser($user_id, $_POST["start_date"], $_POST["end_date"]);
 
         $labels_expense = [];
         $labels_income = [];
@@ -87,8 +94,6 @@ class RecordController{
                 $data_income[] = $allRecord["amount"];
             }
         }
-
-
 
         $arr[] = $labels_expense;
         $arr[] = $data_expense;

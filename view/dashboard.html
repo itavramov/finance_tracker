@@ -10,9 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
     <link rel="stylesheet" href="view/css/main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body onload="welcomeMessage(); fillCategories(); fillAccounts(); incomeExpenseDonut(); cashFlowBars(); getLastFiveRecords();
-    incomeVsExpenseLineChart();">
+    incomeVsExpenseLineChart(); redrawChart();">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
             <a href="index.html" class="navbar-brand">Finance Tracker</a>
@@ -86,8 +91,13 @@
             <span class = "label label-default">Structure of expenses</span>
             <canvas id="myChart"> </canvas>
         </div>
-        <div style="width: 30%; height: 50vh; display: inline-block; vertical-align: top; text-align: center; margin: 20px 20px 20px 20px;">
-            <span class = "label label-default">Trend incomes - last 31 days</span>
+        <div id="test" style="width: 30%; height: 50vh; display: inline-block; vertical-align: top; text-align: center; margin: 20px 20px 20px 20px;">
+            <span class = "label label-default">Trend incomes - last</span>
+
+            <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                <input type="text" id="daterange" name="daterange" value="choose date">
+
+            </div>
             <canvas id="incomeVsExpenseLineChart"></canvas>
         </div>
     </div>
@@ -244,8 +254,6 @@
             </div>
         </div>
     </div>
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
@@ -256,7 +264,6 @@
     <script src="view/js/categories.js"></script>
     <script src="view/js/recordJS.js"></script>
     <script src="view/js/accountsJS.js"></script>
-    <script src="view/js/chart.js"></script>
     <script src="view/js/cashFlowBars.js"></script>
     <script>
         /* BoxWidget()
@@ -436,5 +443,6 @@
             });
         }(jQuery);
     </script>
+    <script src="view/js/chart.js"></script>
 </body>
 </html>
