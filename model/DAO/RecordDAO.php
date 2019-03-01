@@ -104,11 +104,29 @@ class RecordDAO extends Connection {
         $get_query = "SELECT c.category_name,SUM(r.amount) AS sum FROM records AS r 
                       JOIN categories AS c ON (c.category_id = r.category_id)
                       JOIN accounts AS a ON(a.acc_id = r.acc_id)
-                      WHERE a.user_id = ? 
+                      WHERE a.user_id = ? AND c.category_type = 'expense'
                       GROUP BY c.category_id";
         $stmt   = self::$conn->prepare($get_query);
         $stmt->execute(array($user_id));
         //TODO VALIDATION
+        $result = [];
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    static function getLastFiveRecordsById($user_id){
+        $get_query = "SELECT c.category_name,
+                            a.acc_name,
+                            r.amount,
+                            r.action_date,
+                            c.category_type
+                        FROM records r    
+                        JOIN accounts a ON (r.acc_id = a.acc_id)
+                        JOIN categories c ON (r.category_id = c.category_id)
+                        WHERE a.user_id = 10
+                        LIMIT 0, 5";
+        $stmt = self::$conn->prepare($get_query);
+        $stmt->execute(array($user_id));
         $result = [];
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;

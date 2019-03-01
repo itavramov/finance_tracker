@@ -57,4 +57,12 @@ class RecordController{
 
         echo json_encode($arr);
     }
+
+    function listLastFiveRecords(){
+        $user_id = $_SESSION["user_id"];
+
+        $arr = RecordDAO::getLastFiveRecordsById($user_id);
+
+        echo json_encode($arr);
+    }
 }
