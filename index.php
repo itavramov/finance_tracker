@@ -17,7 +17,7 @@ function exceptionHandler($exception){
 set_exception_handler("exceptionHandler");
 
 $fileNotExistsFlag = false;
-$controllerName = isset($_GET["target"]) ? $_GET["target"] : "login";
+$controllerName = isset($_GET["target"]) ? $_GET["target"] : "base";
 $methodName     = isset($_GET["action"]) ? $_GET["action"] : "baseFunc";
 $controllerClassName = "\\controller\\" . ucfirst($controllerName) . "Controller";
 if (class_exists($controllerClassName)){
