@@ -105,7 +105,7 @@ function redrawChart() {
                 })
                 .then(function (myJson) {
 
-                    document.getElementById("incomeVsExpenseLineChart").innerHTML="";
+                    document.getElementById("incomeVsExpenseLineChart").innerHTML = "";
 
                     var ctx = document.getElementById("incomeVsExpenseLineChart");
 

@@ -70,10 +70,10 @@ class RecordController{
     function listIncomesAndExpense(){
         $user_id = $_SESSION["user_id"];
         if(empty( $_POST["start_date"])){
-            $_POST["start_date"] = "2019-01-01";
+            $_POST["start_date"] = date('Y-m-d', strtotime('-1 months'));
         }
         if(empty( $_POST["end_date"])){
-            $_POST["end_date"] = "2019-03-01";
+            $_POST["end_date"] = date("Y-m-d");
         }
 
         $allRecords = RecordDAO::getAllRecordsByUser($user_id, $_POST["start_date"], $_POST["end_date"]);
