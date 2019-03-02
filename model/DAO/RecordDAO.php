@@ -103,14 +103,16 @@ class RecordDAO extends Connection {
         return $result;
     }
 
-    static function getAllExpensesById($user_id){
+    static function getAllExpensesById($user_id, $start_date, $end_date){
         $get_query = "SELECT c.category_name,SUM(r.amount) AS sum FROM records AS r 
                       JOIN categories AS c ON (c.category_id = r.category_id)
                       JOIN accounts AS a ON(a.acc_id = r.acc_id)
-                      WHERE a.user_id = ? AND c.category_type = 'expense'
+                      WHERE a.user_id = ? AND c.category_type = 'expense' 
+                      AND r.action_date BETWEEN STR_TO_DATE(?, '%Y-%m-%d') AND
+                                  STR_TO_DATE(?, '%Y-%m-%d')
                       GROUP BY c.category_id";
         $stmt   = self::$conn->prepare($get_query);
-        $stmt->execute(array($user_id));
+        $stmt->execute(array($user_id,$start_date,$end_date));
         //TODO VALIDATION
         $result = [];
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);

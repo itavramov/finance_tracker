@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body onload="welcomeMessage(); fillCategories(); fillAccounts(); incomeExpenseDonut(); cashFlowBars(); getLastFiveRecords();
-    incomeVsExpenseLineChart(); showAccounts(); redrawChart();">
+    incomeVsExpenseLineChart(); showAccounts(); redrawChart(); drawRadarDiagram();">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
             <a href="index.html" class="navbar-brand">Finance Tracker</a>
@@ -126,10 +126,10 @@
         </div>
         <div id="compareDiagram" style="width: 30%; height: 50vh; display: inline-block; vertical-align: top; text-align: center; margin: 20px 20px 20px 20px;">
             <span class = "label label-default">Radar Diagram - Compare Expenses</span>
-
-            <div id="compare_dates" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                <input type="text" id="compare_date1" name="daterange" value="choose date"> -
-                <input type="text" id="compare_date2" name="daterange" value="choose date">
+            <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                <input type="text" id="daterange1" name="daterange1" value="choose date">
+                -
+                <input type="text" id="daterange2" name="daterange2" value="choose date">
             </div>
             <canvas id="radarDiagram"></canvas>
         </div>
@@ -155,7 +155,7 @@
                         <label for="categorySelectBudget">Category</label>
                         <select id="categorySelectBudget" class="form-control">
                             <option selected>Choose...</option>
-                            <option value="1"></option>
+                            <option value="1">Car</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -177,7 +177,6 @@
             </div>
         </div>
     </div>
-
     <!-- MODAL window  ADD ACCOUNT -->
     <div class="modal fade text-dark" id="addAccount">
         <div class="modal-dialog">
@@ -287,6 +286,7 @@
             </div>
         </div>
     </div>
+    <!-- JS SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"

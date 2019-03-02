@@ -41,8 +41,15 @@ class RecordController{
     }
     function chartExpenses(){
         $user_id  = $_SESSION["user_id"];
+        if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
+            $start_date = date('Y-m-d', strtotime('-1 months'));
+            $end_date   = date("Y-m-d");
+        }else{
+            $start_date = $_POST["start_date"];
+            $end_date   = $_POST["end_date"];
+        }
 
-        $expenses = RecordDAO::getAllExpensesById($user_id);
+        $expenses = RecordDAO::getAllExpensesById($user_id,$start_date,$end_date);
         $labels   = [];
         $data     = [];
         $arr      = [];
@@ -70,10 +77,10 @@ class RecordController{
     function listIncomesAndExpense(){
         $user_id = $_SESSION["user_id"];
         if(empty( $_POST["start_date"])){
-            $_POST["start_date"] = "2019-01-01";
+            $_POST["start_date"] = date('Y-m-d', strtotime('-1 months'));
         }
         if(empty( $_POST["end_date"])){
-            $_POST["end_date"] = "2019-03-01";
+            $_POST["end_date"] = date("Y-m-d");
         }
 
         $allRecords = RecordDAO::getAllRecordsByUser($user_id, $_POST["start_date"], $_POST["end_date"]);
@@ -101,5 +108,52 @@ class RecordController{
         $arr[] = $data_income;
 
         echo json_encode(array_values($arr));
+    }
+
+    function radarDiagramExpenses(){
+        $user_id  = $_SESSION["user_id"];
+        if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
+            $compare1_start_date = date('Y-m-d', strtotime('-1 months'));
+            $compare2_end_date   = date("Y-m-d");
+        }else{
+            $compare1_start_date = $_POST["start_date"];
+            $compare2_end_date   =  $_POST["end_date"];
+        }
+
+
+        $first_compare_period = RecordDAO::getAllExpensesById($user_id, $compare1_start_date, $compare2_end_date);
+
+        $labels   = [];
+        $data     = [];
+        $arr      = [];
+
+        foreach ($first_compare_period as $expens) {
+            $labels[] = $expens["category_name"];
+            $data[]   = $expens["sum"];
+        }
+
+        $arr[] = $labels;
+        $arr[] = $data;
+
+        echo json_encode($arr);
+    }
+
+    function chartExpenses2(){
+        $user_id  = $_SESSION["user_id"];
+
+        $expenses = RecordDAO::getAllExpensesById($user_id);
+        $labels   = [];
+        $data     = [];
+        $arr      = [];
+
+        foreach ($expenses as $expens) {
+            $labels[] = $expens["category_name"];
+            $data[]   = $expens["sum"];
+        }
+
+        $arr[] = $labels;
+        $arr[] = $data;
+
+        echo json_encode($arr);
     }
 }
