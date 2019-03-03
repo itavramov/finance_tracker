@@ -16,9 +16,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
-<body onload="welcomeMessage(); fillCategories(); fillAccounts(); incomeExpenseDonut(); cashFlowBars(); getLastFiveRecords();
+<body onload="welcomeMessage(); fillCategories(); fillAccounts(); ExpenseDonut(); cashFlowBars(); getLastFiveRecords();
     incomeVsExpenseLineChart(); showAccounts(); redrawChart(); drawRadarDiagram(); listAllBudgets(); defaultListAllBudgets();
-    avgIncome(); avgExpense(); default_avgIncome(); default_avgExpense();">
+    avgIncome(); avgExpense(); default_avgIncome(); default_avgExpense(); defaultradarDiagram();">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
             <a href="index.html" class="navbar-brand">Finance Tracker</a>
@@ -61,42 +61,8 @@
                 </div>
                 <!-- /.box-tools -->
             </div>
-            <!-- /.box-header -->
-            <!--<div class="box-body">-->
-                <!--The body of the box1-->
-            <!--</div>-->
-            <!--<div class="box-body">-->
-                <!--The body of the box2-->
-            <!--</div>-->
-            <!--&lt;!&ndash; /.box-body &ndash;&gt;-->
-            <!--<div class="box-footer">-->
-                <!--The footer of the box-->
-            <!--</div>-->
-            <!-- box-footer -->
         </div>
         <div class="box" id="acc_content">
-            <div class="box-header with-border">
-                <h3 class="box-title">Your Accounts</h3>
-                <div class="box-tools pull-right">
-                    <!-- Collapse Button -->
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                        <i class="fa fa-minus"></i>
-                    </button>
-                </div>
-                <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <!--<div class="box-body">-->
-            <!--The body of the box1-->
-            <!--</div>-->
-            <!--<div class="box-body">-->
-            <!--The body of the box2-->
-            <!--</div>-->
-            <!--&lt;!&ndash; /.box-body &ndash;&gt;-->
-            <!--<div class="box-footer">-->
-            <!--The footer of the box-->
-            <!--</div>-->
-            <!-- box-footer -->
         </div>
         <!-- /.box -->
         <div style="width: 30%; margin: 20px 20px 20px 20px; display: inline-block;">
@@ -286,7 +252,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary btn-block" data-dismiss="modal" onclick="addRecord()">Add Record</button>
+                    <button class="btn btn-primary btn-block" data-dismiss="modal" onclick="addRecord(); reloadRecords();">Add Record</button>
                 </div>
             </div>
         </div>
@@ -511,5 +477,6 @@
         }(jQuery);
     </script>
     <script src="view/js/chart.js"></script>
+    <script src="view/js/reload.js"></script>
 </body>
 </html>

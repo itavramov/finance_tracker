@@ -145,6 +145,8 @@ function defaultListAllBudgets() {
                 coloR.push(dynamicColors());
             }
 
+            document.getElementById("all_budgets_progress").innerHTML = "";
+
             if(myJson == "")
             {
                 var parent = document.getElementById('all_budgets_progress');

@@ -5,6 +5,8 @@ function cashFlowBars(){
         })
         .then(function (myJson) {
 
+
+
             document.getElementById("cash_flow_value").innerHTML = myJson[1]['total_sum'] - myJson[0]['total_sum'] + "лв.";
 
             if(myJson[0]['total_sum'] > myJson[1]['total_sum']){
