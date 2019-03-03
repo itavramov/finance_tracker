@@ -539,3 +539,9 @@
 .green{
     color: rgb(40, 203, 124);
 }
+.mess{
+    background-color: #fdf0dc;
+    color: #ce572e;
+    padding: 5px;
+    border: 1px solid #f1dfc5;
+}
