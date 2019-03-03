@@ -36,4 +36,18 @@ class BudgetController
         }
         echo json_encode($arr);
     }
+
+    function listAllBudgets(){
+        $user_id = $_SESSION["user_id"];
+        if(empty( $_POST["start_date"])){
+            $_POST["start_date"] = date('Y-m-d', strtotime('-1 months'));
+        }
+        if(empty( $_POST["end_date"])){
+            $_POST["end_date"] = date("Y-m-d");
+        }
+
+        $sum = BudgetDAO::getAllBudgetsById($user_id, $_POST["start_date"], $_POST["end_date"]);
+
+        echo  json_encode($sum);
+    }
 }

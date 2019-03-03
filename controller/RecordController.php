@@ -137,23 +137,4 @@ class RecordController{
 
         echo json_encode($arr);
     }
-
-    function chartExpenses2(){
-        $user_id  = $_SESSION["user_id"];
-
-        $expenses = RecordDAO::getAllExpensesById($user_id);
-        $labels   = [];
-        $data     = [];
-        $arr      = [];
-
-        foreach ($expenses as $expens) {
-            $labels[] = $expens["category_name"];
-            $data[]   = $expens["sum"];
-        }
-
-        $arr[] = $labels;
-        $arr[] = $data;
-
-        echo json_encode($arr);
-    }
 }

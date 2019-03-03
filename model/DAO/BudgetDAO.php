@@ -49,4 +49,23 @@ class BudgetDAO extends Connection {
             return false;
         }
     }
+
+    static function getAllBudgetsById($user_id, $start_date, $end_date){
+        $records_query = "SELECT b.budget_name, 
+                                  b.init_amount, 
+                                  b.current_amount, 
+                                  c.category_name,
+                                  b.from_date,
+                                  b.to_date
+                            FROM budgets b
+                            JOIN categories c ON (b.category_id = c.category_id)
+                            WHERE b.user_id = ? AND b.from_date <= STR_TO_DATE(?, '%Y-%m-%d') AND 
+                              b.to_date >= STR_TO_DATE(?, '%Y-%m-%d')
+                            GROUP BY c.category_id";
+        $stmt = self::$conn->prepare($records_query);
+        $stmt->execute(array($user_id, $start_date, $end_date));
+        $result = [];
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    }
 }

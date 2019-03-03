@@ -514,3 +514,28 @@
 #progressBarExpense{
     background-color: rgb(231, 76, 60);
 }
+.progress-bar{
+    width: 0%;
+}
+.progress{
+    height: 30px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.budget_table{
+    display: table;
+    width: 100%;
+}
+.budget_names{
+    display: table-cell;
+}
+.budget_amount{
+    display: table-cell;
+    text-align: center;
+}
+.red{
+    color: rgb(231, 76, 60);
+}
+.green{
+    color: rgb(40, 203, 124);
+}
