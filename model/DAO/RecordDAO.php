@@ -62,7 +62,7 @@ class RecordDAO extends Connection {
 
     }
 
-    static function getAllRecordsByUser($user_id, $start_date, $end_date){
+    static function getAllRecordsByUser($user_id){
 
         $records_query = "SELECT  r.record_name, 
                                   r.record_desc, 
@@ -74,13 +74,12 @@ class RecordDAO extends Connection {
                             JOIN categories s ON (r.category_id = s.category_id)
                             JOIN accounts a ON (a.acc_id = r.acc_id)
                             JOIN users u ON (u.user_id = a.user_id)
-                            WHERE u.user_id = ? AND r.action_date BETWEEN STR_TO_DATE(?, '%Y-%m-%d') AND
-                                  STR_TO_DATE(?, '%Y-%m-%d')";
+                            WHERE u.user_id = ?";
 
 
 
         $stmt = self::$conn->prepare($records_query);
-        $stmt->execute(array($user_id, $start_date, $end_date));
+        $stmt->execute(array($user_id));
         $result = [];
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
@@ -133,6 +132,44 @@ class RecordDAO extends Connection {
                         LIMIT 0, 5";
         $stmt = self::$conn->prepare($get_query);
         $stmt->execute(array($user_id));
+        $result = [];
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    static function getAverage($user_id, $start_date, $end_date, $type){
+        $query = "SELECT ROUND(AVG(r.amount),2) AS average FROM records AS r 
+                      JOIN categories AS c ON (c.category_id = r.category_id)
+                      JOIN accounts AS a ON(a.acc_id = r.acc_id)
+                      WHERE a.user_id = ? AND c.category_type = ?
+                      AND r.action_date BETWEEN STR_TO_DATE(?, '%Y-%m-%d')
+                      AND STR_TO_DATE(?, '%Y-%m-%d')";
+        $stmt  = self::$conn->prepare($query);
+        $stmt->execute(array($user_id,$type,$start_date,$end_date));
+        $result = [];
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    static function getAllRecordsByUserFiltered($user_id, $start_date, $end_date){
+
+        $records_query = "SELECT  r.record_name, 
+                                  r.record_desc, 
+                                  r.amount, 
+                                  r.action_date, 
+                                  s.category_name, 
+                                  s.category_type
+                            FROM records r
+                            JOIN categories s ON (r.category_id = s.category_id)
+                            JOIN accounts a ON (a.acc_id = r.acc_id)
+                            JOIN users u ON (u.user_id = a.user_id)
+                            WHERE u.user_id = ? AND r.action_date BETWEEN STR_TO_DATE(?, '%Y-%m-%d') AND
+                                  STR_TO_DATE(?, '%Y-%m-%d')";
+
+
+
+        $stmt = self::$conn->prepare($records_query);
+        $stmt->execute(array($user_id, $start_date, $end_date));
         $result = [];
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;

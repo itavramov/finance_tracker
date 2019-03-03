@@ -182,6 +182,7 @@ function radarDiagram() {
 }
 
 function drawRadarDiagram() {
+
     Chart.defaults.scale.ticks.beginAtZero = true;
     var chart  = document.getElementById("radarDiagram");
     var labels = [];
@@ -291,5 +292,4 @@ function drawRadarDiagram() {
             })
 
     });
-
 }

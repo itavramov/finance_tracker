@@ -83,7 +83,7 @@ class RecordController{
             $_POST["end_date"] = date("Y-m-d");
         }
 
-        $allRecords = RecordDAO::getAllRecordsByUser($user_id, $_POST["start_date"], $_POST["end_date"]);
+        $allRecords = RecordDAO::getAllRecordsByUserFiltered($user_id, $_POST["start_date"], $_POST["end_date"]);
 
         $labels_expense = [];
         $labels_income = [];
@@ -136,5 +136,18 @@ class RecordController{
         $arr[] = $data;
 
         echo json_encode($arr);
+    }
+    function averageIncomeInfo(){
+        $user_id  = $_SESSION["user_id"];
+        if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
+            $start_date = date('Y-m-d', strtotime('-1 months'));
+            $end_date   = date("Y-m-d");
+        }else{
+            $start_date = $_POST["start_date"];
+            $end_date   = $_POST["end_date"];
+        }
+        $type = $_POST["type"];
+        $avg_income = RecordDAO::getAverage($user_id,$start_date,$end_date,$type);
+        echo json_encode($avg_income);
     }
 }

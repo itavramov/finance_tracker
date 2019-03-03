@@ -102,3 +102,91 @@ function getLastFiveRecords() {
             alert(e.message);
         })
 }
+
+function avgIncome(){
+
+    $('input[name="avgIncome_daterange"]').daterangepicker({
+        opens: 'left'
+    }, function(start, end, label) {
+        var start_date = start.format('YYYY-MM-DD');
+        var end_date = end.format('YYYY-MM-DD');
+        fetch("index.php?target=record&action=averageIncomeInfo",{
+            method: "POST",
+            headers: {'Content-type': 'application/x-www-form-urlencoded'},
+            body: "start_date=" + start_date + "&end_date=" + end_date + "&type=income"
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                var avgField = document.getElementById("avgIncomeField");
+                avgField.innerText = myJson.average;
+            })
+            .catch(function (e) {
+                alert(e.message);
+            })
+    });
+}
+
+function avgExpense(){
+
+    $('input[name="avgExpense_daterange"]').daterangepicker({
+        opens: 'left'
+    }, function(start, end, label) {
+        var start_date = start.format('YYYY-MM-DD');
+        var end_date = end.format('YYYY-MM-DD');
+        fetch("index.php?target=record&action=averageIncomeInfo",{
+            method: "POST",
+            headers: {'Content-type': 'application/x-www-form-urlencoded'},
+            body: "start_date=" + start_date + "&end_date=" + end_date + "&type=expense"
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                var avgField = document.getElementById("avgExpenseField");
+                avgField.innerText = myJson.average;
+            })
+            .catch(function (e) {
+                alert(e.message);
+            })
+    });
+}
+
+function default_avgIncome(){
+
+    fetch("index.php?target=record&action=averageIncomeInfo",{
+        method: "POST",
+        headers: {'Content-type': 'application/x-www-form-urlencoded'},
+        body:"type=income"
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            var avgField = document.getElementById("avgIncomeField");
+            avgField.innerText = myJson.average;
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
+
+function default_avgExpense(){
+
+    fetch("index.php?target=record&action=averageIncomeInfo",{
+        method: "POST",
+        headers: {'Content-type': 'application/x-www-form-urlencoded'},
+        body:"type=expense"
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            var avgField = document.getElementById("avgExpenseField");
+            avgField.innerText = myJson.average;
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
