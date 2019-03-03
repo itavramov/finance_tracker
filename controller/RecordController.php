@@ -138,22 +138,17 @@ class RecordController{
         echo json_encode($arr);
     }
 
-    function chartExpenses2(){
+    function averageIncomeInfo(){
         $user_id  = $_SESSION["user_id"];
-
-        $expenses = RecordDAO::getAllExpensesById($user_id);
-        $labels   = [];
-        $data     = [];
-        $arr      = [];
-
-        foreach ($expenses as $expens) {
-            $labels[] = $expens["category_name"];
-            $data[]   = $expens["sum"];
+        if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
+            $start_date = date('Y-m-d', strtotime('-1 months'));
+            $end_date   = date("Y-m-d");
+        }else{
+            $start_date = $_POST["start_date"];
+            $end_date   = $_POST["end_date"];
         }
-
-        $arr[] = $labels;
-        $arr[] = $data;
-
-        echo json_encode($arr);
+        $type = $_POST["type"];
+        $avg_income = RecordDAO::getAverage($user_id,$start_date,$end_date,$type);
+        echo json_encode($avg_income);
     }
 }

@@ -137,4 +137,18 @@ class RecordDAO extends Connection {
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
     }
+
+    static function getAverage($user_id, $start_date, $end_date, $type){
+        $query = "SELECT ROUND(AVG(r.amount),2) AS average FROM records AS r 
+                      JOIN categories AS c ON (c.category_id = r.category_id)
+                      JOIN accounts AS a ON(a.acc_id = r.acc_id)
+                      WHERE a.user_id = ? AND c.category_type = ?
+                      AND r.action_date BETWEEN STR_TO_DATE(?, '%Y-%m-%d')
+                      AND STR_TO_DATE(?, '%Y-%m-%d')";
+        $stmt  = self::$conn->prepare($query);
+        $stmt->execute(array($user_id,$type,$start_date,$end_date));
+        $result = [];
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $result;
+    }
 }
