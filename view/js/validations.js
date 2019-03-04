@@ -1,4 +1,36 @@
+
 function loginValidation() {
+
+    var isValid    = true;
+    var $mailAlert = $('#mailAlert');
+    var $email     = $('#email');
+    var $passAlert = $('#passAlert');
+    var $pass      = $('#password');
+
+    if (!validateEmail($email.val())){
+        $mailAlert.addClass('text-danger');
+        $mailAlert.html('Invalid Email Address!');
+        $email.addClass('alert alert-danger');
+        $email.attr( 'data-content', 'Please enter valid email address!');
+        $email.popover('show');
+        isValid = false;
+    }
+
+    if ($pass.val() === ""){
+        $passAlert.addClass('text-danger');
+        $passAlert.html('Empty Password Field');
+        $pass.addClass('alert alert-danger');
+        $pass.attr( 'data-content', 'Please enter your password!');
+        $pass.popover('show');
+        isValid = false;
+    }
+
+    return isValid;
+
+    function validateEmail(email) {
+        var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regex.test(email);
+    }
 
 }
 
@@ -85,4 +117,15 @@ function registerValidation(form){
     }
 
     return errors;
+}
+
+function logSubmit() {
+
+    if (loginValidation()){
+        $( "#submitBtn" ).click(function() {
+            $( "#logForm" ).submit();
+        });
+    }
+
+    
 }

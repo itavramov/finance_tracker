@@ -60,8 +60,7 @@ class BudgetDAO extends Connection {
                             FROM budgets b
                             JOIN categories c ON (b.category_id = c.category_id)
                             WHERE b.user_id = ? AND b.from_date <= STR_TO_DATE(?, '%Y-%m-%d') AND 
-                              b.to_date >= STR_TO_DATE(?, '%Y-%m-%d')
-                            GROUP BY c.category_id";
+                              b.to_date >= STR_TO_DATE(?, '%Y-%m-%d')";
         $stmt = self::$conn->prepare($records_query);
         $stmt->execute(array($user_id, $start_date, $end_date));
         $result = [];
