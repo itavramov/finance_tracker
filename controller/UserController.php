@@ -25,10 +25,12 @@ class UserController{
             //$image_url = "view/uploads/user_image/noPicture.png";
             if (!empty($first_name) && !empty($last_name) && !empty($last_name) && !empty($email)
                 && !empty($age) && !empty($password_1) && !empty($password_2)){
+
                 if (empty($_FILES["user_image"]["tmp_name"])){
                     //TODO MORE VALIDATIONS
                     $image_url = "view/uploads/user_image/noPicture.png";
                 }else{
+
                     if(move_uploaded_file($user_image, "view/uploads/user_image/". $first_name.time() . ".jpg")){
                         $image_url = "view/uploads/user_image/". $first_name.time() . ".jpg";
                     }
@@ -41,6 +43,7 @@ class UserController{
                     else{
                         $user = new User($cleanVars["first_name"], $cleanVars["last_name"],
                             $cleanVars["email"], $cleanVars["age"], password_hash($cleanVars["pass"], PASSWORD_BCRYPT, ['cost'=>12]), $image_url);
+                        var_dump($user);
                         UserDAO::addUser($user);
                         header('Location: view/login.html');
                     }

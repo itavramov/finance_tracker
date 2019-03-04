@@ -11,10 +11,10 @@
     <title>Document</title>
 </head>
 <body>
-
+<br>
 <h1 style="text-align: center">Log In</h1>
 <div class="container">
-    <form action="../index.php?target=user&action=userLogin" method="post" onsubmit="return loginValidation()">
+    <form action="../index.php?target=user&action=userLogin" method="post" onsubmit="return loginValidation()" id="logForm">
 
         <div class="form-group">
             <label for="email">Email address</label>
@@ -29,26 +29,10 @@
             <p id="passAlert" class="form-text "></p>
         </div>
         <br>
-        <button class="btn btn-primary btn-block" type="submit">Login</button>
+        <button class="btn btn-primary btn-block" id="submitBtn" onclick="logSubmit()">Log In</button>
     </form>
 
 </div>
-<form action="../index.php?target=user&action=userLogin" method="post">
-    <table>
-        <tr>
-            <td>E-mail:</td>
-            <td><input type="email" name="email" required></td>
-        </tr>
-
-        <tr>
-            <td>Password:</td>
-            <td><input type="password" name="pass"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" name="login" value="Register"></td>
-        </tr>
-    </table>
-</form>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
