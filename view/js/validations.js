@@ -126,6 +126,77 @@ function logSubmit() {
             $( "#logForm" ).submit();
         });
     }
+}
 
+function addAccountValidation() {
+
+    var isValid           = true;
+    var $accNameAlert     = $('#accNameAlert');
+    var $accName          = $('#acc_name');
+    var $accTypeAlert     = $('#accTypeAlert');
+    var $accType          = $('#acc_type');
+    var $accCurrencyAlert = $('#accCurrencyAlert');
+    var $accCurrency      = $('#acc_currency');
+    var $accBalance       = $('#balance');
+    var $balanceAlert     = $('#balanceAlert');
     
+    if ($accName.val() === ""){
+        $accName.addClass('alert alert-danger');
+        $accName.attr('data-content', 'Please enter account name!');
+        $accName.popover('show');
+        
+        $accNameAlert.addClass('text-danger');
+        $accNameAlert.html('The account name field is empty');
+        isValid = false;
+    } 
+    
+    if ($accType.val() === "none"){
+        $accType.addClass('border border-danger');
+        $accType.attr('data-content', 'Please choose account type!');
+        $accType.popover('show');
+
+        $accTypeAlert.addClass('text-danger');
+        $accTypeAlert.html('No account type is picked!');
+        isValid = false;
+    }
+
+    if ($accCurrency.val() === "none"){
+        $accCurrency.addClass('border border-danger');
+        $accCurrency.attr('data-content', 'Please choose ');
+        $accCurrency.popover('show');
+
+        $accCurrencyAlert.addClass('text-danger');
+        $accCurrencyAlert.html('No account type is picked!');
+        isValid = false;
+    }
+    if (!validateBalance($accBalance.val()) || !validateBalanceValue($accBalance.val())){
+        $accBalance.addClass('alert alert-danger');
+        $accBalance.attr('data-content', 'Please enter a positive number!');
+        $accBalance.popover('show');
+
+        $balanceAlert.addClass('text-danger');
+        $balanceAlert.html('Invalid number for account balance!');
+        isValid = false;
+    }
+
+    return isValid;
+
+    function validateBalance(balance) {
+        var regex = /^\d*[1-9]\d*$/;
+        return regex.test(balance);
+    }
+
+    function validateBalanceValue(str) {
+        var n = Math.floor(Number(str));
+        return n !== Infinity && String(n) === str && n >= 0;
+    }
+}
+
+function addAccountSubmit() {
+
+    if (addAccountValidation()){
+        $addAccBtn = $('#addAccBtn');
+        $addAccBtn.attr('data-dismiss', 'modal');
+        addAccount();
+    }
 }

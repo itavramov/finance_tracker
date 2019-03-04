@@ -188,31 +188,35 @@
                         <div class="form-group">
                             <label>Account Name</label>
                             <input type="text" name="acc_name" id="acc_name" class="form-control">
+                            <p id="accNameAlert" class="form-text "></p>
                         </div>
                         <div class="form-group">
                             <label for="acc_type">Account type</label>
                             <select id="acc_type" class="form-control">
-                                <option selected>Choose...</option>
+                                <option selected value="none">Choose...</option>
                                 <option value="cash">Cash</option>
                                 <option value="common">Common</option>
                                 <option value="bank">Bank</option>
                             </select>
+                            <p class="form-text" id="accTypeAlert"></p>
                         </div>
                         <div class="form-group">
-                            <label for="acc_currency">Account type</label>
+                            <label for="acc_currency">Currency</label>
                             <select id="acc_currency" class="form-control">
-                                <option selected>Choose...</option>
+                                <option selected value="none">Choose...</option>
                                 <option value="bgn">BGN</option>
                                 <option value="usd">USD</option>
                             </select>
+                            <p class="form-text" id="accCurrencyAlert"></p>
                         </div>
                         <div class="form-group">
                             <label>Balance</label>
                             <input type="number" step="0.01" name="balance" id="balance" class="form-control">
+                            <p class="form-text" id="balanceAlert"></p>
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary btn-block" data-dismiss="modal" onclick="addAccount()">Add Budget</button>
+                    <button class="btn btn-primary btn-block" onclick="addAccountSubmit()" id="addAccBtn">Add Account</button>
                 </div>
             </div>
         </div>
@@ -478,5 +482,6 @@
     </script>
     <script src="view/js/chart.js"></script>
     <script src="view/js/reload.js"></script>
+    <script src="view/js/validations.js"></script>
 </body>
 </html>
