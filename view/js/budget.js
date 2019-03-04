@@ -1,11 +1,11 @@
 function addBudget(){
 
-    var budget_name   = document.getElementById("budget_name").value;
-    var budget_desc   = document.getElementById("budget_desc").value;
+    var budget_name   = document.getElementById("budgetName").value;
+    var budget_desc   = document.getElementById("budgetDesc").value;
     var category_id   = document.getElementById("categorySelectBudget").value;
-    var budget_amount = document.getElementById("budget_amount").value;
-    var from_date     = document.getElementById("from_date").value;
-    var to_date       = document.getElementById("to_date").value;
+    var budget_amount = document.getElementById("budgetAmount").value;
+    var from_date     = document.getElementById("fromDate").value;
+    var to_date       = document.getElementById("toDate").value;
 
     fetch("index.php?target=budget&action=registerBudget",{
         method: "POST",

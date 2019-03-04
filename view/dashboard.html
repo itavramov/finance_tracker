@@ -16,9 +16,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
-<body onload="welcomeMessage(); fillCategories(); fillAccounts(); ExpenseDonut(); cashFlowBars(); getLastFiveRecords();
+<body onload="welcomeMessage(); fillRecordsCategories(); fillAccounts(); ExpenseDonut(); cashFlowBars(); getLastFiveRecords();
     incomeVsExpenseLineChart(); showAccounts(); redrawChart(); drawRadarDiagram(); listAllBudgets(); defaultListAllBudgets();
-    avgIncome(); avgExpense(); default_avgIncome(); default_avgExpense(); defaultradarDiagram();">
+    avgIncome(); avgExpense(); default_avgIncome(); default_avgExpense(); defaultradarDiagram(); fillBudgetsCategories();">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
             <a href="index.html" class="navbar-brand">Finance Tracker</a>
@@ -144,34 +144,41 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Budget Name</label>
-                        <input type="text" name="budget_name" id="budget_name" class="form-control">
+                        <input type="text" name="budget_name" id="budgetName" class="form-control">
+                        <p id="budgetNameAlert" class="form-text "></p>
                     </div>
                     <div class="form-group">
-                        <label for="recordDesc">Budget Description</label>
-                        <textarea class="form-control" id="budget_desc" name="budget_desc" rows="2"></textarea>
+                        <label for="budgetDesc">Budget Description</label>
+                        <textarea class="form-control" id="budgetDesc" name="budget_desc" rows="2"></textarea>
+                        <p id="budgetDescAlert" class="form-text "></p>
                     </div>
                     <div class="form-group">
                         <label for="categorySelectBudget">Category</label>
                         <select id="categorySelectBudget" class="form-control">
-                            <option selected>Choose...</option>
-                            <option value="1">Car</option>
+                            <option selected value="none">Choose...</option>
                         </select>
+                        <p id="categorySelectBudgetAlert" class="form-text "></p>
                     </div>
                     <div class="form-group">
                         <label>Amount</label>
-                        <input type="number" step="0.01" name="budget_amount" id="budget_amount" class="form-control">
+                        <input type="number" step="0.01" name="budget_amount" id="budgetAmount" class="form-control">
+                        <p id="budgetAmountAlert" class="form-text "></p>
                     </div>
                     <div class="form-group">
                         <label>Starting Date</label>
-                        <input type="date" name="from_date" id="from_date" class="form-control">
+                        <input type="date" name="from_date" id="fromDate" class="form-control">
+                        <p id="fromDateAlert" class="form-text "></p>
                     </div>
                     <div class="form-group">
                         <label>Ending Date</label>
-                        <input type="date" name="to_date" id="to_date" class="form-control">
+                        <input type="date" name="to_date" id="toDate" class="form-control">
+                        <p id="toDateAlert" class="form-text "></p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary btn-block" data-dismiss="modal" onclick="addBudget()">Add Budget</button>
+                    <button class="btn btn-primary btn-block" id="addBudgetBtn" onclick="addBudgetSubmit();">
+                        Add Budget
+                    </button>
                 </div>
             </div>
         </div>
@@ -277,19 +284,21 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Category Name</label>
-                        <input type="text" name="cat_name" id="cat_name" class="form-control">
+                        <input type="text" name="cat_name" id="categoryName" class="form-control">
+                        <p class="form-text" id="categoryNameAlert"></p>
                     </div>
                     <div class="form-group">
-                        <label for="cat_type">Category type</label>
-                        <select id="cat_type" class="form-control">
-                            <option selected>Choose...</option>
+                        <label for="categoryType">Category type</label>
+                        <select id="categoryType" class="form-control">
+                            <option selected value="none">Choose...</option>
                             <option value="income">Income</option>
                             <option value="expense">Expense</option>
                         </select>
+                        <p class="form-text" id="categoryTypeAlert"></p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary btn-block" data-dismiss="modal" onclick="addCategory()">Add Category</button>
+                    <button class="btn btn-primary btn-block" id="addCategoryBtn" onclick="addCategorySubmit();">Add Category</button>
                 </div>
             </div>
         </div>

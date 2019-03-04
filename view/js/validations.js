@@ -184,6 +184,92 @@ function addAccountSubmit() {
     }
 }
 
+function addBudgetValidation(){
+    var isValid = true;
+    var $budgetName = $('#budgetName');
+    var $budgetNameAlert = $('#budgetNameAlert');
+    var $budgetDesc = $('#budgetDesc');
+    var $budgetDescAlert = $('#budgetDescAlert');
+    var $categorySelectBudget = $('#categorySelectBudget');
+    var $categorySelectBudgetAlert = $('#categorySelectBudgetAlert');
+    var $budgetAmount = $('#budgetAmount');
+    var $budgetAmountAlert = $('#budgetAmountAlert');
+    var $fromDate = $('#fromDate');
+    var $fromDateAlert = $('#fromDateAlert');
+    var $toDate = $('#toDate');
+    var $toDateAlert = $('#toDateAlert');
+
+    if ($budgetName.val() === "" || !validateName($budgetName.val())){
+        $budgetName.addClass('alert alert-danger');
+        $budgetName.attr('data-content', 'Please enter only letters!');
+        $budgetName.popover('show');
+
+        $budgetNameAlert.addClass('text-danger');
+        $budgetNameAlert.html('The budget name field is empty or invalid value');
+        isValid = false;
+    }
+
+    if ($budgetDesc.val() === ""){
+        $budgetDesc.addClass('alert alert-danger');
+        $budgetDesc.attr('data-content', 'Please enter budget desc!');
+        $budgetDesc.popover('show');
+
+        $budgetDescAlert.addClass('text-danger');
+        $budgetDescAlert.html('The budget desc field is empty');
+        isValid = false;
+    }
+
+    if ($categorySelectBudget.val() === "none"){
+        $categorySelectBudget.addClass('border border-danger');
+        $categorySelectBudget.attr('data-content', 'Please choose category!');
+        $categorySelectBudget.popover('show');
+
+        $categorySelectBudgetAlert.addClass('text-danger');
+        $categorySelectBudgetAlert.html('No category type is picked!');
+        isValid = false;
+    }
+
+    if (!validateNumber($budgetAmount.val()) || !validateNumberValue($budgetAmount.val())){
+        $budgetAmount.addClass('alert alert-danger');
+        $budgetAmount.attr('data-content', 'Please enter a positive number!');
+        $budgetAmount.popover('show');
+
+        $budgetAmountAlert.addClass('text-danger');
+        $budgetAmountAlert.html('Invalid number for budget amount!');
+        isValid = false;
+    }
+
+    if ($fromDate.val() === ""){
+        $fromDate.addClass('alert alert-danger');
+        $fromDate.attr('data-content', 'Please enter date!');
+        $fromDate.popover('show');
+
+        $fromDateAlert.addClass('text-danger');
+        $fromDateAlert.html('Date field is empty');
+        isValid = false;
+    }
+
+    if ($toDate.val() === ""){
+        $toDate.addClass('alert alert-danger');
+        $toDate.attr('data-content', 'Please enter date!');
+        $toDate.popover('show');
+
+        $toDateAlert.addClass('text-danger');
+        $toDateAlert.html('Date field is empty');
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function addBudgetSubmit() {
+    if (addBudgetValidation()){
+        $addBudgetBtn = $('#addBudgetBtn');
+        $addBudgetBtn.attr('data-dismiss', 'modal');
+        addBudget();
+    }
+}
+
 function addRecordValidation() {
     var isValid      = true;
     var $recordName      = $('#recordName');
@@ -259,6 +345,44 @@ function addRecordSubmit() {
     }
 }
 
+function addCategoryValidation(){
+    var isValid            = true;
+    var $categoryName      = $('#categoryName');
+    var $categoryNameAlert = $('#categoryNameAlert');
+    var $categoryType      = $('#categoryType');
+    var $categoryTypeAlert = $('#categoryTypeAlert');
+
+    if ($categoryName.val() === "" || !validateName($categoryName.val())){
+        $categoryName.addClass('alert alert-danger');
+        $categoryName.attr('data-content', 'Please enter category name!');
+        $categoryName.popover('show');
+
+        $categoryNameAlert.addClass('text-danger');
+        $categoryNameAlert.html('The category name field is empty');
+        isValid = false;
+    }
+
+    if ($categoryType.val() === "none"){
+        $categoryType.addClass('border border-danger');
+        $categoryType.attr('data-content', 'Please choose category!');
+        $categoryType.popover('show');
+
+        $categoryTypeAlert.addClass('text-danger');
+        $categoryTypeAlert.html('No category type is picked!');
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function addCategorySubmit(){
+    if (addCategoryValidation()){
+        $addCategorydBtn = $('#addCategoryBtn');
+        $addCategorydBtn.attr('data-dismiss', 'modal');
+        addCategory();
+    }
+}
+
 //HELPING VALIDATION FUNCTIONS
 function validateEmail(email) {
     var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -273,4 +397,9 @@ function validateNumber(number) {
 function validateNumberValue(str) {
     var n = Math.floor(Number(str));
     return n !== Infinity && String(n) === str && n >= 0;
+}
+
+function validateName(name){
+    var regex = /^[a-zA-Z \.\,\+\-]*$/;
+    return regex.test(name);
 }

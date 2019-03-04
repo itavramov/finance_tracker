@@ -1,6 +1,6 @@
 function addCategory(){
-    var cat_name = document.getElementById('cat_name').value;
-    var cat_type = document.getElementById('cat_type').value;
+    var cat_name = document.getElementById('categoryName').value;
+    var cat_type = document.getElementById('categoryType').value;
 
     fetch("index.php?target=category&action=regCategory",{
         method: "POST",
@@ -29,7 +29,7 @@ function addCategory(){
         })
 }
 
-function fillCategories(){
+function fillRecordsCategories(){
     fetch("index.php?target=category&action=allUserCategories")
         .then(function (response) {
             return response.json();
@@ -41,6 +41,28 @@ function fillCategories(){
                 option.value = myJson[i]["category_id"];
                 option.text = myJson[i]["category_name"];
                 cat_select.options.add(option,1);
+            }
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
+
+function fillBudgetsCategories(){
+    fetch("index.php?target=category&action=allUserCategories")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            var cat_select = document.getElementById('categorySelectBudget');
+            for (var i=0; i < myJson.length; i++){
+                if(myJson[i]["category_type"] === "expense"){
+                    var option = document.createElement('option');
+                    option.value = myJson[i]["category_id"];
+                    option.text = myJson[i]["category_name"];
+                    cat_select.options.add(option,1);
+                }
+
             }
         })
         .catch(function (e) {
