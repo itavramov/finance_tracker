@@ -7,17 +7,26 @@ use model\Record;
 
 class RecordController{
     function recordRegistration(){
-        //TODO VALIDATIONS
-        $record_name = $_POST["record_name"];
-        $record_desc = $_POST["record_desc"];
-        $amount      = $_POST["amount"];
-        $category_id = $_POST["category_id"];
-        $acc_id      = $_POST["acc_id"];
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            $record_name = $_POST["record_name"];
+            $record_desc = $_POST["record_desc"];
+            $amount      = $_POST["amount"];
+            $category_id = $_POST["category_id"];
+            $acc_id      = $_POST["acc_id"];
+            $response    = [];
 
-        $new_record = new Record($record_name,$record_desc,$amount,$category_id,$acc_id);
-        $response = [];
-        if (RecordDAO::addRecord($new_record)){
-            $response["message"] = "success";
+            $clean = DataValidator::validateAddRecord($record_name,$record_desc,$amount,$acc_id,$category_id);
+            if ($clean){
+                $new_record = new Record($clean["rec_name"],$clean["rec_desc"],$clean["amount"]
+                    ,$clean["acc"],$clean["category"]);
+                if (RecordDAO::addRecord($new_record)){
+                    $response["message"] = "success";
+                }else{
+                    $response["message"] = "fail";
+                }
+            }else{
+                $response["message"] = "fail";
+            }
         }else{
             $response["message"] = "fail";
         }

@@ -55,7 +55,7 @@ class DataValidator{
         }else{
             $clean["acc_currency"] = NULL;
         }
-        if (filter_var($balance,FILTER_VALIDATE_INT,["options" => ["min_range" => 1]])){
+        if (filter_var($balance,FILTER_VALIDATE_FLOAT,["options" => ["min_range" => 1]])){
             $clean["balance"] = $balance;
         }else{
             $clean["balance"] = NULL;
@@ -68,8 +68,39 @@ class DataValidator{
         }
     }
 
-    public static function validateAddRecord($rec_name,$rec_desc,$amount,$account){
-
+    public static function validateAddRecord($rec_name,$rec_desc,$amount,$account,$category){
+        $clean = [];
+        if (ctype_alpha($rec_name)){
+            $clean["rec_name"]   = $rec_name;
+        }else{
+            $clean["rec_name"] = NULL;
+        }
+        if ($rec_desc !== "" || strlen($rec_desc) > 5){
+            $clean["rec_desc"]   = $rec_desc;
+        }else{
+            $clean["rec_desc"] = NULL;
+        }
+        if (filter_var($amount,FILTER_VALIDATE_FLOAT,["options" => ["min_range" => 1]])){
+            $clean["amount"] = $amount;
+        }else{
+            $clean["amount"] = NULL;
+        }
+        if ($account !== "none"){
+            $clean["acc"] = $account;
+        }else{
+            $clean["acc"] = NULL;
+        }
+        if ($category !== "none"){
+            $clean["category"] = $category;
+        }else{
+            $clean["category"] = NULL;
+        }
+        if (!empty($clean["rec_name"]) && !empty($clean["rec_desc"]) && !empty($clean["amount"])
+            && !empty($clean["acc"]) && !empty($clean["category"])){
+            return $clean;
+        }else{
+            return false;
+        }
     }
     //TODO ADD BUDGET VALIDATION
     //TODO ADD CATEGORY VALIDATION
