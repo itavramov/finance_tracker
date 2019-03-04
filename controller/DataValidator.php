@@ -12,14 +12,14 @@ class DataValidator{
             $clean["first_name"] = NULL;
             $clean["last_name"]  = NULL;
         }
-//        if ($pass1 === $pass2){
+        if ($pass1 === $pass2){
             if (preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $pass1)){
                 $clean["pass"] = $pass1;
             } else {
                 $clean["pass"] = NULL;
                 throw new \Exception("Wrong pass error");
             }
-       // }
+        }
         if (filter_var($age,FILTER_VALIDATE_INT,["options" => ["min_range" => 18]])){
             $clean["age"] = $age;
         }else{
@@ -40,7 +40,7 @@ class DataValidator{
 
     public static function validateAddAccount($acc_name,$acc_type,$currency,$balance){
         $clean = [];
-        if (ctype_alpha($acc_name)){
+        if (ctype_alpha($acc_name) && !empty($acc_name)){
             $clean["acc_name"]   = $acc_name;
         }else{
             $clean["acc_name"] = NULL;
@@ -102,6 +102,73 @@ class DataValidator{
             return false;
         }
     }
-    //TODO ADD BUDGET VALIDATION
-    //TODO ADD CATEGORY VALIDATION
+
+    public static function validateAddBudget($budget_name, $budget_desc, $category, $current_amount,
+                                             $from_date, $to_date){
+        $clean = [];
+        if(ctype_alpha(($budget_name)) && !empty($budget_name)){
+            $clean["budget_name"]   = $budget_name;
+        }
+        else{
+            $clean["budget_name"] = NULL;
+        }
+        if ($budget_desc !== "" || strlen($budget_desc) > 5){
+            $clean["budget_desc"]   = $budget_desc;
+        }else{
+            $clean["budget_desc"] = NULL;
+        }
+        if ($category !== "none"){
+            $clean["category"] = $category;
+        }else{
+            $clean["category"] = NULL;
+        }
+        if (filter_var($current_amount,FILTER_VALIDATE_FLOAT,["options" => ["min_range" => 1]])){
+            $clean["current_amount"] = $current_amount;
+        }else{
+            $clean["current_amount"] = NULL;
+        }
+        if(!empty($from_date)){
+            $clean["from_date"] = $from_date;
+        }
+        else{
+            $clean["from_date"] = NULL;
+        }
+        if(!empty($to_date)){
+            $clean["to_date"] = $to_date;
+        }
+        else{
+            $clean["to_date"] = NULL;
+        }
+
+        if(!empty($clean["budget_name"]) && !empty($clean["budget_desc"]) && !empty($clean["category"]) &&
+            !empty($clean["current_amount"]) && !empty($clean["from_date"]) && !empty($clean["to_date"])){
+            return $clean;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static function validateAddCategory($cat_name, $cat_type){
+        $clean = [];
+        if(ctype_alpha(($cat_name)) && !empty($cat_name)){
+            $clean["cat_name"]   = $cat_name;
+        }
+        else{
+            $clean["cat_name"] = NULL;
+        }
+
+        if ($cat_type !== "none"){
+            $clean["cat_type"] = $cat_type;
+        }else{
+            $clean["cat_type"] = NULL;
+        }
+
+        if(!empty($clean["cat_name"]) && !empty($clean["cat_type"])){
+            return $clean;
+        }
+        else{
+            return false;
+        }
+    }
 }

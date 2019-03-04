@@ -7,7 +7,6 @@ use model\DAO\AccountDAO;
 
 class AccountController{
     function regAccount(){
-        //TODO REQUEST METHOD VALIDATION
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $acc_name      = trim($_POST["acc_name"]);
             $acc_type      = trim($_POST["acc_type"]);
