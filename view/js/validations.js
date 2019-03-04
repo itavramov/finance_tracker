@@ -26,12 +26,6 @@ function loginValidation() {
     }
 
     return isValid;
-
-    function validateEmail(email) {
-        var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return regex.test(email);
-    }
-
 }
 
 function registerValidation(form){
@@ -120,7 +114,6 @@ function registerValidation(form){
 }
 
 function logSubmit() {
-
     if (loginValidation()){
         $( "#submitBtn" ).click(function() {
             $( "#logForm" ).submit();
@@ -169,7 +162,7 @@ function addAccountValidation() {
         $accCurrencyAlert.html('No account type is picked!');
         isValid = false;
     }
-    if (!validateBalance($accBalance.val()) || !validateBalanceValue($accBalance.val())){
+    if (!validateNumber($accBalance.val()) || !validateNumberValue($accBalance.val())){
         $accBalance.addClass('alert alert-danger');
         $accBalance.attr('data-content', 'Please enter a positive number!');
         $accBalance.popover('show');
@@ -180,16 +173,6 @@ function addAccountValidation() {
     }
 
     return isValid;
-
-    function validateBalance(balance) {
-        var regex = /^\d*[1-9]\d*$/;
-        return regex.test(balance);
-    }
-
-    function validateBalanceValue(str) {
-        var n = Math.floor(Number(str));
-        return n !== Infinity && String(n) === str && n >= 0;
-    }
 }
 
 function addAccountSubmit() {
@@ -199,4 +182,95 @@ function addAccountSubmit() {
         $addAccBtn.attr('data-dismiss', 'modal');
         addAccount();
     }
+}
+
+function addRecordValidation() {
+    var isValid      = true;
+    var $recordName      = $('#recordName');
+    var $recordNameAlert = $('#recordNameAlert');
+    var $recordDesc      = $('#recordDesc');
+    var $recordDescAlert = $('#recordDescAlert');
+    var $amount          = $('#amount');
+    var $amountAlert     = $('#amountAlert');
+    var $category        = $('#categorySelect');
+    var $categoryAlert   = $('#categorySelectAlert');
+    var $accSelect       = $('#accSelect');
+    var $accSelectAlert  = $('#accSelectAlert');
+
+    if ($recordName.val() === ""){
+        $recordName.addClass('alert alert-danger');
+        $recordName.attr('data-content', 'Please enter record name!');
+        $recordName.popover('show');
+
+        $recordNameAlert.addClass('text-danger');
+        $recordNameAlert.html('The record name field is empty');
+        isValid = false;
+    }
+
+    if ($recordDesc.val() === "" || $recordDesc.val().length < 10){
+        $recordDesc.addClass('alert alert-danger');
+        $recordDesc.attr('data-content', 'Please enter record name!');
+        $recordDesc.popover('show');
+
+        $recordDescAlert.addClass('text-danger');
+        $recordDescAlert.html('The record name field is empty');
+        isValid = false;
+    }
+
+    if (!validateNumber($amount.val()) || !validateNumberValue($amount.val())){
+        $amount.addClass('alert alert-danger');
+        $amount.attr('data-content', 'Please enter a positive number!');
+        $amount.popover('show');
+
+        $amountAlert.addClass('text-danger');
+        $amountAlert.html('Invalid number for record amount!');
+        isValid = false;
+    }
+
+    if ($category.val() === "none"){
+        $category.addClass('border border-danger');
+        $category.attr('data-content', 'Please choose ');
+        $category.popover('show');
+
+        $categoryAlert.addClass('text-danger');
+        $categoryAlert.html('No account type is picked!');
+        isValid = false;
+    }
+
+    if ($accSelect.val() === "none"){
+        $accSelect.addClass('border border-danger');
+        $accSelect.attr('data-content', 'Please choose ');
+        $accSelect.popover('show');
+
+        $accSelectAlert$accSelectAlert.addClass('text-danger');
+        $accSelectAlert.html('No account type is picked!');
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function addRecordSubmit() {
+
+    if (addRecordValidation()){
+        $addRecordBtn = $('#addRecordBtn');
+        $addRecordBtn.attr('data-dismiss', 'modal');
+        addRecord()
+    }
+}
+
+//HELPING VALIDATION FUNCTIONS
+function validateEmail(email) {
+    var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email);
+}
+
+function validateNumber(number) {
+    var regex = /^\d*[1-9]\d*$/;
+    return regex.test(number);
+}
+
+function validateNumberValue(str) {
+    var n = Math.floor(Number(str));
+    return n !== Infinity && String(n) === str && n >= 0;
 }
