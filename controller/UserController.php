@@ -13,12 +13,12 @@ class UserController{
     function userRegistration(){
 
         if (isset($_POST["register"]) && $_SERVER["REQUEST_METHOD"] == "POST"){
-            $first_name = $_POST["first_name"];
-            $last_name  = $_POST["last_name"];
-            $email      = $_POST["email"];
-            $age        = $_POST["age"];
-            $password_1 = $_POST["password_1"];
-            $password_2 = $_POST["password_2"];
+            $first_name = trim($_POST["first_name"]);
+            $last_name  = trim($_POST["last_name"]);
+            $email      = trim($_POST["email"]);
+            $age        = trim($_POST["age"]);
+            $password_1 = trim($_POST["password_1"]);
+            $password_2 = trim($_POST["password_2"]);
             $user_image = $_FILES["user_image"]["tmp_name"];
 
 

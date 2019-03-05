@@ -8,11 +8,11 @@ use model\Record;
 class RecordController{
     function recordRegistration(){
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            $record_name = $_POST["record_name"];
-            $record_desc = $_POST["record_desc"];
-            $amount      = $_POST["amount"];
-            $category_id = $_POST["category_id"];
-            $acc_id      = $_POST["acc_id"];
+            $record_name = trim($_POST["record_name"]);
+            $record_desc = trim($_POST["record_desc"]);
+            $amount      = trim($_POST["amount"]);
+            $category_id = trim($_POST["category_id"]);
+            $acc_id      = trim($_POST["category_id"]);
             $response    = [];
 
             $clean = DataValidator::validateAddRecord($record_name,$record_desc,$amount,$acc_id,$category_id);
@@ -122,15 +122,15 @@ class RecordController{
     function radarDiagramExpenses(){
         $user_id  = $_SESSION["user_id"];
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
-            $compare1_start_date = date('Y-m-d', strtotime('-1 months'));
-            $compare2_end_date   = date("Y-m-d");
+            $start_date = date('Y-m-d', strtotime('-1 months'));
+            $end_date   = date("Y-m-d");
         }else{
-            $compare1_start_date = $_POST["start_date"];
-            $compare2_end_date   =  $_POST["end_date"];
+            $start_date = $_POST["start_date"];
+            $end_date   =  $_POST["end_date"];
         }
 
 
-        $first_compare_period = RecordDAO::getAllExpensesById($user_id, $compare1_start_date, $compare2_end_date);
+        $first_compare_period = RecordDAO::getAllExpensesById($user_id, $start_date, $end_date);
 
         $labels   = [];
         $data     = [];
