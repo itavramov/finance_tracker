@@ -34,7 +34,9 @@ class CategoryDAO extends Connection{
 
     static function getAllCategoriesByUser($user_id){
         try{
-            $stmt = self::$conn->prepare("SELECT category_id, category_name, category_type FROM categories WHERE user_id = ?");
+            $stmt = self::$conn->prepare("SELECT category_id, category_name, category_type 
+                                                    FROM categories 
+                                                    WHERE user_id = ?");
             $stmt->execute(array($user_id));
             $categories = [];
             $categories = $stmt->fetchAll(\PDO::FETCH_ASSOC);

@@ -36,7 +36,9 @@ class AccountDAO extends Connection {
 
     static function getAllAccountsById($user_id){
         try{
-            $stmt = self::$conn->prepare("SELECT acc_id,acc_name,balance,currency FROM accounts WHERE user_id = ?");
+            $stmt = self::$conn->prepare("SELECT acc_id,acc_name,balance,currency 
+                                                    FROM accounts 
+                                                    WHERE user_id = ?");
             $stmt->execute(array($user_id));
             $accounts = [];
             $accounts = $stmt->fetchAll(\PDO::FETCH_ASSOC);
