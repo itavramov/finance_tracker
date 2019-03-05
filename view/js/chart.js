@@ -158,6 +158,38 @@ function incomeVsExpenseLineChart() {
         })
         .then(function (myJson) {
 
+            var CurrentDate = new Date();
+            var newDate = new Date();
+            var x = 1;
+            newDate.setMonth(CurrentDate.getMonth() - x);
+            var month = newDate.getUTCMonth() + 1;
+            var day = newDate.getUTCDate();
+            var year = newDate.getUTCFullYear();
+
+            var curr_month = CurrentDate.getUTCMonth() + 1;
+            var curr_day = newDate.getUTCDate();
+            var curr_year = newDate.getUTCFullYear();
+
+            if(month < 9){
+                month = "0" + month;
+            }
+            if(day < 9){
+                day = "0" + day;
+            }
+
+            if(curr_month < 10){
+                curr_month = "0" + curr_month;
+            }
+            if(curr_day < 10){
+                curr_day = "0" + curr_day;
+            }
+
+            var start_date = month + "/" + day + "/" +  year;
+            var end_date = curr_month + "/" + curr_day + "/" +  curr_year;
+
+            console.log(start_date + " = " + end_date);
+            document.getElementById("daterange").value = start_date + " - " + end_date;
+
             var ctx = document.getElementById("incomeVsExpenseLineChart");
 
             var secondDiagram = new Chart(ctx, {
@@ -213,6 +245,39 @@ function defaultradarDiagram() {
             return response.json();
         })
         .then(function (myJson) {
+            var CurrentDate = new Date();
+            var newDate = new Date();
+            var x = 1;
+            newDate.setMonth(CurrentDate.getMonth() - x);
+            var month = newDate.getUTCMonth() + 1;
+            var day = newDate.getUTCDate();
+            var year = newDate.getUTCFullYear();
+
+            var curr_month = CurrentDate.getUTCMonth() + 1;
+            var curr_day = newDate.getUTCDate();
+            var curr_year = newDate.getUTCFullYear();
+
+            if(month < 9){
+                month = "0" + month;
+            }
+            if(day < 9){
+                day = "0" + day;
+            }
+
+            if(curr_month < 10){
+                curr_month = "0" + curr_month;
+            }
+            if(curr_day < 10){
+                curr_day = "0" + curr_day;
+            }
+
+            var start_date = month + "/" + day + "/" +  year;
+            var end_date = curr_month + "/" + curr_day + "/" +  curr_year;
+
+            console.log(start_date + " = " + end_date);
+            document.getElementById("daterange1").value = start_date + " - " + end_date;
+            document.getElementById("daterange2").value = start_date + " - " + end_date;
+
             var current_labels = radarDiagram.data.labels;
             for (var i = 0; i < myJson[0].length; i++){
                 if (!current_labels.includes(myJson[0][i])){

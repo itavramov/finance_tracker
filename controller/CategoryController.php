@@ -15,8 +15,8 @@ use model\DAO\CategoryDAO;
 class CategoryController{
     function regCategory(){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $cat_name = $_POST["cat_name"];
-            $cat_type = $_POST["cat_type"];
+            $cat_name = trim($_POST["cat_name"]);
+            $cat_type = trim($_POST["cat_type"]);
             $user_id = $_SESSION["user_id"];
             $arr = [];
 

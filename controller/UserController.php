@@ -42,7 +42,8 @@ class UserController{
                     }
                     else{
                         $user = new User($cleanVars["first_name"], $cleanVars["last_name"],
-                            $cleanVars["email"], $cleanVars["age"], password_hash($cleanVars["pass"], PASSWORD_BCRYPT, ['cost'=>12]), $image_url);
+                            $cleanVars["email"], $cleanVars["age"], password_hash($cleanVars["pass"],
+                                PASSWORD_BCRYPT, ['cost'=>12]), $image_url);
                         var_dump($user);
                         UserDAO::addUser($user);
                         header('Location: view/login.html');
