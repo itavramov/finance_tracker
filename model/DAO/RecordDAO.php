@@ -81,7 +81,7 @@ class RecordDAO extends Connection {
         $stmt = self::$conn->prepare($records_query);
         $stmt->execute(array($user_id));
         $result = [];
-        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(\PDO::FETCH_OBJ);
         return $result;
     }
 
