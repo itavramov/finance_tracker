@@ -99,13 +99,14 @@ function defaultExpenseDonut(){
 }
 
 function redrawChart() {
-    $('input[name="daterange"]').daterangepicker({
-        opens: 'left'
-    }, function(start, end, label) {
-        var start_date = start.format('YYYY-MM-DD');
-        var end_date = end.format('YYYY-MM-DD');
-        console.log(start_date + " " + end_date);
-            fetch("index.php?target=record&action=listIncomesAndExpense",{
+
+        $('#daterange').daterangepicker({
+            opens: 'left'
+        }, function(start, end, label) {
+            var start_date = start.format('YYYY-MM-DD');
+            var end_date = end.format('YYYY-MM-DD');
+            console.log(start_date + " " + end_date);
+            fetch("../index.php?target=record&action=listIncomesAndExpense",{
                 method: "POST",
                 headers: {'Content-type': 'application/x-www-form-urlencoded'},
                 body: "start_date=" + start_date + "&end_date=" + end_date
@@ -148,11 +149,11 @@ function redrawChart() {
                 .catch(function (e) {
                     alert(e.message);
                 })
-    });
+        });
 }
 
 function incomeVsExpenseLineChart() {
-    fetch("index.php?target=record&action=listIncomesAndExpense")
+    fetch("../index.php?target=record&action=listIncomesAndExpense")
         .then(function (response) {
             return response.json();
         })
@@ -188,7 +189,7 @@ function incomeVsExpenseLineChart() {
             var end_date = curr_month + "/" + curr_day + "/" +  curr_year;
 
             console.log(start_date + " = " + end_date);
-            document.getElementById("daterange").value = start_date + " - " + end_date;
+            //document.getElementById("daterange").value = start_date + " - " + end_date;
 
             var ctx = document.getElementById("incomeVsExpenseLineChart");
 
@@ -226,58 +227,51 @@ function incomeVsExpenseLineChart() {
 }
 
 function defaultradarDiagram() {
-    Chart.defaults.scale.ticks.beginAtZero = true;
-    var chart  = document.getElementById("radarDiagram");
-    var labels = [];
-    var data   = [
-        {},
-        {}
-    ];
-    var radarDiagram = new Chart(chart,{
-        type: 'radar',
-        data:{
-            labels: labels,
-            datasets: data,
-        }
-    });
-    fetch("index.php?target=record&action=radarDiagramExpenses")
+
+    fetch("../index.php?target=record&action=radarDiagramExpenses")
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
-            var CurrentDate = new Date();
-            var newDate = new Date();
-            var x = 1;
-            newDate.setMonth(CurrentDate.getMonth() - x);
-            var month = newDate.getUTCMonth() + 1;
-            var day = newDate.getUTCDate();
-            var year = newDate.getUTCFullYear();
-
-            var curr_month = CurrentDate.getUTCMonth() + 1;
-            var curr_day = newDate.getUTCDate();
-            var curr_year = newDate.getUTCFullYear();
-
-            if(month < 9){
-                month = "0" + month;
-            }
-            if(day < 9){
-                day = "0" + day;
-            }
-
-            if(curr_month < 10){
-                curr_month = "0" + curr_month;
-            }
-            if(curr_day < 10){
-                curr_day = "0" + curr_day;
-            }
-
-            var start_date = month + "/" + day + "/" +  year;
-            var end_date = curr_month + "/" + curr_day + "/" +  curr_year;
-
-            console.log(start_date + " = " + end_date);
-            document.getElementById("daterange1").value = start_date + " - " + end_date;
-            document.getElementById("daterange2").value = start_date + " - " + end_date;
-
+            // var CurrentDate = new Date();
+            // var newDate = new Date();
+            // var x = 1;
+            // newDate.setMonth(CurrentDate.getMonth() - x);
+            // var month = newDate.getUTCMonth() + 1;
+            // var day = newDate.getUTCDate();
+            // var year = newDate.getUTCFullYear();
+            //
+            // var curr_month = CurrentDate.getUTCMonth() + 1;
+            // var curr_day = newDate.getUTCDate();
+            // var curr_year = newDate.getUTCFullYear();
+            //
+            // if(month < 9){
+            //     month = "0" + month;
+            // }
+            // if(day < 9){
+            //     day = "0" + day;
+            // }
+            //
+            // if(curr_month < 10){
+            //     curr_month = "0" + curr_month;
+            // }
+            // if(curr_day < 10){
+            //     curr_day = "0" + curr_day;
+            // }
+            //
+            // var start_date = month + "/" + day + "/" +  year;
+            // var end_date = curr_month + "/" + curr_day + "/" +  curr_year;
+            //
+            // console.log(start_date + " = " + end_date);
+            // document.getElementById("daterange1").value = start_date + " - " + end_date;
+            // document.getElementById("daterange2").value = start_date + " - " + end_date;
+            var radarDiagram = new Chart(chart,{
+                type: 'radar',
+                data:{
+                    labels: labels,
+                    datasets: data,
+                }
+            });
             var current_labels = radarDiagram.data.labels;
             for (var i = 0; i < myJson[0].length; i++){
                 if (!current_labels.includes(myJson[0][i])){

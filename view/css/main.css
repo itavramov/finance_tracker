@@ -545,16 +545,34 @@
     padding: 5px;
     border: 1px solid #f1dfc5;
 }
-#main, #accounts_main{
+#main, #accounts_main, #budgets_main{
     padding: 20px;
 }
-#accounts_main div{
-    width: 30%;
+#accounts_main{
+    width: 48%;
+    display: inline-block;
 }
-
+#budgets_main {
+    width: 48%;
+    display: inline-block;
+    vertical-align: top;
+}
 .donutChart {
     width: 30%;
     margin: 25px 25px 25px 25px;
     display: inline-block;
     text-align: center;
+    height: 50vh;
+}
+.chart-span{
+    font-size: 1.2em;
+    font-weight: 700;
+}
+.incomeExpenseChart{
+    width: 50%;
+    margin: 25px 25px 25px 25px;
+    display: inline-block;
+    text-align: center;
+    height: 50vh;
+
 }

@@ -7,13 +7,11 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
     <link rel="stylesheet" href="css/AdminLTE.min.css">
     <link rel="stylesheet" href="css/skins/skin-blue.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -25,11 +23,12 @@
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
           crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini" onload="userHeaderInfo();">
-<div class="wrapper">
-
+<div class = "wrapper">
     <!-- Main Header -->
     <header class="main-header">
         <!-- Logo -->
@@ -91,7 +90,7 @@
                 <li class="header">Navigation</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="active" id="all_records"><a href="#"><i class="fa fa-link"></i> <span>All records</span></a></li>
-                <li><a href="#" id="analysis"> <i class="fas fa-chart-line"></i> <span>Analysis</span></a></li>
+                <li><a href="#" id="analysis"> <i class="fa fa-bar-chart"></i> <span>Analysis</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Converters</span>
                         <span class="pull-right-container">
@@ -136,6 +135,8 @@
     $('#analysis').click(function () {
         $('#main').load('analysis.html');
         ExpenseDonut();
+        defaultradarDiagram();
+        incomeVsExpenseLineChart();
     })
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
