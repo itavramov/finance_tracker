@@ -47,6 +47,18 @@ function fillAccounts() {
                 else{
                     span_box_number.style.color = "rgb(231, 76, 60)";
                 }
+
+                var delete_btn = document.createElement("i");
+                delete_btn.className = "fa fa-trash";
+                delete_btn.style.cssFloat = "right";
+                delete_btn.style.marginRight = "15px";
+                var edit_btn = document.createElement("i");
+                edit_btn.setAttribute("data-toggle", "modal");
+                edit_btn.setAttribute("data-target", "#editRecord");
+                edit_btn.className = "fa fa-pencil";
+                edit_btn.style.cssFloat = "right";
+
+
                 acc_main.appendChild(info_box);
                 info_box.appendChild(span_info);
                 span_info.appendChild(span_i);
@@ -54,6 +66,8 @@ function fillAccounts() {
                 box_content.appendChild(span_box_text);
                 box_content.appendChild(span_box_number);
                 box_content.appendChild(span_currency);
+                box_content.appendChild(edit_btn);
+                box_content.appendChild(delete_btn);
             }
         })
         .catch(function (e) {

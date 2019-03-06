@@ -23,7 +23,12 @@ class RecordDAO extends Connection {
             $cat_type = $stmt->fetch(\PDO::FETCH_ASSOC);
 
 
-            $addRecord_query = "INSERT INTO records (record_name,record_desc,amount,category_id,acc_id,action_date)
+            $addRecord_query = "INSERT INTO records (record_name,
+                                                      record_desc,
+                                                      amount,
+                                                      category_id,
+                                                      acc_id,
+                                                      action_date)
                                       VALUES (?,?,?,?,?,curdate())";
 
             $stmt = self::$conn->prepare($addRecord_query);

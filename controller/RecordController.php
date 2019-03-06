@@ -12,13 +12,13 @@ class RecordController{
             $record_desc = trim($_POST["record_desc"]);
             $amount      = trim($_POST["amount"]);
             $category_id = trim($_POST["category_id"]);
-            $acc_id      = trim($_POST["category_id"]);
+            $acc_id      = trim($_POST["acc_id"]);
             $response    = [];
 
             $clean = DataValidator::validateAddRecord($record_name,$record_desc,$amount,$acc_id,$category_id);
+
             if ($clean){
-                $new_record = new Record($clean["rec_name"],$clean["rec_desc"],$clean["amount"]
-                    ,$clean["acc"],$clean["category"]);
+                $new_record = new Record($clean["rec_name"],$clean["rec_desc"],$clean["amount"],$clean["category"],$clean["acc"]);
                 if (RecordDAO::addRecord($new_record)){
                     $response["message"] = "success";
                 }else{
