@@ -2,7 +2,7 @@ function addCategory(){
     var cat_name = document.getElementById('categoryName').value;
     var cat_type = document.getElementById('categoryType').value;
 
-    fetch("index.php?target=category&action=regCategory",{
+    fetch("../index.php?target=category&action=regCategory",{
         method: "POST",
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
         body: "cat_name=" + cat_name + "&cat_type=" + cat_type
