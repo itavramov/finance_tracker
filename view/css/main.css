@@ -551,3 +551,10 @@
 #accounts_main div{
     width: 30%;
 }
+
+.donutChart {
+    width: 30%;
+    margin: 25px 25px 25px 25px;
+    display: inline-block;
+    text-align: center;
+}

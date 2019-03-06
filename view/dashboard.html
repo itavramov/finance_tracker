@@ -91,16 +91,16 @@
                 <li class="header">Navigation</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="active" id="all_records"><a href="#"><i class="fa fa-link"></i> <span>All records</span></a></li>
-                <li><a href="#" id="accounts"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+                <li><a href="#" id="analysis"> <i class="fas fa-chart-line"></i> <span>Analysis</span></a></li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                    <a href="#"><i class="fa fa-link"></i> <span>Converters</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
+                        <li><a href="#">Crypto Converter</a></li>
+                        <li><a href="#">Fiat Converter</a></li>
                     </ul>
                 </li>
             </ul>
@@ -133,6 +133,10 @@
         fillRecordsTable();
 
     });
+    $('#analysis').click(function () {
+        $('#main').load('analysis.html');
+        ExpenseDonut();
+    })
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
