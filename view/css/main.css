@@ -581,8 +581,14 @@
     width: 50%;
     margin: 25px 25px 25px 25px;
     display: inline-block;
-    text-align: center;
     height: 50vh;
+}
+
+.progressBars {
+    width: 30%;
+    margin: 25px 25px 25px 25px;
+    display: inline-block;
+    vertical-align: middle;
 }
 .last_five_records{
     width: 49%;
