@@ -6,11 +6,29 @@ function fillAccounts() {
         .then(function (myJson) {
             document.getElementById("accounts_main").innerHTML = "";
             var acc_main = document.getElementById("accounts_main");
+            label = document.createElement("H3");
+            label.innerText = "All accounts";
+            acc_main.appendChild(label);
+            var ict_unit = [];
+            var efficiency = [];
+            var coloR = [];
+
+            var dynamicColors = function() {
+                var r = Math.floor(Math.random() * 255);
+                var g = Math.floor(Math.random() * 255);
+                var b = Math.floor(Math.random() * 255);
+                return "rgb(" + r + "," + g + "," + b + ")";
+            };
+
             for (var i=0; i < myJson.length; i++){
+                ict_unit.push("ICT Unit " + myJson[i].ict_unit);
+                efficiency.push(myJson[i].efficiency);
+                coloR.push(dynamicColors());
                 var info_box = document.createElement('div');
                 info_box.className = "info-box";
                 var span_info = document.createElement("span");
                 span_info.className = "info-box-icon";
+                span_info.style.backgroundColor = coloR[i];
                 var span_i = document.createElement("i");
                 span_i.className = "fa fa-money";
                 var box_content = document.createElement("div");
@@ -21,7 +39,12 @@ function fillAccounts() {
                 var span_box_number= document.createElement("span");
                 span_box_number.className = "info-box-number";
                 span_box_number.innerText = myJson[i]["balance"];
-
+                if(myJson[i]["balance"] > 0){
+                    span_box_number.style.color = "rgb(40, 203, 124)";
+                }
+                else{
+                    span_box_number.style.color = "rgb(231, 76, 60)";
+                }
                 acc_main.appendChild(info_box);
                 info_box.appendChild(span_info);
                 span_info.appendChild(span_i);
@@ -34,20 +57,6 @@ function fillAccounts() {
             alert(e.message);
         })
 }
-
-/*
-<div class="info-box">
-        <!-- Apply any bg-* class to to the icon to color it -->
-        <span class="info-box-icon"><i class="fa fa-money"></i></span>
-        <div class="info-box-content">
-            <span class="info-box-text">Likes</span>
-            <span class="info-box-number">93,139</span>
-        </div>
-        <!-- /.info-box-content -->
-    </div>
-    <!-- /.info-box -->
-*/
-
 function showAccounts() {
     fetch("index.php?target=account&action=listAllAccounts")
         .then(function (response) {
@@ -110,6 +119,41 @@ function showAccounts() {
                 div.appendChild(amount_date);
                 amount_date.appendChild(amount);
                 amount_date.appendChild(action_date);
+            }
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
+function addAccount() {
+    var acc_name = document.getElementById('acc_name').value;
+    var acc_type = document.getElementById('acc_type').value;
+    var balance = document.getElementById('balance').value;
+    var acc_currency = document.getElementById('acc_currency').value;
+
+    fetch("../index.php?target=account&action=regAccount",{
+        method: "POST",
+        headers: {'Content-type': 'application/x-www-form-urlencoded'},
+        body: "acc_name=" + acc_name + "&acc_type=" + acc_type + "&balance=" + balance + "&acc_currency=" + acc_currency
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            if(myJson.success === true){
+                document.getElementById('addAccount').style.display='none';
+                document.getElementById('addAccount').classList.remove("show");
+                document.getElementById('addAccount').setAttribute('aria-hidden', 'true');
+                var h = document.createElement("H1");
+                var t = document.createTextNode("You create successfully an account");
+                h.appendChild(t);
+                document.body.appendChild(h);
+            }
+            else{
+                var h = document.createElement("H1");
+                var t = document.createTextNode("Sorry bro");
+                h.appendChild(t);
+                document.body.appendChild(h);
             }
         })
         .catch(function (e) {

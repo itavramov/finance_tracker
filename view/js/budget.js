@@ -228,3 +228,63 @@ function defaultListAllBudgets() {
             alert(e.message);
         })
 }
+
+function fillBudgets(){
+    fetch("../index.php?target=budget&action=listAllBudgets")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            document.getElementById("budgets_main").innerHTML = "";
+            var budgets_main = document.getElementById("budgets_main");
+            label = document.createElement("H3");
+            label.innerText = "All budgets";
+            budgets_main.appendChild(label);
+            var ict_unit = [];
+            var efficiency = [];
+            var coloR = [];
+
+            var dynamicColors = function() {
+                var r = Math.floor(Math.random() * 255);
+                var g = Math.floor(Math.random() * 255);
+                var b = Math.floor(Math.random() * 255);
+                return "rgb(" + r + "," + g + "," + b + ")";
+            };
+
+            for (var i=0; i < myJson.length; i++){
+                ict_unit.push("ICT Unit " + myJson[i].ict_unit);
+                efficiency.push(myJson[i].efficiency);
+                coloR.push(dynamicColors());
+                var info_box = document.createElement('div');
+                info_box.className = "info-box";
+                var span_info = document.createElement("span");
+                span_info.className = "info-box-icon";
+                span_info.style.backgroundColor = coloR[i];
+                var span_i = document.createElement("i");
+                span_i.className = "fa fa-usd";
+                var box_content = document.createElement("div");
+                box_content.className = "info-box-content";
+                var span_box_text = document.createElement("span");
+                span_box_text.className = "info-box-text";
+                span_box_text.innerText = myJson[i]["budget_name"];
+                var span_box_number= document.createElement("span");
+                span_box_number.className = "info-box-number";
+                span_box_number.innerText = myJson[i]["current_amount"];
+                if(myJson[i]["current_amount"] > 0){
+                    span_box_number.style.color = "rgb(40, 203, 124)";
+                }
+                else{
+                    span_box_number.style.color = "rgb(231, 76, 60)";
+                }
+                budgets_main.appendChild(info_box);
+                info_box.appendChild(span_info);
+                span_info.appendChild(span_i);
+                info_box.appendChild(box_content);
+                box_content.appendChild(span_box_text);
+                box_content.appendChild(span_box_number);
+            }
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
