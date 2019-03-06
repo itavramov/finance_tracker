@@ -568,6 +568,17 @@
     text-align: center;
     padding: 20px;
 }
-.avgIncomeExpense{
+.avgIncomeExpense {
     text-align: center;
+}
+.chart-span{
+    font-size: 1.2em;
+    font-weight: 700;
+}
+.incomeExpenseChart{
+    width: 50%;
+    margin: 25px 25px 25px 25px;
+    display: inline-block;
+    text-align: center;
+    height: 50vh;
 }
