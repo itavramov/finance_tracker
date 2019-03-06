@@ -55,7 +55,7 @@ class UserDAO extends Connection {
         }
     }
     static function getInfoById($id){
-        $stmt = self::$conn->prepare("SELECT first_name,last_name,email,picture,age 
+        $stmt = self::$conn->prepare("SELECT first_name,last_name,email,picture,age,sign_up_date
                               FROM users WHERE user_id = ?");
         $stmt->execute(array($id));
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);

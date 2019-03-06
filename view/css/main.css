@@ -545,3 +545,9 @@
     padding: 5px;
     border: 1px solid #f1dfc5;
 }
+#main, #accounts_main{
+    padding: 20px;
+}
+#accounts_main div{
+    width: 30%;
+}

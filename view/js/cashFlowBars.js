@@ -1,11 +1,9 @@
 function cashFlowBars(){
-    fetch("index.php?target=record&action=getSumTotal")
+    fetch("../index.php?target=record&action=getSumTotal")
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
-
-
 
             document.getElementById("cash_flow_value").innerHTML = myJson[1]['total_sum'] - myJson[0]['total_sum'] + "лв.";
 

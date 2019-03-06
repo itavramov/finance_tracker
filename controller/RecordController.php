@@ -73,7 +73,6 @@ class RecordController{
 
         echo json_encode($arr);
     }
-
     function listLastFiveRecords(){
         $user_id = $_SESSION["user_id"];
 
@@ -81,8 +80,6 @@ class RecordController{
 
         echo json_encode($arr);
     }
-
-
     function listIncomesAndExpense(){
         $user_id = $_SESSION["user_id"];
         if(empty( $_POST["start_date"])){
@@ -118,7 +115,6 @@ class RecordController{
 
         echo json_encode(array_values($arr));
     }
-
     function radarDiagramExpenses(){
         $user_id  = $_SESSION["user_id"];
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){

@@ -1,5 +1,5 @@
 function ExpenseDonut() {
-    fetch("index.php?target=record&action=chartExpenses")
+    fetch("../index.php?target=record&action=chartExpenses")
         .then(function (response) {
             return response.json();
         })
