@@ -62,7 +62,7 @@ function fillRecordsTable() {
 }
 
 function getLastFiveRecords() {
-    fetch("index.php?target=record&action=listLastFiveRecords")
+    fetch("../index.php?target=record&action=listLastFiveRecords")
         .then(function (response) {
             return response.json();
         })
@@ -75,7 +75,6 @@ function getLastFiveRecords() {
             box_header.className = "box-header width-border";
 
             var box_title = document.createElement("H3");
-            box_title.className = "box-title";
             box_title.innerText = "Last 5 records";
 
             var box_tools = document.createElement("div");
@@ -105,6 +104,7 @@ function getLastFiveRecords() {
                 amount_date.className = "amount_date";
                 var amount = document.createElement('div');
                 amount.className = "box_amount";
+                amount.style.fontWeight = "700";
                 if(myJson[i]["category_type"] === "expense"){
                     amount.id = "amount_red";
                 }

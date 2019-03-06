@@ -10,7 +10,6 @@
     <input type="date" name="start_date" id="start_date">
     <input type="date" name="end_date" id="end_date">
     <button onclick="avgIncome(); avgExpense();">Submit</button>
-
 </div>
 <div id="accounts_main"></div>
 <div id="budgets_main">
@@ -37,6 +36,19 @@
                 <h5 class="card-title" id="avgExpenseField"></h5>
                 <p>BGN</p>
             </div>
+        </div>
+    </div>
+</div>
+<div class="last_five_records">
+    <div class="box" id="box_content">
+        <div class="box-header with-border">
+            <div class="box-tools pull-right">
+                <!-- Collapse Button -->
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+            <!-- /.box-tools -->
         </div>
     </div>
 </div>
@@ -178,7 +190,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary btn-block" id="addRecordBtn" onclick="addRecordSubmit(); reloadRecords();">Add Record</button>
+                <button class="btn btn-primary btn-block" id="addRecordBtn" onclick="addRecordSubmit(); fillAccounts();">Add Record</button>
             </div>
         </div>
     </div>
