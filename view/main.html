@@ -1,12 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
-<body>
+
 <div id="add_btns">
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAccount">Add Account</button>
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addRecord">Add Record</button>
@@ -14,8 +6,41 @@
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addBudget">Add Budget</button>
 </div>
 
+<div class="search">
+    <input type="date" name="start_date" id="start_date">
+    <input type="date" name="end_date" id="end_date">
+    <button onclick="avgIncome(); avgExpense();">Submit</button>
+
+</div>
 <div id="accounts_main"></div>
-<div id="budgets_main"></div>
+<div id="budgets_main">
+        <h3>Budgets</h3>
+        <hr>
+        <div id="all_budgets_progress" style="background: #fff; cursor: pointer; padding: 5px 10px; width: 100%">
+
+        </div>
+</div>
+<div class="avgIncomeExpense">
+    <div id="avgIncome" style="width: 30%; height: 50vh; display: inline-block; vertical-align: top; text-align: center; margin: 20px 20px 20px 20px;">
+        <div class="card text-white bg-info mb-3 mt-3" style="max-width: 18rem;">
+            <div class="card-header">Avg. Income</div>
+            <div class="card-body">
+                <h5 class="card-title" id="avgIncomeField"></h5>
+                <p>BGN</p>
+            </div>
+        </div>
+    </div>
+    <div id="avgExpense" style="width: 30%; height: 50vh; display: inline-block; vertical-align: top; text-align: center; margin: 20px 20px 20px 20px;">
+        <div class="card text-white bg-danger mb-3 mt-3" style="max-width: 18rem;">
+            <div class="card-header">Avg. Expense</div>
+            <div class="card-body">
+                <h5 class="card-title" id="avgExpenseField"></h5>
+                <p>BGN</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- MODAL window  ADD BUDGET -->
 <div class="modal fade text-dark" id="addBudget">
     <div class="modal-dialog">
@@ -59,7 +84,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary btn-block" id="addBudgetBtn" onclick="addBudgetSubmit();">
+                <button class="btn btn-primary btn-block" id="addBudgetBtn" onclick="addBudgetSubmit(); fillBudgets();">
                     Add Budget
                 </button>
             </div>
@@ -197,5 +222,4 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 <script src="js/box_widget.js"></script>
-</body>
-</html>
+<script src="js/recordJS.js"></script>

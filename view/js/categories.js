@@ -30,7 +30,7 @@ function addCategory(){
 }
 
 function fillRecordsCategories(){
-    fetch("index.php?target=category&action=allUserCategories")
+    fetch("../index.php?target=category&action=allUserCategories")
         .then(function (response) {
             return response.json();
         })
@@ -49,7 +49,7 @@ function fillRecordsCategories(){
 }
 
 function fillBudgetsCategories(){
-    fetch("index.php?target=category&action=allUserCategories")
+    fetch("../index.php?target=category&action=allUserCategories")
         .then(function (response) {
             return response.json();
         })

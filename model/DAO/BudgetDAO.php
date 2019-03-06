@@ -62,7 +62,7 @@ class BudgetDAO extends Connection {
                             WHERE b.user_id = ? AND b.from_date <= STR_TO_DATE(?, '%Y-%m-%d') AND 
                               b.to_date >= STR_TO_DATE(?, '%Y-%m-%d')";
         $stmt = self::$conn->prepare($records_query);
-        $stmt->execute(array($user_id, $start_date, $end_date));
+        $stmt->execute(array($user_id, $end_date, $start_date));
         $result = [];
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;

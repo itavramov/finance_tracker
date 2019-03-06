@@ -6,7 +6,7 @@ function addRecord(){
     var category_id = document.getElementById("categorySelect").value;
     var acc_id      = document.getElementById("accSelect").value;
 
-    fetch("index.php?target=record&action=recordRegistration",{
+    fetch("../index.php?target=record&action=recordRegistration",{
         method: "POST",
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
         body: "record_name=" + record_name + "&record_desc=" + record_desc + "&amount=" + amount +
@@ -129,97 +129,53 @@ function getLastFiveRecords() {
 }
 
 function avgIncome(){
+    var CurrentDate = new Date();
+    var newDate = new Date();
+    var x = 1;
+    newDate.setMonth(CurrentDate.getMonth() - x);
+    var month = newDate.getUTCMonth() + 1;
+    var day = newDate.getUTCDate();
+    var year = newDate.getUTCFullYear();
 
-    $('input[name="avgIncome_daterange"]').daterangepicker({
-        opens: 'left'
-    }, function(start, end, label) {
-        var start_date = start.format('YYYY-MM-DD');
-        var end_date = end.format('YYYY-MM-DD');
-        fetch("index.php?target=record&action=averageIncomeInfo",{
-            method: "POST",
-            headers: {'Content-type': 'application/x-www-form-urlencoded'},
-            body: "start_date=" + start_date + "&end_date=" + end_date + "&type=income"
-        })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJson) {
-                var avgField = document.getElementById("avgIncomeField");
-                avgField.innerText = myJson.average;
-            })
-            .catch(function (e) {
-                alert(e.message);
-            })
-    });
-}
+    var curr_month = CurrentDate.getUTCMonth() + 1;
+    var curr_day = newDate.getUTCDate();
+    var curr_year = newDate.getUTCFullYear();
 
-function avgExpense(){
+    if(month < 9){
+        month = "0" + month;
+    }
+    if(day < 9){
+        day = "0" + day;
+    }
 
-    $('input[name="avgExpense_daterange"]').daterangepicker({
-        opens: 'left'
-    }, function(start, end, label) {
-        var start_date = start.format('YYYY-MM-DD');
-        var end_date = end.format('YYYY-MM-DD');
-        fetch("index.php?target=record&action=averageIncomeInfo",{
-            method: "POST",
-            headers: {'Content-type': 'application/x-www-form-urlencoded'},
-            body: "start_date=" + start_date + "&end_date=" + end_date + "&type=expense"
-        })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJson) {
-                var avgField = document.getElementById("avgExpenseField");
-                avgField.innerText = myJson.average;
-            })
-            .catch(function (e) {
-                alert(e.message);
-            })
-    });
-}
+    if(curr_month < 9){
+        curr_month = "0" + curr_month;
+    }
+    if(curr_day < 9){
+        curr_day = "0" + curr_day;
+    }
+    var start_date;
+    var end_date;
+    if(document.getElementById("start_date") === null){
+        start_date = year + "-" + month + "-" +  day;
+        end_date = curr_year + "-" +  curr_month+ "-" + curr_day ;
+    }
+    else{
+        start_date = document.getElementById("start_date").value;
+        end_date = document.getElementById("end_date").value;
+    }
 
-function default_avgIncome(){
+    console.log(document.getElementById("end_date"));
 
-    fetch("index.php?target=record&action=averageIncomeInfo",{
+    fetch("../index.php?target=record&action=averageIncomeInfo",{
         method: "POST",
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
-        body:"type=income"
+        body:"start_date=" + start_date + "&end_date=" + end_date + "&type=income"
     })
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
-            var CurrentDate = new Date();
-            var newDate = new Date();
-            var x = 1;
-            newDate.setMonth(CurrentDate.getMonth() - x);
-            var month = newDate.getUTCMonth() + 1;
-            var day = newDate.getUTCDate();
-            var year = newDate.getUTCFullYear();
-
-            var curr_month = CurrentDate.getUTCMonth() + 1;
-            var curr_day = newDate.getUTCDate();
-            var curr_year = newDate.getUTCFullYear();
-
-            if(month < 9){
-                month = "0" + month;
-            }
-            if(day < 9){
-                day = "0" + day;
-            }
-
-            if(curr_month < 9){
-                curr_month = "0" + curr_month;
-            }
-            if(curr_day < 9){
-                curr_day = "0" + curr_day;
-            }
-
-            var start_date = month + "/" + day + "/" +  year;
-            var end_date = curr_month + "/" + curr_day + "/" +  curr_year;
-
-            console.log(start_date + " = " + end_date);
-            document.getElementById("avgIncome_daterange").value = start_date + " - " + end_date;
 
             var avgField = document.getElementById("avgIncomeField");
             avgField.innerText = myJson.average;
@@ -229,48 +185,54 @@ function default_avgIncome(){
         })
 }
 
-function default_avgExpense(){
+function avgExpense(){
+    var CurrentDate = new Date();
+    var newDate = new Date();
+    var x = 1;
+    newDate.setMonth(CurrentDate.getMonth() - x);
+    var month = newDate.getUTCMonth() + 1;
+    var day = newDate.getUTCDate();
+    var year = newDate.getUTCFullYear();
 
-    fetch("index.php?target=record&action=averageIncomeInfo",{
+    var curr_month = CurrentDate.getUTCMonth() + 1;
+    var curr_day = newDate.getUTCDate();
+    var curr_year = newDate.getUTCFullYear();
+
+    if(month < 9){
+        month = "0" + month;
+    }
+    if(day < 9){
+        day = "0" + day;
+    }
+
+    if(curr_month < 9){
+        curr_month = "0" + curr_month;
+    }
+    if(curr_day < 9){
+        curr_day = "0" + curr_day;
+    }
+    var start_date;
+    var end_date;
+    if(document.getElementById("start_date") === null){
+        start_date = year + "-" + month + "-" +  day;
+        end_date = curr_year + "-" +  curr_month+ "-" + curr_day ;
+    }
+    else{
+        start_date = document.getElementById("start_date").value;
+        end_date = document.getElementById("end_date").value;
+    }
+
+    console.log(document.getElementById("end_date"));
+
+    fetch("../index.php?target=record&action=averageIncomeInfo",{
         method: "POST",
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
-        body:"type=expense"
+        body:"start_date=" + start_date + "&end_date=" + end_date + "&type=expense"
     })
         .then(function (response) {
             return response.json();
         })
         .then(function (myJson) {
-            var CurrentDate = new Date();
-            var newDate = new Date();
-            var x = 1;
-            newDate.setMonth(CurrentDate.getMonth() - x);
-            var month = newDate.getUTCMonth() + 1;
-            var day = newDate.getUTCDate();
-            var year = newDate.getUTCFullYear();
-
-            var curr_month = CurrentDate.getUTCMonth() + 1;
-            var curr_day = newDate.getUTCDate();
-            var curr_year = newDate.getUTCFullYear();
-
-            if(month < 9){
-                month = "0" + month;
-            }
-            if(day < 9){
-                day = "0" + day;
-            }
-
-            if(curr_month < 10){
-                curr_month = "0" + curr_month;
-            }
-            if(curr_day < 10){
-                curr_day = "0" + curr_day;
-            }
-
-            var start_date = month + "/" + day + "/" +  year;
-            var end_date = curr_month + "/" + curr_day + "/" +  curr_year;
-
-            console.log(start_date + " = " + end_date);
-            document.getElementById("avgExpense_daterange").value = start_date + " - " + end_date;
 
             var avgField = document.getElementById("avgExpenseField");
             avgField.innerText = myJson.average;

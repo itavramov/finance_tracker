@@ -22,7 +22,7 @@ function ExpenseDonut() {
                 coloR.push(dynamicColors());
             }
 
-            var ctx = document.getElementById("myChart");
+            var ctx = document.getElementById("donutChart");
             var data_arr = {
                 datasets: [{
                     data: myJson[1],
@@ -48,7 +48,7 @@ function ExpenseDonut() {
 }
 
 function defaultExpenseDonut(){
-    fetch("index.php?target=record&action=chartExpenses")
+    fetch("../index.php?target=record&action=chartExpenses")
         .then(function (response) {
             return response.json();
         })
@@ -73,7 +73,7 @@ function defaultExpenseDonut(){
 
             $('#results-graph').remove();
 
-            var ctx = document.getElementById("myChart");
+            var ctx = document.getElementById("donutChart");
             var data_arr = {
                 datasets: [{
                     data: myJson[1],

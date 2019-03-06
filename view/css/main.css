@@ -546,14 +546,28 @@
     border: 1px solid #f1dfc5;
 }
 #main, #accounts_main, #budgets_main{
-    padding: 20px;
-}
+     padding: 20px;
+ }
 #accounts_main{
     width: 48%;
     display: inline-block;
 }
-#budgets_main{
+#budgets_main {
     width: 48%;
     display: inline-block;
     vertical-align: top;
+}
+.donutChart {
+    width: 30%;
+    margin: 25px 25px 25px 25px;
+    display: inline-block;
+    text-align: center;
+    height: 50vh;
+}
+.search{
+    text-align: center;
+    padding: 20px;
+}
+.avgIncomeExpense{
+    text-align: center;
 }

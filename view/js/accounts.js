@@ -39,6 +39,8 @@ function fillAccounts() {
                 var span_box_number= document.createElement("span");
                 span_box_number.className = "info-box-number";
                 span_box_number.innerText = myJson[i]["balance"];
+                var span_currency = document.createElement("span");
+                span_currency.innerText = myJson[i]["currency"];
                 if(myJson[i]["balance"] > 0){
                     span_box_number.style.color = "rgb(40, 203, 124)";
                 }
@@ -51,14 +53,16 @@ function fillAccounts() {
                 info_box.appendChild(box_content);
                 box_content.appendChild(span_box_text);
                 box_content.appendChild(span_box_number);
+                box_content.appendChild(span_currency);
             }
         })
         .catch(function (e) {
             alert(e.message);
         })
 }
+
 function showAccounts() {
-    fetch("index.php?target=account&action=listAllAccounts")
+    fetch("../index.php?target=account&action=listAllAccounts")
         .then(function (response) {
             return response.json();
         })
@@ -125,6 +129,7 @@ function showAccounts() {
             alert(e.message);
         })
 }
+
 function addAccount() {
     var acc_name = document.getElementById('acc_name').value;
     var acc_type = document.getElementById('acc_type').value;
