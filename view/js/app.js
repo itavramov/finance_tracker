@@ -1,12 +1,20 @@
 //THIS IS JUST THE BEGINING
-function welcomeMessage() {
-    fetch("index.php?target=user&action=userData")
+function userHeaderInfo() {
+    fetch("../index.php?target=user&action=userData")
         .then(function (response) {
             return response.json();
         }).then(function (json) {
-            var header = document.getElementById("hello_section");
-            header.innerHTML = "";
-            header.innerHTML = "Welcome " + json.first_name + " " + json.last_name;
+            var user_image_nav = document.getElementById("user_image_nav");
+            var user_image_header = document.getElementById("user_image_header");
+            var user_info = document.getElementById("user_info");
+            var user_name_nav = document.getElementById("user_name_nav");
+            var small = document.createElement("small");
+            user_image_nav.src = json.picture;
+            user_image_header.src = json.picture;
+            user_info.innerText = json.first_name + " " + json.last_name;
+            small.innerHTML = json.sign_up_date;
+            user_name_nav.innerHTML = json.first_name + " " + json.last_name;
+            user_info.appendChild(small);
     }).catch(function (e) {
         alert("The total error message: " + e.message);
     })
@@ -18,7 +26,7 @@ function addAccount() {
     var balance = document.getElementById('balance').value;
     var acc_currency = document.getElementById('acc_currency').value;
 
-    fetch("index.php?target=account&action=regAccount",{
+    fetch("../index.php?target=account&action=regAccount",{
         method: "POST",
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
         body: "acc_name=" + acc_name + "&acc_type=" + acc_type + "&balance=" + balance + "&acc_currency=" + acc_currency

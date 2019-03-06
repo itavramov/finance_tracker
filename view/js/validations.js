@@ -132,7 +132,9 @@ function addAccountValidation() {
     var $accCurrency      = $('#acc_currency');
     var $accBalance       = $('#balance');
     var $balanceAlert     = $('#balanceAlert');
-    
+
+    //TODO include validate name regex
+
     if ($accName.val() === ""){
         $accName.addClass('alert alert-danger');
         $accName.attr('data-content', 'Please enter account name!');

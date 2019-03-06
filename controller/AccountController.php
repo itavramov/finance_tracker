@@ -15,7 +15,6 @@ class AccountController{
             $user_id       = $_SESSION["user_id"];
 
             $clean = DataValidator::validateAddAccount($acc_name,$acc_type,$acc_currency,$balance);
-
             if ($clean){
                 $acc = new Account($clean["acc_name"],$clean["acc_type"],$clean["balance"],
                                     $clean["acc_currency"],$user_id);

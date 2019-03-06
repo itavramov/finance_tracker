@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+<div id="add_btns">
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAccount">Add Account</button>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addRecord">Add Record</button>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addCategory">Add Category</button>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addBudget">Add Budget</button>
+</div>
+<div id="accounts_main"></div>
+<!-- MODAL window  ADD BUDGET -->
+<div class="modal fade text-dark" id="addBudget">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Budget</h5>
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Budget Name</label>
+                    <input type="text" name="budget_name" id="budgetName" class="form-control">
+                    <p id="budgetNameAlert" class="form-text "></p>
+                </div>
+                <div class="form-group">
+                    <label for="budgetDesc">Budget Description</label>
+                    <textarea class="form-control" id="budgetDesc" name="budget_desc" rows="2"></textarea>
+                    <p id="budgetDescAlert" class="form-text "></p>
+                </div>
+                <div class="form-group">
+                    <label for="categorySelectBudget">Category</label>
+                    <select id="categorySelectBudget" class="form-control">
+                        <option selected value="none">Choose...</option>
+                    </select>
+                    <p id="categorySelectBudgetAlert" class="form-text "></p>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="number" step="0.01" name="budget_amount" id="budgetAmount" class="form-control">
+                    <p id="budgetAmountAlert" class="form-text "></p>
+                </div>
+                <div class="form-group">
+                    <label>Starting Date</label>
+                    <input type="date" name="from_date" id="fromDate" class="form-control">
+                    <p id="fromDateAlert" class="form-text "></p>
+                </div>
+                <div class="form-group">
+                    <label>Ending Date</label>
+                    <input type="date" name="to_date" id="toDate" class="form-control">
+                    <p id="toDateAlert" class="form-text "></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-block" id="addBudgetBtn" onclick="addBudgetSubmit();">
+                    Add Budget
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL window  ADD ACCOUNT -->
+<div class="modal fade text-dark" id="addAccount">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Account</h5>
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Account Name</label>
+                    <input type="text" name="acc_name" id="acc_name" class="form-control">
+                    <p id="accNameAlert" class="form-text "></p>
+                </div>
+                <div class="form-group">
+                    <label for="acc_type">Account type</label>
+                    <select id="acc_type" class="form-control">
+                        <option selected value="none">Choose...</option>
+                        <option value="cash">Cash</option>
+                        <option value="common">Common</option>
+                        <option value="bank">Bank</option>
+                    </select>
+                    <p class="form-text" id="accTypeAlert"></p>
+                </div>
+                <div class="form-group">
+                    <label for="acc_currency">Currency</label>
+                    <select id="acc_currency" class="form-control">
+                        <option selected value="none">Choose...</option>
+                        <option value="bgn">BGN</option>
+                        <option value="usd">USD</option>
+                    </select>
+                    <p class="form-text" id="accCurrencyAlert"></p>
+                </div>
+                <div class="form-group">
+                    <label>Balance</label>
+                    <input type="number" step="0.01" name="balance" id="balance" class="form-control">
+                    <p class="form-text" id="balanceAlert"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-block" onclick="addAccountSubmit(); fillAccounts();" id="addAccBtn">
+                    Add Account
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL window  ADD RECORD -->
+<div class="modal fade text-dark" id="addRecord">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Record</h5>
+                <button class="close" data-dismiss="modal" id="close_btn"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Record Name</label>
+                    <input type="text" name="record_name" id="recordName" class="form-control">
+                    <p class="form-text" id="recordNameAlert"></p>
+                </div>
+                <div class="form-group">
+                    <label for="recordDesc">Record Description</label>
+                    <textarea class="form-control" id="recordDesc" name="recordDesc" rows="3"></textarea>
+                    <p class="form-text" id="recordDescAlert"></p>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="number" step="0.01" name="amount" id="amount" class="form-control">
+                    <p class="form-text" id="amountAlert"></p>
+                </div>
+                <div class="form-group">
+                    <label for="categorySelect">Category</label>
+                    <select id="categorySelect" class="form-control">
+                        <option selected value="none">Choose...</option>
+                    </select>
+                    <p class="form-text" id="categorySelectAlert"></p>
+                </div>
+                <div class="form-group">
+                    <label for="accSelect">Account</label>
+                    <select id="accSelect" class="form-control">
+                        <option selected value="none">Choose...</option>
+                    </select>
+                    <p class="form-text" id="accSelectAlert"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-block" id="addRecordBtn" onclick="addRecordSubmit(); reloadRecords();">Add Record</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL window  ADD CATEGORY -->
+<div class="modal fade text-dark" id="addCategory">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Category</h5>
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Category Name</label>
+                    <input type="text" name="cat_name" id="categoryName" class="form-control">
+                    <p class="form-text" id="categoryNameAlert"></p>
+                </div>
+                <div class="form-group">
+                    <label for="categoryType">Category type</label>
+                    <select id="categoryType" class="form-control">
+                        <option selected value="none">Choose...</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                    <p class="form-text" id="categoryTypeAlert"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-block" id="addCategoryBtn" onclick="addCategorySubmit();">Add Category</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+<script src="js/box_widget.js"></script>
+</body>
+</html>
