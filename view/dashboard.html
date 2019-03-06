@@ -27,8 +27,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini" onload="userHeaderInfo();">
-<div class = "wrapper">
+<body class="hold-transition skin-blue sidebar-mini" onload="userHeaderInfo(); fillRecordsCategories();
+    fillAccounts(); fillBudgetsCategories();"><div class = "wrapper">
     <!-- Main Header -->
     <header class="main-header">
         <!-- Logo -->
@@ -143,6 +143,7 @@
         ExpenseDonut();
         defaultradarDiagram();
         incomeVsExpenseLineChart();
+        cashFlowBars();
     })
 </script>
 <script src="js/adminlte.min.js"></script>
