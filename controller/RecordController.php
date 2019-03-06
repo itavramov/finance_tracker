@@ -12,7 +12,7 @@ class RecordController{
             $record_desc = trim($_POST["record_desc"]);
             $amount      = trim($_POST["amount"]);
             $category_id = trim($_POST["category_id"]);
-            $acc_id      = trim($_POST["category_id"]);
+            $acc_id      = trim($_POST["acc_id"]);
             $response    = [];
 
             $clean = DataValidator::validateAddRecord($record_name,$record_desc,$amount,$acc_id,$category_id);
@@ -32,7 +32,6 @@ class RecordController{
         }
         echo json_encode($response);
     }
-
     function listRecords(){
         $user_id = $_SESSION["user_id"];
         $allRecords = RecordDAO::getAllRecordsByUser($user_id);
@@ -42,7 +41,6 @@ class RecordController{
         }
         echo json_encode(array_values($result));
     }
-
     function getSumTotal(){
         $user_id = $_SESSION["user_id"];
 
@@ -50,7 +48,6 @@ class RecordController{
 
         echo  json_encode($sum);
     }
-
     function chartExpenses(){
         $user_id  = $_SESSION["user_id"];
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
@@ -84,6 +81,7 @@ class RecordController{
 
         echo json_encode($arr);
     }
+
 
     function listIncomesAndExpense(){
         $user_id = $_SESSION["user_id"];
@@ -148,7 +146,6 @@ class RecordController{
 
         echo json_encode($arr);
     }
-
     function averageIncomeInfo(){
         $user_id  = $_SESSION["user_id"];
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
