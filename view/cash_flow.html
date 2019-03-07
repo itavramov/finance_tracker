@@ -1,3 +1,6 @@
+<div class="div_date">
+    <input type="text" name="daterange" value="01/01/2019 - 01/15/2019" />
+</div>
 <div class="progressBars">
     <span class = "label chart-span">Cash flow</span>
     <hr>
@@ -11,3 +14,22 @@
         <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progressBarExpense"></div>
     </div>
 </div>
+<div class="desc">
+    What is Cash Flow <br>
+    Cash flow is the net amount of cash and cash-equivalents being transferred into and out of a business. At the most
+    <br>
+    fundamental level, a company’s ability to create value for shareholders is determined by its ability to generate
+    <br>
+    positive cash flows, or more specifically, maximize long-term free cash flow. <br>
+</div>
+<script>
+    $(function() {
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'left'
+        }, function(start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            cashFlowBars(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
+        });
+
+    })
+</script>

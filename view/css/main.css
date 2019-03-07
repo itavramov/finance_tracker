@@ -562,16 +562,12 @@
     vertical-align: top;
 }
 .donutChart {
-    width: 30%;
+    width: 45%;
     margin: 25px 25px 25px 25px;
     display: inline-block;
     text-align: center;
     height: 50vh;
     vertical-align: middle;
-}
-.search{
-    text-align: center;
-    padding: 20px;
 }
 .avgIncomeExpense {
     text-align: center;
@@ -590,7 +586,7 @@
 }
 
 .progressBars {
-    width: 29%;
+    width: 45%;
     margin: 25px 25px 25px 25px;
     display: inline-block;
     vertical-align: middle;
@@ -598,4 +594,19 @@
 .last_five_records{
     width: 49%;
     display: inline-block;
+}
+.desc{
+    width: 47%;
+    display: inline-block;
+    margin: 25px 25px 25px 25px;
+    vertical-align: middle;
+}
+.daterangepicker.ltr.show-calendar.opensleft{
+    right: 0;
+}
+#donut_legend{
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 25px 25px 25px 25px;
 }
