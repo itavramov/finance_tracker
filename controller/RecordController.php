@@ -43,10 +43,20 @@ class RecordController{
     }
     function getSumTotal(){
         $user_id = $_SESSION["user_id"];
+        if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
+            $start_date = date('Y-m-d', strtotime('-1 months'));
+            $end_date   = date("Y-m-d");
+        }else{
+            $start_date = $_POST["start_date"];
+            $end_date   = $_POST["end_date"];
+        }
 
-        $sum = RecordDAO::sumAllExpenses($user_id);
-
-        echo  json_encode($sum);
+        $sum = RecordDAO::sumAllExpenses($user_id, $start_date, $end_date);
+        if(empty($sum)){
+            $sum = array(["category_type"=>"expense","total_sum"=>"0"],
+                ["category_type"=>"income","total_sum"=>"0"]);
+        }
+        echo json_encode($sum);
     }
     function chartExpenses(){
         $user_id  = $_SESSION["user_id"];

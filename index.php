@@ -22,12 +22,11 @@ $methodName     = isset($_GET["action"]) ? $_GET["action"] : "baseFunc";
 $controllerClassName = "\\controller\\" . ucfirst($controllerName) . "Controller";
 if (class_exists($controllerClassName)){
 
-
     $controller = new $controllerClassName();
     if (method_exists($controller,$methodName)){
-//        if ( ($controllerName === "user" && !in_array($methodName,array("userRegistration","userLogin")))){
+//        if (!($controllerName !== "user" && in_array($methodName,array("userLogin","userRegistration")))){
 //            if (!isset($_SESSION["logged"])){
-//                header("Location: view/error.html");
+//                header("Location: view/401.html");
 //                die();
 //            }
 //        }
@@ -46,6 +45,6 @@ if (class_exists($controllerClassName)){
 
 
 if ($fileNotExistsFlag){
-    header("Location: view/error.html");
+    header("Location: view/404.html");
 }
 

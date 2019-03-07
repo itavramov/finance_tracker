@@ -20,8 +20,9 @@ class UserDAO extends Connection {
                                                                     email,
                                                                     age,
                                                                     password,
-                                                                    picture)
-                                                                    VALUES (?, ?, ?, ?, ?, ?)");
+                                                                    picture,
+                                                                    sign_up_date)
+                                                                    VALUES (?, ?, ?, ?, ?, ?, curdate())");
         $stmt->execute(array($first_name,
                                 $last_name,
                                 $email,

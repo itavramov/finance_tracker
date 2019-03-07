@@ -58,26 +58,23 @@ class UserController{
     }
 
     function userLogin(){
-
         //TODO REFRESH LOGIC
-
-        if (isset($_SESSION["logged"]) && $_SESSION["logged"]){
-            require_once "view/dashboard.html";
-        }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = $_POST["email"];
             $password = $_POST["pass"];
             $db_pass = UserDAO::getPassByEmail($email);
+            $result = [];
             if (password_verify($password, $db_pass)) {
                 //TODO UserDAO getUserInfoByMail() -> insert in the session array
                 $_SESSION["logged"] = true;
                 $_SESSION["email"] = $email;
                 $_SESSION["user_id"] = UserDAO::getIdByEmail($email);
-                header("Location: view/dashboard.html");
+                $result["message"] = "success";
             } else {
-                throw new \Exception("Wrong email or password");
+                $result["message"] = "fail";
             }
+            echo json_encode($result);
         }
     }
 
@@ -85,8 +82,11 @@ class UserController{
         echo json_encode(UserDAO::getInfoById($_SESSION["user_id"]));
     }
 
-    function logout(){
-
+    function userLogout(){
+        session_destroy();
+        $arr = [];
+        $arr["message"] = "true";
+        echo json_encode($arr);
     }
 
 }

@@ -2,7 +2,7 @@
     <span class = "label chart-span">Pick filter date:</span>
     <input type="date" name="start_date" id="start_date">
     <input type="date" name="end_date" id="end_date">
-    <button onclick="defaultradarDiagram(); incomeVsExpenseLineChart();">Submit</button>
+    <button onclick="cashFlowBars(); defaultradarDiagram(); incomeVsExpenseLineChart(); ExpenseDonut();">Submit</button>
 
 </div>
 <div class="donutChart">
@@ -34,6 +34,7 @@
 <script>
     Chart.defaults.scale.ticks.beginAtZero = true;
     var chart  = document.getElementById("radarDiagram");
+    var donut = document.getElementById("donutChart");
     var labels = [];
     var data   = [
         {},
