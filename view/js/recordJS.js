@@ -241,3 +241,5 @@ function avgExpense(){
             alert(e.message);
         })
 }
+
+
