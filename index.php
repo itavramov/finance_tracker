@@ -24,12 +24,12 @@ if (class_exists($controllerClassName)){
 
     $controller = new $controllerClassName();
     if (method_exists($controller,$methodName)){
-//        if (!($controllerName !== "user" && in_array($methodName,array("userLogin","userRegistration")))){
-//            if (!isset($_SESSION["logged"])){
-//                header("Location: view/401.html");
-//                die();
-//            }
-//        }
+        if (!($controllerName == "user" && in_array($methodName,array("userLogin","userRegistration")))){
+            if (!isset($_SESSION["logged"])){
+                header("Location: view/401.html");
+                die();
+            }
+        }
         try{
             $controller->$methodName();
         }catch (Exception $exception){

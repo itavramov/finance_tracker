@@ -58,4 +58,19 @@ class BudgetController
 
         echo  json_encode($sum);
     }
+
+    public function deleteBudget(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            $budget_id  = trim($_POST["budget_id"]);
+            $result  = BudgetDAO::deleteBudget($budget_id);
+            if ($result){
+                $arr["success"] = "done";
+            }else{
+                $arr["success"] = "fail";
+            }
+        }else{
+            $arr["success"] = "fail";
+        }
+        echo json_encode($arr);
+    }
 }

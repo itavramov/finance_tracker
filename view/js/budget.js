@@ -101,9 +101,9 @@ function fillBudgets(){
                 coloR.push(dynamicColors());
             }
 
+            var parent = document.getElementById('all_budgets_progress');
             if(myJson == "")
             {
-                var parent = document.getElementById('all_budgets_progress');
                 var h = document.createElement('H3');
                 var t = document.createTextNode("No data!");
 
@@ -112,7 +112,17 @@ function fillBudgets(){
             }
             else{
                 for (var i = 0; i < myJson.length; i++){
-                    var parent = document.getElementById('all_budgets_progress');
+                    var check = myJson[i]["budget_id"];
+                    var delete_btn = document.createElement("i");
+                    delete_btn.className = "fa fa-trash";
+                    delete_btn.style.cssFloat = "right";
+                    delete_btn.setAttribute("data-toggle", "modal");
+                    delete_btn.addEventListener('click', function (check) {
+                        return function () {
+                            $('#deleteBudget').modal('show');
+                            document.getElementById("magicField").value = check;
+                        }
+                    }(check));
                     var progress = document.createElement('div');
                     var progress_bar = document.createElement('div');
                     progress.className = "progress";
@@ -122,9 +132,11 @@ function fillBudgets(){
                     var table = document.createElement("div");
                     var td_first = document.createElement("div");
                     var td_second = document.createElement("div");
+                    var td_third = document.createElement("div");
                     table.className = "budget_table";
                     td_first.className = "budget_names";
                     td_second.className = "budget_amount";
+                    td_third.className = "budget_delete";
 
                     td_first.innerHTML = myJson[i]["budget_name"] + "<br>" + myJson[i]["category_name"];
 
@@ -140,8 +152,10 @@ function fillBudgets(){
                     parent.appendChild(table);
                     table.appendChild(td_first);
                     table.appendChild(td_second);
+                    table.appendChild(td_third);
                     parent.appendChild(progress);
                     progress.appendChild(progress_bar);
+                    td_third.appendChild(delete_btn);
 
                     $("#bar_" + i).attr('aria-valuenow', 0).attr('aria-valuemin', 0).attr('aria-valuemax', 100).
                     attr('role', "progressbar").css("width",(myJson[i]["current_amount"]/myJson[i]["init_amount"])*100 + "%");
@@ -151,4 +165,30 @@ function fillBudgets(){
         .catch(function (e) {
             alert(e.message);
         })
+}
+function deleteBudget() {
+    var deleteConf   = document.getElementById("deleteConfBud");
+    var budget_id    = document.getElementById('magicField').value;
+    if (deleteConf.value === "DELETE"){
+        fetch("../index.php?target=budget&action=deleteBudget",{
+            method: "POST",
+            headers: {'Content-type': 'application/x-www-form-urlencoded'},
+            body:"budget_id=" + budget_id
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                if (myJson.success === "done"){
+                    alert("You just deleted budget!");
+                }else {
+                    alert("Please try again!");
+                }
+            })
+            .catch(function (e) {
+                alert(e.message);
+            })
+    }else {
+        alert("Please type DELETE correctly!");
+    }
 }
