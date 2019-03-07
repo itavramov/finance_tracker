@@ -533,6 +533,10 @@
     display: table-cell;
     text-align: center;
 }
+.budget_delete{
+    display: table-cell;
+    vertical-align: middle;
+}
 .red{
     color: rgb(231, 76, 60);
 }

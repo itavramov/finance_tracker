@@ -3,7 +3,13 @@
 namespace controller;
 
 class BaseController{
+
     function baseFunc(){
-        echo "Base func";
+
+        if ($_SESSION["logged"]){
+            header("Location: view/dashboard.html");
+        }else{
+            header("Location: view/welcomePage.html");
+        }
     }
 }

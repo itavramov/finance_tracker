@@ -277,7 +277,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Delete Account Confirmation</h5>
+                <h5 class="modal-title">Delete Budget Confirmation</h5>
                 <button class="close" data-dismiss="modal"><span>&times;</span></button>
             </div>
             <div class="modal-body">
@@ -288,7 +288,28 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger btn-block" id="" onclick="deleteAccount(); fillAccounts();">Delete Account</button>
+                <button class="btn btn-danger btn-block" onclick="deleteAccount(); fillAccounts();">Delete Account</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL window DELETE BUDGET -->
+<div class="modal fade text-dark" id="deleteBudget">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Account Confirmation</h5>
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>PLEASE TYPE 'DELETE' FOR CONFIRMATION</label>
+                    <input type="text" name="cat_name" id="deleteConfBud" class="form-control">
+                    <p class="form-text"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-block" onclick="deleteBudget(); fillBudgets();">Delete Budget</button>
             </div>
         </div>
     </div>

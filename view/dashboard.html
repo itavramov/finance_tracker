@@ -92,7 +92,19 @@
                 <li class="header">Navigation</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="active" id="all_records"><a href="#"><i class="fa fa-link"></i> <span>All records</span></a></li>
-                <li><a href="#" id="analysis"> <i class="fa fa-bar-chart"></i> <span>Analysis</span></a></li>
+                <li class="treeview">
+                    <a href="#"> <i class="fa fa-bar-chart"></i> <span>Analysis</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"  id="donut_btn">Expense donut</a></li>
+                        <li><a href="#" id="trend_btn">Trend incomes</a></li>
+                        <li><a href="#" id="radar_btn">Radar diagram</a></li>
+                        <li><a href="#" id="flow_btn">Cash flow</a></li>
+                    </ul>
+                </li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-btc"></i> <span>Converters</span>
                         <span class="pull-right-container">
@@ -150,11 +162,20 @@
         fillRecordsTable();
 
     });
-    $('#analysis').click(function () {
-        $('#main').load('analysis.html');
+    $('#donut_btn').click(function () {
+        $('#main').load('donut_expense.html');
         ExpenseDonut();
-        defaultradarDiagram();
+    })
+    $('#trend_btn').click(function () {
+        $('#main').load('trend_income.html');
         incomeVsExpenseLineChart();
+    })
+    $('#radar_btn').click(function () {
+        $('#main').load('radar_diagram.html');
+        defaultradarDiagram();
+    })
+    $('#flow_btn').click(function () {
+        $('#main').load('cash_flow.html');
         cashFlowBars();
     })
 </script>

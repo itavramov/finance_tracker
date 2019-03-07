@@ -51,7 +51,8 @@ class BudgetDAO extends Connection {
     }
 
     static function getAllBudgetsById($user_id, $start_date, $end_date){
-        $records_query = "SELECT b.budget_name, 
+        $records_query = "SELECT b.budget_id,
+                                  b.budget_name, 
                                   b.init_amount, 
                                   b.current_amount, 
                                   c.category_name,
@@ -66,5 +67,16 @@ class BudgetDAO extends Connection {
         $result = [];
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    static function deleteBudget($budget_id){
+        $query = "DELETE FROM budgets WHERE budget_id = ?";
+        $stmt  = self::$conn->prepare($query);
+        $stmt->execute(array($budget_id));
+        if ($stmt->rowCount() !== 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
