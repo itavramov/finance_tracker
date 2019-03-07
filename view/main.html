@@ -236,7 +236,7 @@
         </div>
             <div class="modal-footer">
                 <input type="text" hidden id="editHidden">
-                <button class="btn btn-primary btn-block" id="editAccBtn" onclick="editAccount()">Edit Account</button>
+                <button class="btn btn-primary btn-block" id="editAccBtn" onclick="editAccount(); fillAccounts();">Edit Account</button>
             </div>
         </div>
     </div>
@@ -267,6 +267,28 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary btn-block" id="addCategoryBtn" onclick="addCategorySubmit();">Add Category</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL window DELETE ACC -->
+<div class="modal fade text-dark" id="deleteAcc">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Account Confirmation</h5>
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>PLEASE TYPE 'DELETE' FOR CONFIRMATION</label>
+                    <input type="text" name="cat_name" id="deleteConf" class="form-control">
+                    <p class="form-text" id=""></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-block" id="" onclick="deleteAccount(); fillAccounts();">Delete Account</button>
             </div>
         </div>
     </div>

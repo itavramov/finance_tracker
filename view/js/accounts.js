@@ -43,8 +43,8 @@ function fillAccounts() {
                 span_currency.innerText = myJson[i]["currency"];
                 var hidden_input = document.createElement('input');
                 hidden_input.setAttribute("type","hidden");
-                hidden_input.value = myJson[i].acc_id;
-                hidden_input.id    = myJson[i].acc_id;
+                // hidden_input.value = myJson[i].acc_id;
+                // hidden_input.id    = myJson[i].acc_id;
                 if(myJson[i]["balance"] > 0){
                     span_box_number.style.color = "rgb(40, 203, 124)";
                 }
@@ -54,18 +54,24 @@ function fillAccounts() {
 
                 var hiddenField = document.getElementById('magicField');
 
-                var check = hidden_input.value;
+                var check = myJson[i].acc_id;
                 var delete_btn = document.createElement("i");
                 delete_btn.className = "fa fa-trash";
                 delete_btn.style.cssFloat = "right";
                 delete_btn.style.marginRight = "15px";
+                delete_btn.setAttribute('data-toggle','modal');
+                delete_btn.addEventListener('click',function (check){
+                    return function () {
+                        $('#deleteAcc').modal('show');
+                        document.getElementById('magicField').value = check;
+                    }
+                }(check));
                 var edit_btn = document.createElement("i");
                 edit_btn.setAttribute("data-toggle", "modal");
                 edit_btn.addEventListener('click',function (check){
                     return function () {
                         $('#editAccount').modal('show');
                         document.getElementById('magicField').value = check;
-                        //alert(document.getElementById('magicField').value);
                     }
                 }(check));
                 edit_btn.className = "fa fa-pencil";
@@ -77,7 +83,6 @@ function fillAccounts() {
                 info_box.appendChild(hidden_input);
                 span_info.appendChild(span_i);
                 info_box.appendChild(box_content);
-                box_content.appendChild(hidden_input);
                 box_content.appendChild(span_box_text);
                 box_content.appendChild(span_box_number);
                 box_content.appendChild(span_currency);
@@ -240,4 +245,31 @@ function editAccount() {
         .catch(function (e) {
             alert(e.message);
         })
+}
+
+function deleteAccount() {
+    var deleteConf   = document.getElementById("deleteConf");
+    var acc_id       = document.getElementById('magicField').value;
+    if (deleteConf.value === "DELETE"){
+        fetch("../index.php?target=account&action=deleteAccount",{
+            method: "POST",
+            headers: {'Content-type': 'application/x-www-form-urlencoded'},
+            body:"acc_id=" + acc_id
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                if (myJson.success === "done"){
+                    alert("You just edited account!");
+                }else {
+                    alert("Please try again!");
+                }
+            })
+            .catch(function (e) {
+                alert(e.message);
+            })
+    }else {
+        alert("Please type DELETE correctly!");
+    }
 }

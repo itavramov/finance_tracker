@@ -51,11 +51,11 @@ class AccountDAO extends Connection {
 
     }
 
-    static function updateAccount(Account $account, $user_id){
-        $acc_name  = $account->getAccName();
-        $acc_type  = $account->getAccType();
-        $balance   = $account->getBalance();
-        $currency  = $account->getCurrency();
+    static function updateAccount(Account $account, $acc_id){
+        $acc_name   = $account->getAccName();
+        $acc_type   = $account->getAccType();
+        $balance    = $account->getBalance();
+        $currency   = $account->getCurrency();
 
         $flagIsset     = false;
         $query         = "UPDATE accounts SET ";
@@ -93,11 +93,22 @@ class AccountDAO extends Connection {
             }
             $executeParams[] = $currency;
         }
-        $executeParams[] = $user_id;
-        $query          .= "WHERE user_id = ?";
-        
+        $executeParams[] = $acc_id;
+        $query          .= "WHERE acc_id = ?";
+
         $stmt = self::$conn->prepare($query);
         $stmt->execute($executeParams);
+        if ($stmt->rowCount() !== 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    static function deleteAccount($acc_id){
+        $query = "DELETE FROM accounts WHERE acc_id = ?";
+        $stmt  = self::$conn->prepare($query);
+        $stmt->execute(array($acc_id));
         if ($stmt->rowCount() !== 0){
             return true;
         }else{
