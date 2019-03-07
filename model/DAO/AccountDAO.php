@@ -51,5 +51,58 @@ class AccountDAO extends Connection {
 
     }
 
+    static function updateAccount(Account $account, $user_id){
+        $acc_name  = $account->getAccName();
+        $acc_type  = $account->getAccType();
+        $balance   = $account->getBalance();
+        $currency  = $account->getCurrency();
+
+        $flagIsset     = false;
+        $query         = "UPDATE accounts SET ";
+        $executeParams = [];
+
+        if ($acc_name !== "none"){
+            $query .= "acc_name = ? ";
+            $executeParams[] = $acc_name;
+            $flagIsset = true;
+        }
+        if ($acc_type !== "none"){
+            if (!$flagIsset){
+                $query .= "acc_type = ? ";
+                $flagIsset = true;
+            }else{
+                $query .= ",acc_type = ? ";
+            }
+            $executeParams[] = $acc_type;
+        }
+        if ($balance !== "none"){
+            if (!$flagIsset){
+                $query .= "balance = ? ";
+                $flagIsset = true;
+            }else{
+                $query .= ",balance = ? ";
+            }
+            $executeParams[] = $balance;
+        }
+        if ($currency !== "none"){
+            if (!$flagIsset){
+                $query .= "acc_type = ? ";
+                $flagIsset = true;
+            }else{
+                $query .= ",acc_type = ? ";
+            }
+            $executeParams[] = $currency;
+        }
+        $executeParams[] = $user_id;
+        $query          .= "WHERE user_id = ?";
+        
+        $stmt = self::$conn->prepare($query);
+        $stmt->execute($executeParams);
+        if ($stmt->rowCount() !== 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }

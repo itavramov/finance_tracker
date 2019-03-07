@@ -16,9 +16,9 @@ class RecordController{
             $response    = [];
 
             $clean = DataValidator::validateAddRecord($record_name,$record_desc,$amount,$acc_id,$category_id);
+
             if ($clean){
-                $new_record = new Record($clean["rec_name"],$clean["rec_desc"],$clean["amount"]
-                    ,$clean["acc"],$clean["category"]);
+                $new_record = new Record($clean["rec_name"],$clean["rec_desc"],$clean["amount"],$clean["category"],$clean["acc"]);
                 if (RecordDAO::addRecord($new_record)){
                     $response["message"] = "success";
                 }else{

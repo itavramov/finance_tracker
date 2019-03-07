@@ -563,6 +563,7 @@
     display: inline-block;
     text-align: center;
     height: 50vh;
+    vertical-align: middle;
 }
 .search{
     text-align: center;
@@ -585,7 +586,7 @@
 }
 
 .progressBars {
-    width: 30%;
+    width: 29%;
     margin: 25px 25px 25px 25px;
     display: inline-block;
     vertical-align: middle;

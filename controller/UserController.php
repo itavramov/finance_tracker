@@ -74,7 +74,7 @@ class UserController{
                 $_SESSION["logged"] = true;
                 $_SESSION["email"] = $email;
                 $_SESSION["user_id"] = UserDAO::getIdByEmail($email);
-                require_once "view/dashboard.html";
+                header("Location: view/dashboard.html");
             } else {
                 throw new \Exception("Wrong email or password");
             }

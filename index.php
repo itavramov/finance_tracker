@@ -25,8 +25,8 @@ if (class_exists($controllerClassName)){
 
     $controller = new $controllerClassName();
     if (method_exists($controller,$methodName)){
-//        if ( !($controllerName !== "user" && in_array($methodName,array("login","register","forgotPassword")))){
-//            if (!isset($_SESSION["user"])){
+//        if ( ($controllerName === "user" && !in_array($methodName,array("userRegistration","userLogin")))){
+//            if (!isset($_SESSION["logged"])){
 //                header("Location: view/error.html");
 //                die();
 //            }

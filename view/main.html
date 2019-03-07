@@ -11,12 +11,12 @@
     <input type="date" name="end_date" id="end_date">
     <button onclick="avgIncome(); avgExpense();">Submit</button>
 </div>
+<input type="text" value="" hidden id="magicField">
 <div id="accounts_main"></div>
 <div id="budgets_main">
         <h3>Budgets</h3>
         <hr>
         <div id="all_budgets_progress" style="background: #fff; cursor: pointer; padding: 5px 10px; width: 100%">
-
         </div>
 </div>
 <div class="avgIncomeExpense">
@@ -190,7 +190,53 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary btn-block" id="addRecordBtn" onclick="addRecordSubmit(); fillAccounts();">Add Record</button>
+                <button class="btn btn-primary btn-block" id="addRecordBtn" onclick="addRecordSubmit(); fillAccounts();
+        getLastFiveRecords(); fillBudgets(); avgIncome(); avgExpense();">Add Record</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL window  EDIT ACCOUNT -->
+<div class="modal fade text-dark" id="editAccount"><div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Edit Account</h5>
+            <button class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>New Account Name</label>
+                <input type="text" name="acc_name" id="new_acc_name" class="form-control">
+                <p id="new_accNameAlert" class="form-text "></p>
+            </div>
+            <div class="form-group">
+                <label for="acc_type">New Account type</label>
+                <select id="new_acc_type" class="form-control">
+                    <option selected value="none">Choose...</option>
+                    <option value="cash">Cash</option>
+                    <option value="common">Common</option>
+                    <option value="bank">Bank</option>
+                </select>
+                <p class="form-text" id="new_accTypeAlert"></p>
+            </div>
+            <div class="form-group">
+                <label for="acc_currency">New Currency</label>
+                <select id="new_acc_currency" class="form-control">
+                    <option selected value="none">Choose...</option>
+                    <option value="bgn">BGN</option>
+                    <option value="usd">USD</option>
+                </select>
+                <p class="form-text" id="new_accCurrencyAlert"></p>
+            </div>
+            <div class="form-group">
+                <label>New Balance</label>
+                <input type="number" step="0.01" name="balance" id="new_balance" class="form-control">
+                <p class="form-text" id="new_balanceAlert"></p>
+            </div>
+        </div>
+            <div class="modal-footer">
+                <input type="text" hidden id="editHidden">
+                <button class="btn btn-primary btn-block" id="editAccBtn" onclick="editAccount()">Edit Account</button>
             </div>
         </div>
     </div>
@@ -225,13 +271,3 @@
         </div>
     </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
-<script src="js/box_widget.js"></script>
-<script src="js/recordJS.js"></script>
