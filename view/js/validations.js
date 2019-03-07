@@ -1,31 +1,27 @@
 
 function loginValidation() {
-
-    var isValid    = true;
-    var $mailAlert = $('#mailAlert');
-    var $email     = $('#email');
-    var $passAlert = $('#passAlert');
-    var $pass      = $('#password');
-
-    if (!validateEmail($email.val())){
-        $mailAlert.addClass('text-danger');
-        $mailAlert.html('Invalid Email Address!');
-        $email.addClass('alert alert-danger');
-        $email.attr( 'data-content', 'Please enter valid email address!');
-        $email.popover('show');
-        isValid = false;
-    }
-
-    if ($pass.val() === ""){
-        $passAlert.addClass('text-danger');
-        $passAlert.html('Empty Password Field');
-        $pass.addClass('alert alert-danger');
-        $pass.attr( 'data-content', 'Please enter your password!');
-        $pass.popover('show');
-        isValid = false;
-    }
-
-    return isValid;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    fetch("../index.php?target=user&action=userLogin",{
+        method: "POST",
+        headers: {'Content-type': 'application/x-www-form-urlencoded'},
+        body: "email=" + email + "&pass=" + password
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            if(myJson.message === "success"){
+                location.href="./dashboard.html";
+            }
+            else{
+                console.log("noo");
+                document.getElementById("err_login").innerHTML = "<div class='mess'>Incorrect data! </div>";
+            }
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
 }
 
 function registerValidation(form){
