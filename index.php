@@ -1,6 +1,7 @@
 <?php
 
 require_once "config.php";
+require_once "util/session_security.php";
 //AUTOCOMPLETE
 spl_autoload_register(function ($class){
     $class = str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
@@ -9,6 +10,18 @@ spl_autoload_register(function ($class){
 
 \model\DAO\Connection::init_conn();
 session_start();
+$ip_address = get_ip_address();
+if (!my_session_is_registered('SESSION_IP')) {
+    $SESSION_IP = $ip_address;
+    my_session_register('SESSION_IP');
+}
+if ($SESSION_IP != $ip_address) {
+    // session ip check failed
+    $this_page = $_SESSION['PHP_SELF'];
+    my_session_unregister('SESSION_IP');
+    session_destroy();
+    my_redirect($this_page);
+}
 
 function exceptionHandler($exception){
     echo "<h1>Error</h1>" . $exception->getMessage();

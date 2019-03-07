@@ -157,6 +157,18 @@
         fillRecordsAccounts();
         getLastFiveRecords();
     });
+    $("#home").click(function(){
+        $('#main').load('main.html');
+        fillAccounts();
+        fillBudgets();
+        avgIncome();
+        avgExpense();
+        fillRecordsCategories();
+        fillBudgetsCategories();
+        userHeaderInfo();
+        fillRecordsAccounts();
+        getLastFiveRecords();
+    });
     $("#all_records").click(function () {
         $('#main').load('records.html');
         fillRecordsTable();
@@ -164,11 +176,11 @@
     });
     $('#donut_btn').click(function () {
         $('#main').load('donut_expense.html');
-        ExpenseDonut();
+        defaultExpenseDonut();
     })
     $('#trend_btn').click(function () {
         $('#main').load('trend_income.html');
-        incomeVsExpenseLineChart();
+        defaultIncomeVsExpense();
     })
     $('#radar_btn').click(function () {
         $('#main').load('radar_diagram.html');
@@ -176,7 +188,7 @@
     })
     $('#flow_btn').click(function () {
         $('#main').load('cash_flow.html');
-        cashFlowBars();
+        cash();
     })
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
