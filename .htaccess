@@ -1,0 +1,11 @@
+#RewriteEngine on
+#
+###if url contains uploads, pass it
+##RewriteRule ^uploads/(.*)$ - [L]
+##
+###if url contains assets, pass it
+##RewriteRule ^assets/(.*)$ - [L]
+#
+##if url contains api query, redirect to index.php front controller
+#RewriteRule ^.*$ index.php [NC]
+
