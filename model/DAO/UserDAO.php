@@ -55,8 +55,9 @@ class UserDAO extends Connection {
             return $row["password"];
         }
     }
+
     static function getInfoById($id){
-        $stmt = self::$conn->prepare("SELECT first_name,last_name,email,picture,age,sign_up_date
+        $stmt = self::$conn->prepare("SELECT user_id,first_name,last_name,email,picture,age,sign_up_date
                               FROM users WHERE user_id = ?");
         $stmt->execute(array($id));
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -65,6 +66,39 @@ class UserDAO extends Connection {
         }
         else{
             return $row;
+        }
+    }
+
+    static function getPassById($id){
+        $stmt = self::$conn->prepare("SELECT password FROM users WHERE user_id = ?");
+        $stmt->execute(array($id));
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if(empty($row)){
+            return null;
+        }
+        else{
+            return $row["password"];
+        }
+    }
+
+    static function updateUser(User $user, $user_id){
+        $first_name = $user->getFirstName();
+        $last_name  = $user->getLastName();
+        $age        = $user->getAge();
+        $email      = $user->getEmail();
+        $picture    = $user->getImgUrl();
+
+        $stmt = self::$conn->prepare("UPDATE users SET first_name = ?,
+                                                                  last_name = ?,
+                                                                  age = ?,
+                                                                  email = ?,
+                                                                  picture = ?
+                                                WHERE user_id = ?");
+        $stmt->execute(array($first_name, $last_name, $age, $email, $picture, $user_id));
+        if ($stmt->rowCount() !== 0){
+            return true;
+        }else{
+            return false;
         }
     }
 }
