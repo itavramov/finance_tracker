@@ -27,7 +27,7 @@ function calculateCrypto() {
             .then(function (myJson) {
                 //cryptoField.innerText = amount.value + " : " + result.value;
                 if (fiat === "BGN"){
-                    cryptoField.innerText =
+                    cryptoField.innerText = crypto + " : " + amount.value;
                     fiatOutput.innerText ="BGN: " + result.value*myJson.BGN;
                 } else if(fiat === "USD"){
                     fiatOutput.innerText ="USD: " + result.value*myJson.USD;

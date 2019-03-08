@@ -138,10 +138,7 @@ class RecordController{
             $start_date = $_POST["start_date"];
             $end_date   =  $_POST["end_date"];
         }
-
-
         $first_compare_period = RecordDAO::getAllExpensesById($user_id, $start_date, $end_date);
-
         $labels   = [];
         $data     = [];
         $arr      = [];
