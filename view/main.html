@@ -1,8 +1,10 @@
 <div id="add_btns">
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAccount">Add Account</button>
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addRecord">Add Record</button>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addRecord"
+            onclick="fillRecordsCategories(); fillRecordsAccounts();">Add Record</button>
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addCategory">Add Category</button>
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addBudget">Add Budget</button>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addBudget"
+            onclick="fillBudgetsCategories();">Add Budget</button>
 </div>
 <input type="text" value="" hidden id="magicField">
 <div id="accounts_main"></div>

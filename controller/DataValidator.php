@@ -38,9 +38,37 @@ class DataValidator{
         }
     }
 
+    public static function validateUserEdit($email,$fist_name,$last_name,$age){
+        $clean = array();
+        if (ctype_alpha($fist_name) && ctype_alpha($last_name)){
+            $clean["first_name"] = $fist_name;
+            $clean["last_name"]  = $last_name;
+        }else{
+            $clean["first_name"] = NULL;
+            $clean["last_name"]  = NULL;
+        }
+
+        if (filter_var($age,FILTER_VALIDATE_INT,["options" => ["min_range" => 18]])){
+            $clean["age"] = $age;
+        }else{
+            $clean["age"] = NULL;
+        }
+        if (filter_var($email,FILTER_VALIDATE_EMAIL)){
+            $clean["email"] = $email;
+        }else{
+            $clean["email"] = NULL;
+        }
+        if (!empty($clean["email"]) && !empty($clean["first_name"]) && !empty($clean["last_name"])
+            && !empty($clean["age"])){
+            return $clean;
+        }else{
+            return false;
+        }
+    }
+
     public static function validateAddAccount($acc_name,$acc_type,$currency,$balance){
         $clean = [];
-        if (ctype_alpha($acc_name) && !empty($acc_name)){
+        if (!empty($acc_name)){
             $clean["acc_name"]   = $acc_name;
         }else{
             $clean["acc_name"] = NULL;
@@ -70,7 +98,7 @@ class DataValidator{
 
     public static function validateAddRecord($rec_name,$rec_desc,$amount,$account,$category){
         $clean = [];
-        if (ctype_alpha($rec_name)){
+        if (!empty($rec_name)){
             $clean["rec_name"]   = $rec_name;
         }else{
             $clean["rec_name"] = NULL;
@@ -106,7 +134,7 @@ class DataValidator{
     public static function validateAddBudget($budget_name, $budget_desc, $category, $current_amount,
                                              $from_date, $to_date){
         $clean = [];
-        if(ctype_alpha(($budget_name)) && !empty($budget_name)){
+        if(!empty($budget_name)){
             $clean["budget_name"]   = $budget_name;
         }
         else{
@@ -151,7 +179,7 @@ class DataValidator{
 
     public static function validateAddCategory($cat_name, $cat_type){
         $clean = [];
-        if(ctype_alpha(($cat_name)) && !empty($cat_name)){
+        if(!empty($cat_name)){
             $clean["cat_name"]   = $cat_name;
         }
         else{
