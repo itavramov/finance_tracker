@@ -68,7 +68,7 @@ class DataValidator{
 
     public static function validateAddAccount($acc_name,$acc_type,$currency,$balance){
         $clean = [];
-        if (ctype_alpha($acc_name) && !empty($acc_name)){
+        if (!empty($acc_name)){
             $clean["acc_name"]   = $acc_name;
         }else{
             $clean["acc_name"] = NULL;
@@ -98,7 +98,7 @@ class DataValidator{
 
     public static function validateAddRecord($rec_name,$rec_desc,$amount,$account,$category){
         $clean = [];
-        if (ctype_alpha($rec_name)){
+        if (!empty($rec_name)){
             $clean["rec_name"]   = $rec_name;
         }else{
             $clean["rec_name"] = NULL;
@@ -134,7 +134,7 @@ class DataValidator{
     public static function validateAddBudget($budget_name, $budget_desc, $category, $current_amount,
                                              $from_date, $to_date){
         $clean = [];
-        if(ctype_alpha(($budget_name)) && !empty($budget_name)){
+        if(!empty($budget_name)){
             $clean["budget_name"]   = $budget_name;
         }
         else{
@@ -179,7 +179,7 @@ class DataValidator{
 
     public static function validateAddCategory($cat_name, $cat_type){
         $clean = [];
-        if(ctype_alpha(($cat_name)) && !empty($cat_name)){
+        if(!empty($cat_name)){
             $clean["cat_name"]   = $cat_name;
         }
         else{

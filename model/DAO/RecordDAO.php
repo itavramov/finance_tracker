@@ -119,7 +119,6 @@ class RecordDAO extends Connection {
         $stmt   = self::$conn->prepare($get_query);
         $stmt->execute(array($user_id,$start_date,$end_date));
         //TODO VALIDATION
-        $result = [];
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
     }

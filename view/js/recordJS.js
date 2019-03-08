@@ -17,16 +17,10 @@ function addRecord(){
         })
         .then(function (myJson) {
             if(myJson.message === "success"){
-                var h = document.createElement("H1");
-                var t = document.createTextNode("You create successfully an record!");
-                h.appendChild(t);
-                document.body.appendChild(h);
+                alert("You successfuly added a record!");
             }
             else{
-                var h = document.createElement("H1");
-                var t = document.createTextNode("Sorry bro");
-                h.appendChild(t);
-                document.body.appendChild(h);
+                alert("Something went wrong!");
             }
         })
         .catch(function (e) {

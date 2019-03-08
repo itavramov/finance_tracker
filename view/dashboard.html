@@ -113,7 +113,7 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Crypto Converter</a></li>
+                        <li><a href="#" id="crypto">Crypto Converter</a></li>
                         <li><a href="#">Fiat Converter</a></li>
                     </ul>
                 </li>
@@ -242,6 +242,9 @@
         $('#main').load('cash_flow.html');
         cash();
     })
+    $('#crypto').click(function () {
+        $('#main').load('cryptoConverter.html');
+    })
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
@@ -261,5 +264,6 @@
 <script src="js/recordJS.js"></script>
 <script src="js/logout.js"></script>
 <script src="js/users.js"></script>
+<script src="js/cryptoConverter.js"></script>
 </body>
 </html>
