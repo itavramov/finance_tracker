@@ -1,26 +1,44 @@
-<div class="div_date">
-    <input type="text" name="daterange" value="01/01/2019 - 01/15/2019" />
-</div>
-<div class="progressBars">
-    <span class = "label chart-span">Cash flow</span>
-    <hr>
-    <span class = "label chart-span" id="cash_flow_value"></span><br><br>
-    <label for="progressBarIncome">Income</label>
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" id="progressBarIncome"></div>
+<div style="display: flex">
+    <div id="compareDiagram" class="donutChart">
+        <div class="progressBars">
+            <span class = "label chart-span">Cash flow</span>
+            <hr>
+            <span class = "label chart-span" id="cash_flow_value"></span><br><br>
+            <label for="progressBarIncome">Income</label>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" id="progressBarIncome"></div>
+            </div>
+            <label for="progressBarExpense">Expense</label>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progressBarExpense"></div>
+            </div>
+        </div>
     </div>
-    <label for="progressBarExpense">Expense</label>
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progressBarExpense"></div>
+    <div class="card bg-info mt-5" style="width: 18rem;">
+        <div class="card-header">
+            Featutes:
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Select Date:</li>
+            <li class="list-group-item">
+                <input type="text" name="daterange" value="01/01/2019 - 01/15/2019" />
+            </li>
+            <li class="list-group-item">
+                <div id="donut_legend"></div>
+            </li>
+        </ul>
     </div>
-</div>
-<div class="desc">
-    What is Cash Flow <br>
-    Cash flow is the net amount of cash and cash-equivalents being transferred into and out of a business. At the most
-    <br>
-    fundamental level, a company’s ability to create value for shareholders is determined by its ability to generate
-    <br>
-    positive cash flows, or more specifically, maximize long-term free cash flow. <br>
+    <div class="card text-white bg-info mt-5 ml-3" style="max-width: 18rem;">
+        <div class="card-header">Cash flow bars</div>
+        <div class="card-body">
+            <h5 class="card-title">Info:</h5>
+            <p class="card-text">-What is Cash Flow
+                Cash flow is the net amount of cash and cash-equivalents being transferred into and out of a business. At the most
+                fundamental level, a company’s ability to create value for shareholders is determined by its ability to generate
+                positive cash flows, or more specifically, maximize long-term free cash flow. .</p>
+
+        </div>
+    </div>
 </div>
 <script>
     $(function() {

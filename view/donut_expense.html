@@ -1,11 +1,34 @@
-<div class="div_date">
-    <input type="text" name="daterange" value="01/01/2019 - 01/15/2019" />
+<div style="display: flex">
+    <div id="compareDiagram" class="donutChart">
+        <span class = "label chart-span">Structure of expenses</span>
+        <canvas id="donutChart"></canvas>
+    </div>
+    <div class="card bg-info mt-5" style="width: 18rem;">
+        <div class="card-header">
+            Featutes:
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Select Date:</li>
+            <li class="list-group-item">
+                <input type="text" name="daterange" value="01/01/2019 - 01/15/2019" />
+            </li>
+            <li class="list-group-item">
+                <div id="donut_legend"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="card text-white bg-info mt-5 ml-3" style="max-width: 18rem;">
+        <div class="card-header">Donut Diagram</div>
+        <div class="card-body">
+            <h5 class="card-title">Info:</h5>
+            <p class="card-text">-This diagram gives you a chance to check all your expenses by
+                category and period of time.</p>
+            <p>-By default the period is for the last 30 days.</p>
+            <p>-You can dynamically remove category from the chart.</p>
+
+        </div>
+    </div>
 </div>
-<div class="donutChart">
-    <span class = "label chart-span">Structure of expenses</span>
-    <canvas id="donutChart"></canvas>
-</div>
-<div id="donut_legend"></div>
 <script>
     $(function() {
         $('input[name="daterange"]').daterangepicker({

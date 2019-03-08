@@ -36,6 +36,7 @@ function fillRecordsCategories(){
         })
         .then(function (myJson) {
             var cat_select = document.getElementById('categorySelect');
+            cat_select.innerHTML = "";
             for (var i=0; i < myJson.length; i++){
                 var option = document.createElement('option');
                 option.value = myJson[i]["category_id"];
@@ -55,6 +56,7 @@ function fillBudgetsCategories(){
         })
         .then(function (myJson) {
             var cat_select = document.getElementById('categorySelectBudget');
+            cat_select.innerHTML = "";
             for (var i=0; i < myJson.length; i++){
                 if(myJson[i]["category_type"] === "expense"){
                     var option = document.createElement('option');

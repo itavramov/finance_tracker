@@ -51,7 +51,7 @@ function ExpenseDonut(start_date, end_date) {
             for (var i in myJson[0]){
                 var name = document.createElement("div");
                 name.innerHTML = "<b>" + myJson[0][i] + "</b>" + " - " + myJson[1][i];
-                name.style.padding = "10px";
+                name.style.paddingBottom = "10px";
 
                 total_sum += parseInt(myJson[1][i])
                 donut_legend.appendChild(name);
@@ -121,7 +121,7 @@ function defaultExpenseDonut(){
             for (var i in myJson[0]){
                 var name = document.createElement("div");
                 name.innerHTML = "<b>" + myJson[0][i] + "</b>" + " - " + myJson[1][i];
-                name.style.padding = "10px";
+                name.style.paddingBottom = "10px";
 
                 total_sum += parseInt(myJson[1][i])
                 donut_legend.appendChild(name);
