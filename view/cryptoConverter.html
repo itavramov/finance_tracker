@@ -1,0 +1,52 @@
+<div class="form-row">
+    <div class="col">
+        <label class="mr-sm-2" >Cryptocurrency</label>
+        <select class="custom-select mr-sm-2" id="cryptoSelect" onchange="changeCrypto();">
+            <option value="BTC" selected>Bitcoin</option>
+            <option value="ETH">Ethereum</option>
+            <option value="XRP">Ripple</option>
+            <option value="LTC">Litecoin</option>
+        </select>
+    </div>
+
+    <div class="col">
+        <label class="mr-sm-2">Fiat Currency</label>
+        <select class="custom-select mr-sm-2" id="fiatSelect" onchange="changeFiat()">
+            <option value="BGN" selected>BGN</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+        </select>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">amount</span>
+            <span class="input-group-text">0.00</span>
+        </div>
+        <input type="number" class="form-control" id="converterAmount" onkeyup="calculateCrypto()">
+    </div>
+</div>
+<div class="row">
+    <div class="card ml-3" style="width: 40%; text-align: center">
+        <div class="card-body" id="cryptoOutput">
+                BTC : 0
+        </div>
+    </div>
+    <div class="card ml-3" style="width: 10%">
+        <div class="card-body" style="text-align: center">
+            =
+        </div>
+    </div>
+    <div class="card ml-3" id="fiatOutput" style="width: 40%; text-align: center">
+        <div class="card-body">
+           BGN : 0
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+</script>
