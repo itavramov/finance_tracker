@@ -48,7 +48,7 @@ if (class_exists($controllerClassName)){
     if (method_exists($controller,$methodName)){
         if (!($controllerName == "user" && in_array($methodName,array("userLogin","userRegistration")))){
             if (!isset($_SESSION["logged"])){
-                header("Location: view/401.html");
+                header("HTTP/1.0 401 Not Authorized");
                 die();
             }
          }

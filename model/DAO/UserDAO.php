@@ -30,6 +30,13 @@ class UserDAO extends Connection {
                                 $password,
                                 $picture));
         $user->setId(self::$conn->lastInsertId());
+
+        if(self::$conn->lastInsertId() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     static function getIdByEmail($email){

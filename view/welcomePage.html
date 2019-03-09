@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
           crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/welcomePage.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>Finance Tracker</title>
 </head>
 
@@ -95,7 +96,7 @@
                                        data-trigger="focus" >
                                 <p id="passAlert" class="form-text "></p>
                             </div>
-                            <a href="register.html" style="color: white">Register now!</a>
+                            <a href="#" data-toggle="modal" data-target="#register" style="color: white" >Register now!</a>
                             <br>
                             <button class="btn btn-outline-light btn-block" id="submitBtn" onclick="loginValidation()">Log In</button>
                             <div id="err_login"></div>
@@ -212,6 +213,75 @@
         </div>
     </div>
 </div>
+<!-- MODAL window  Registration-->
+<div class="modal fade text-dark" id="register">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="../index.php?target=user&action=userRegistration" method="post" enctype="multipart/form-data"
+                      role="form" onsubmit="return registerValidation(this);">
+                    <div class="col-md-12" style="margin: 50px auto">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title" style="display: inline-block">Register Now</h3>
+                                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="first_name">First Name</label>
+                                    <input type="text" class="form-control" name="first_name" id="first_name"
+                                           placeholder="First Name" required>
+                                    <div id="firstNameErr"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" class="form-control" name="last_name" id="last_name"
+                                           placeholder="Last Name" required>
+                                    <div id="lastNameErr"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" class="form-control" name="email" id="reg_email"
+                                           placeholder="Enter email" required>
+                                    <div id="emailErr"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="age">Your Age</label>
+                                    <input type="text" class="form-control" name="age" id="age" placeholder="Your Age" required>
+                                    <div id="ageErr"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password_1">Password</label>
+                                    <input type="password" class="form-control" id="password_1" name="password_1"
+                                           placeholder="Password" required>
+                                    <div id="passErr"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password_2">Retype Password</label>
+                                    <input type="password" class="form-control" id="password_2" name="password_2"
+                                           placeholder="Retype Password" required>
+                                    <div id="rePassErr"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="user_image">File input</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" name="user_image" id="user_image">
+                                            <div id="imageErr"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <input type="submit" class="btn btn-primary btn-block" name="register" value="Register"></input>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
 
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
@@ -242,6 +312,7 @@
         }
     });
 </script>
+<script src="js/handleErrors.js"></script>
 </body>
 
 </html>

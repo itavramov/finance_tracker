@@ -134,7 +134,8 @@
 </div>
 <!-- MODAL window  EDIT Profile-->
 <div class="modal fade text-dark" id="profileEdit">
-    <form action="../index.php?target=user&action=edit" method="post" enctype="multipart/form-data">
+    <form action="../index.php?target=user&action=edit" method="post" enctype="multipart/form-data"
+        onsubmit="return editUserValidation();">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -145,7 +146,7 @@
                 <div class="form-group">
                     <label>First Name</label>
                     <input type="text" name="first_name" id="new_first_name" class="form-control">
-                    <p id="budgetNameAlert" class="form-text"></p>
+                    <p id="userFirstAlert" class="form-text"></p>
                 </div>
                 <div class="form-group">
                     <label for="new_last_name">Last Name</label>
@@ -169,14 +170,14 @@
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" name="user_image" id="new_user_image">
-                            <p id="fromDateAlert" class="form-text "></p>
+                            <p id="userImageAlert" class="form-text "></p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary btn-block" id="addBudgetBtn" onclick="editUser();">
-                    Add Budget
+                <button class="btn btn-primary btn-block" id="addBudgetBtn">
+                    Edit
                 </button>
                 <input type="hidden" id="user_id" name="user_id">
             </div>
@@ -265,5 +266,6 @@
 <script src="js/logout.js"></script>
 <script src="js/users.js"></script>
 <script src="js/cryptoConverter.js"></script>
+<script src="js/handleErrors.js"></script>
 </body>
 </html>

@@ -46,8 +46,9 @@ class UserController implements Editable {
                             $cleanVars["email"], $cleanVars["age"], password_hash($cleanVars["pass"],
                                 PASSWORD_BCRYPT, ['cost'=>12]), $image_url);
                         //var_dump($user);
-                        UserDAO::addUser($user);
-                        header('Location: view/login.html');
+                        $result["success"] = UserDAO::addUser($user);
+                        //header('Location: view/login.html');
+                        echo json_encode($result);
                     }
                 }else{
                     throw new \Exception("Invalid credentials...");
