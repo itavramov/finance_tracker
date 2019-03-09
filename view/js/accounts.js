@@ -72,6 +72,8 @@ function fillAccounts() {
                     return function () {
                         $('#editAccount').modal('show');
                         document.getElementById('magicField').value = check;
+                        document.getElementById("editAccBtn").setAttribute("data-dismiss", "modal");
+                        showAccountInfo();
                     }
                 }(check));
                 edit_btn.className = "fa fa-pencil";
@@ -250,6 +252,7 @@ function editAccount() {
         })
         .then(function (myJson) {
             if (myJson.success === "done"){
+                fillAccounts();
                 alert("You just edited account!");
             }else {
                 alert("Please try again!");
@@ -289,9 +292,34 @@ function deleteAccount() {
     }
 }
 
-function resetAccInputs(){
-    document.getElementById("acc_name").value="";
+function resetAccInputs() {
+    document.getElementById("acc_name").value = "";
     document.getElementById("acc_type").selectedIndex = "none";
     document.getElementById("acc_currency").selectedIndex = "none";
-    document.getElementById("balance").value="";
+    document.getElementById("balance").value = "";
+}
+function showAccountInfo() {
+    var acc_id         = document.getElementById('magicField').value;
+    var newAccName     = document.getElementById("new_acc_name");
+    var newAccType     = document.getElementById("new_acc_type");
+    var newAccCurrency = document.getElementById("new_acc_currency");
+    var newBalance     = document.getElementById("new_balance");
+
+    fetch("../index.php?target=account&action=accountInfo",{
+        method: "POST",
+        headers: {'Content-type': 'application/x-www-form-urlencoded'},
+        body:"acc_id=" + acc_id
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            newAccName.value          = myJson.acc_name;
+            newAccType.value          = myJson.acc_type;
+            newAccCurrency.value      = myJson.currency;
+            newBalance.value          = myJson.balance;
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
 }
