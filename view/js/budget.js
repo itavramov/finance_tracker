@@ -147,3 +147,12 @@ function deleteBudget() {
         alert("Please type DELETE correctly!");
     }
 }
+
+function resetBudgetsInputs(){
+    document.getElementById("budgetName").value="";
+    document.getElementById("budgetDesc").value="";
+    document.getElementById("categorySelectBudget").selectedIndex = "none";
+    document.getElementById("budgetAmount").value="";
+    document.getElementById("fromDate").value="mm/dd/yyy";
+    document.getElementById("toDate").value="mm/dd/yyy";
+}

@@ -10,7 +10,7 @@ class Constants{
     const DB_USER     = "root";
     const DB_PASS     = "root";
     //DATE FORMAT FOR DB CONST
-    const DATE_FORMAT     = '%Y-%m-%d';
+    const DATE_FORMAT     = '%Y-%m-%d %H:%i';
     //DATE FORMAT FOR PHP
     const DATE_FORMAT_PHP = 'Y-m-d';
 }
