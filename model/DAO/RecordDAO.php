@@ -3,6 +3,7 @@
 namespace model\DAO;
 
 use model\Record;
+use util\Constants;
 
 class RecordDAO extends Connection {
 
@@ -97,8 +98,8 @@ class RecordDAO extends Connection {
                             JOIN categories s ON (r.category_id = s.category_id)
                             JOIN accounts a ON (a.acc_id = r.acc_id)
                             JOIN users u ON (u.user_id = a.user_id)
-                            WHERE u.user_id = ? AND r.action_date BETWEEN STR_TO_DATE(?, '%Y-%m-%d') AND
-                                  STR_TO_DATE(?, '%Y-%m-%d')
+                            WHERE u.user_id = ? AND r.action_date BETWEEN STR_TO_DATE(?, '".Constants::DATE_FORMAT."') AND
+                                  STR_TO_DATE(?, '".Constants::DATE_FORMAT."')
                             GROUP BY category_type";
 
         $stmt = self::$conn->prepare($sum_query);
@@ -113,8 +114,8 @@ class RecordDAO extends Connection {
                       JOIN categories AS c ON (c.category_id = r.category_id)
                       JOIN accounts AS a ON(a.acc_id = r.acc_id)
                       WHERE a.user_id = ? AND c.category_type = 'expense' 
-                      AND r.action_date BETWEEN STR_TO_DATE(?, '%Y-%m-%d') AND
-                                  STR_TO_DATE(?, '%Y-%m-%d')
+                      AND r.action_date BETWEEN STR_TO_DATE(?, '".Constants::DATE_FORMAT."') AND
+                                  STR_TO_DATE(?, '".Constants::DATE_FORMAT."')
                       GROUP BY c.category_id";
         $stmt   = self::$conn->prepare($get_query);
         $stmt->execute(array($user_id,$start_date,$end_date));
@@ -143,12 +144,13 @@ class RecordDAO extends Connection {
     }
 
     static function getAverage($user_id, $start_date, $end_date, $type){
+
         $query = "SELECT ROUND(AVG(r.amount),2) AS average FROM records AS r 
                       JOIN categories AS c ON (c.category_id = r.category_id)
                       JOIN accounts AS a ON(a.acc_id = r.acc_id)
                       WHERE a.user_id = ? AND c.category_type = ?
-                      AND r.action_date BETWEEN STR_TO_DATE(?, '%Y-%m-%d')
-                      AND STR_TO_DATE(?, '%Y-%m-%d')";
+                      AND r.action_date BETWEEN STR_TO_DATE(?, '".Constants::DATE_FORMAT."')
+                      AND STR_TO_DATE(?, '".Constants::DATE_FORMAT."')";
         $stmt  = self::$conn->prepare($query);
         $stmt->execute(array($user_id,$type,$start_date,$end_date));
         $result = [];
@@ -168,8 +170,8 @@ class RecordDAO extends Connection {
                             JOIN categories s ON (r.category_id = s.category_id)
                             JOIN accounts a ON (a.acc_id = r.acc_id)
                             JOIN users u ON (u.user_id = a.user_id)
-                            WHERE u.user_id = ? AND r.action_date BETWEEN STR_TO_DATE(?, '%Y-%m-%d') AND
-                                  STR_TO_DATE(?, '%Y-%m-%d')";
+                            WHERE u.user_id = ? AND r.action_date BETWEEN STR_TO_DATE(?, '".Constants::DATE_FORMAT."') AND
+                                  STR_TO_DATE(?, '".Constants::DATE_FORMAT."')";
 
 
 

@@ -10,6 +10,7 @@ namespace model\DAO;
 
 
 use model\Budget;
+use util\Constants;
 
 class BudgetDAO extends Connection {
     static function addBudget(Budget $budget){
@@ -31,8 +32,8 @@ class BudgetDAO extends Connection {
                                                             from_date,
                                                             to_date)
                                                             VALUES (?, ?, ?, ?, ?, ?,
-                                                             STR_TO_DATE(?, '%Y-%m-%d'),
-                                                             STR_TO_DATE(?, '%Y-%m-%d'))");
+                                                             STR_TO_DATE(?, '".Constants::DATE_FORMAT."'),
+                                                             STR_TO_DATE(?, '".Constants::DATE_FORMAT."'))");
         $stmt->execute(array($user_id,
                             $budget_name,
                             $budget_desc,
@@ -60,8 +61,8 @@ class BudgetDAO extends Connection {
                                   b.to_date
                             FROM budgets b
                             JOIN categories c ON (b.category_id = c.category_id)
-                            WHERE b.user_id = ? AND b.from_date <= STR_TO_DATE(?, '%Y-%m-%d') AND 
-                              b.to_date >= STR_TO_DATE(?, '%Y-%m-%d')";
+                            WHERE b.user_id = ? AND b.from_date <= STR_TO_DATE(?, '".Constants::DATE_FORMAT."') AND 
+                              b.to_date >= STR_TO_DATE(?, '".Constants::DATE_FORMAT."')";
         $stmt = self::$conn->prepare($records_query);
         $stmt->execute(array($user_id, $end_date, $start_date));
         $result = [];

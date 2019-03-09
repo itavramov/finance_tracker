@@ -4,6 +4,7 @@ namespace controller;
 
 use model\DAO\RecordDAO;
 use model\Record;
+use util\Constants;
 
 class RecordController{
     function recordRegistration(){
@@ -44,8 +45,8 @@ class RecordController{
     function getSumTotal(){
         $user_id = $_SESSION["user_id"];
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
-            $start_date = date('Y-m-d', strtotime('-1 months'));
-            $end_date   = date("Y-m-d");
+            $start_date = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
+            $end_date   = date(Constants::DATE_FORMAT_PHP);
         }else{
             $start_date = $_POST["start_date"];
             $end_date   = $_POST["end_date"];
@@ -61,8 +62,8 @@ class RecordController{
     function chartExpenses(){
         $user_id  = $_SESSION["user_id"];
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
-            $start_date = date('Y-m-d', strtotime('-1 months'));
-            $end_date   = date("Y-m-d");
+            $start_date = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
+            $end_date   = date(Constants::DATE_FORMAT_PHP);
         }else{
             $start_date = $_POST["start_date"];
             $end_date   = $_POST["end_date"];
@@ -96,10 +97,10 @@ class RecordController{
     function listIncomesAndExpense(){
         $user_id = $_SESSION["user_id"];
         if(empty( $_POST["start_date"])){
-            $_POST["start_date"] = date('Y-m-d', strtotime('-1 months'));
+            $_POST["start_date"] = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
         }
         if(empty( $_POST["end_date"])){
-            $_POST["end_date"] = date("Y-m-d");
+            $_POST["end_date"] = date(Constants::DATE_FORMAT_PHP);
         }
 
         $allRecords = RecordDAO::getAllRecordsByUserFiltered($user_id, $_POST["start_date"], $_POST["end_date"]);
@@ -132,8 +133,8 @@ class RecordController{
     function radarDiagramExpenses(){
         $user_id  = $_SESSION["user_id"];
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
-            $start_date = date('Y-m-d', strtotime('-1 months'));
-            $end_date   = date("Y-m-d");
+            $start_date = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
+            $end_date   = date(Constants::DATE_FORMAT_PHP);
         }else{
             $start_date = $_POST["start_date"];
             $end_date   =  $_POST["end_date"];

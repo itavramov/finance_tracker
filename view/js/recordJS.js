@@ -18,6 +18,7 @@ function addRecord(){
         .then(function (myJson) {
             if(myJson.message === "success"){
                 alert("You successfuly added a record!");
+
             }
             else{
                 alert("Something went wrong!");
