@@ -23,11 +23,10 @@ class AccountController implements Editable{
             }else{
                 $arr["success"] = false;
             }
-            echo json_encode($arr);
         }else{
-            $arr["success"] = false;
-            echo json_encode($arr);
+            header("HTTP/1.0 404 Not Found");
         }
+        echo json_encode($arr);
     }
 
     function allUserAccounts(){

@@ -175,28 +175,18 @@ function addAccount() {
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
         body: "acc_name=" + acc_name + "&acc_type=" + acc_type + "&balance=" + balance + "&acc_currency=" + acc_currency
     })
-        .then(function (response) {
-            return response.json();
-        })
+        .then(handleErrors)
         .then(function (myJson) {
             if(myJson.success === true){
-                document.getElementById('addAccount').style.display='none';
-                document.getElementById('addAccount').classList.remove("show");
-                document.getElementById('addAccount').setAttribute('aria-hidden', 'true');
-                var h = document.createElement("H1");
-                var t = document.createTextNode("You create successfully an account");
-                h.appendChild(t);
-                document.body.appendChild(h);
+                alert("You successfuly added an account!");
+                fillAccounts();
             }
             else{
-                var h = document.createElement("H1");
-                var t = document.createTextNode("Sorry bro");
-                h.appendChild(t);
-                document.body.appendChild(h);
+                alert("Something went wrong!");
             }
         })
         .catch(function (e) {
-            alert(e.message);
+            location.href="./404.html";
         })
 }
 
@@ -207,6 +197,7 @@ function fillRecordsAccounts(){
         })
         .then(function (myJson) {
             var cat_select = document.getElementById('accSelect');
+            cat_select.innerHTML = "";
             for (var i=0; i < myJson.length; i++){
                 var option = document.createElement('option');
                 option.value = myJson[i]["acc_id"];
@@ -261,7 +252,9 @@ function deleteAccount() {
             })
             .then(function (myJson) {
                 if (myJson.success === "done"){
-                    alert("You just edited account!");
+                    document.getElementById("deleteConf").value = "";
+                    alert("You just deleted an account!");
+                    fillAccounts();
                 }else {
                     alert("Please try again!");
                 }

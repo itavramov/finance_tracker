@@ -109,7 +109,8 @@ class RecordDAO extends Connection {
     }
 
     static function getAllExpensesById($user_id, $start_date, $end_date){
-        $get_query = "SELECT c.category_name,SUM(r.amount) AS sum FROM records AS r 
+        $get_query = "SELECT c.category_name,SUM(r.amount) AS sum 
+                      FROM records AS r 
                       JOIN categories AS c ON (c.category_id = r.category_id)
                       JOIN accounts AS a ON(a.acc_id = r.acc_id)
                       WHERE a.user_id = ? AND c.category_type = 'expense' 

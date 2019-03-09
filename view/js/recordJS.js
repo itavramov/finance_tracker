@@ -12,19 +12,22 @@ function addRecord(){
         body: "record_name=" + record_name + "&record_desc=" + record_desc + "&amount=" + amount +
             "&category_id=" + category_id + "&acc_id=" + acc_id
     })
-        .then(function (response) {
-            return response.json();
-        })
+        .then(handleErrors)
         .then(function (myJson) {
             if(myJson.message === "success"){
                 alert("You successfuly added a record!");
+                fillAccounts();
+                getLastFiveRecords();
+                fillBudgets();
+                avgIncome();
+                avgExpense();
             }
             else{
                 alert("Something went wrong!");
             }
         })
         .catch(function (e) {
-            alert(e.message);
+            location.href="./404.html";
         })
 }
 

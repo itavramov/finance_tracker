@@ -28,7 +28,7 @@ class RecordController{
                 $response["message"] = "fail";
             }
         }else{
-            $response["message"] = "fail";
+            header("HTTP/1.0 404 Not Found");
         }
         echo json_encode($response);
     }

@@ -5,7 +5,7 @@ function logout() {
         })
         .then(function (myJson) {
             if(myJson.message === "true"){
-                location.href="./login.html";
+                location.href="./welcomePage.html";
                 console.log("ok");
             }
         })

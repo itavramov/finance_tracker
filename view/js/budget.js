@@ -13,25 +13,18 @@ function addBudget(){
         body: "budget_name=" + budget_name + "&budget_desc=" + budget_desc + "&budget_amount=" + budget_amount +
             "&category_id=" + category_id + "&from_date=" + from_date + "&to_date=" + to_date
     })
-        .then(function (response) {
-            return response.json();
-        })
+        .then(handleErrors)
         .then(function (myJson) {
             if(myJson.response === "success"){
-                var h = document.createElement("H1");
-                var t = document.createTextNode("You create successfully an budget!");
-                h.appendChild(t);
-                document.body.appendChild(h);
+                alert("You successfuly added a budget!");
+                fillBudgets();
             }
             else{
-                var h = document.createElement("H1");
-                var t = document.createTextNode("Sorry bro");
-                h.appendChild(t);
-                document.body.appendChild(h);
+                alert("Something went wrong!");
             }
         })
         .catch(function (e) {
-            alert(e.message);
+            location.href="./404.html";
         })
 }
 
@@ -142,6 +135,7 @@ function deleteBudget() {
             .then(function (myJson) {
                 if (myJson.success === "done"){
                     alert("You just deleted budget!");
+                    fillBudgets();
                 }else {
                     alert("Please try again!");
                 }

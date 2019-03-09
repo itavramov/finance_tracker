@@ -1,4 +1,3 @@
-
 function loginValidation() {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
@@ -107,6 +106,67 @@ function registerValidation(form){
     }
 
     return errors;
+}
+
+function editUserValidation(){
+    var errors = true;
+    var $first_name = $('#new_first_name');
+    var $firstNameAlert = $('#userFirstAlert');
+    var $last_name= $('#new_last_name');
+    var $lastNameAlert= $('#userlastAlert');
+    var $email = $('#new_email');
+    var $emailAlert = $('#userMailAlert');
+    var $age = $('#new_age');
+    var $ageAlert = $('#userAgeAlert');
+    var $image = $('#new_user_image');
+    var $imageAlert = $('#userImageAlert');
+
+    if($first_name.val() === "" || !validateName($first_name.val())){
+        $first_name.addClass('alert alert-danger');
+        $first_name.attr('data-content', 'Please enter only letters!');
+        $first_name.popover('show');
+
+        $firstNameAlert.addClass('text-danger');
+        $firstNameAlert.html('The budget name field is empty or invalid value');
+
+        errors = false;
+    }
+
+    if($last_name.val() === "" || !validateName($last_name.val())){
+        $last_name.addClass('alert alert-danger');
+        $last_name.attr('data-content', 'Please enter only letters!');
+        $last_name.popover('show');
+
+        $lastNameAlert.addClass('text-danger');
+        $lastNameAlert.html('The budget name field is empty or invalid value');
+
+        errors = false;
+    }
+
+    if($email.val() === "" || !validateEmail($email.val())){
+        $email.addClass('alert alert-danger');
+        $email.attr('data-content', 'E-mail is not valid!!');
+        $email.popover('show');
+
+        $emailAlert.addClass('text-danger');
+        $emailAlert.html('The email field is empty or invalid value');
+
+        errors = false;
+    }
+
+    if($age.val() === "" || !validateAge($age.val())){
+        $age.addClass('alert alert-danger');
+        $age.attr('data-content', 'There is no entered Age!');
+        $age.popover('show');
+
+        $ageAlert.addClass('text-danger');
+        $ageAlert.html('Age is not valid!');
+
+        errors = false;
+    }
+
+    return errors;
+
 }
 
 function logSubmit() {
@@ -400,4 +460,9 @@ function validateNumberValue(str) {
 function validateName(name){
     var regex = /^[a-zA-Z \.\,\+\-]*$/;
     return regex.test(name);
+}
+
+function validateAge(number){
+    var regex = /\b(1[89]|[2-9][0-9]|1[01][0-9]|100)\b/;
+    return regex.test(number);
 }
