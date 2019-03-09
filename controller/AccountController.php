@@ -90,5 +90,17 @@ class AccountController implements Editable{
         }
         echo json_encode($arr);
     }
+
+    public function accountInfo(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            $acc_id  = trim($_POST["acc_id"]);
+            $result  = AccountDAO::getAccountInfo($acc_id);
+            if ($acc_id){
+                echo json_encode($result);
+            }
+        }else{
+            header("HTTP/1.0 404 Not Found");
+        }
+    }
 }
 

@@ -87,11 +87,11 @@ class AccountDAO extends Connection {
         if ($currency !== "none"){
             if (!$flagIsset){
                 $query .= "acc_type = ? ";
-                $flagIsset = true;
+                //$flagIsset = true;
             }else{
                 $query .= ",acc_type = ? ";
             }
-            $executeParams[] = $currency;
+            $executeParams[] = $acc_type;
         }
         $executeParams[] = $acc_id;
         $query          .= "WHERE acc_id = ?";
@@ -116,4 +116,16 @@ class AccountDAO extends Connection {
         }
     }
 
+    static function getAccountInfo($acc_id){
+        $getQuery = "SELECT acc_name,acc_type,balance,currency 
+                  FROM accounts WHERE acc_id = ?";
+        $stmt     = self::$conn->prepare($getQuery);
+        $stmt->execute(array($acc_id));
+        $acc_info = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($stmt->rowCount() !== 0){
+            return $acc_info;
+        }else{
+            return false;
+        }
+    }
 }
