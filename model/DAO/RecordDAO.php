@@ -30,7 +30,7 @@ class RecordDAO extends Connection {
                                                       category_id,
                                                       acc_id,
                                                       action_date)
-                                      VALUES (?,?,?,?,?,curdate())";
+                                      VALUES (?,?,?,?,?,now())";
 
             $stmt = self::$conn->prepare($addRecord_query);
             $stmt->execute([$record_name,
@@ -61,7 +61,7 @@ class RecordDAO extends Connection {
             return true;
         }
         catch (\PDOException $exception){
-
+            self::$conn->rollBack();
             echo "error -> " . $exception->getMessage();
             return false;
         }
@@ -144,7 +144,7 @@ class RecordDAO extends Connection {
         return $result;
     }
 
-    static function getAverage($user_id, $start_date, $end_date, $type){
+    static function getAverage($user_id, $start_date, $end_date, $type, $acc_id){
 
         $query = "SELECT ROUND(AVG(r.amount),2) AS average FROM records AS r 
                       JOIN categories AS c ON (c.category_id = r.category_id)
@@ -152,6 +152,10 @@ class RecordDAO extends Connection {
                       WHERE a.user_id = ? AND c.category_type = ?
                       AND r.action_date BETWEEN STR_TO_DATE(?, '".Constants::DATE_FORMAT."')
                       AND STR_TO_DATE(?, '".Constants::DATE_FORMAT."')";
+
+        if($acc_id !== 0){
+            $query .= " AND a.acc_id = " . intval($acc_id);
+        }
         $stmt  = self::$conn->prepare($query);
         $stmt->execute(array($user_id,$type,$start_date,$end_date));
         $result = [];

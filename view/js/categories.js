@@ -36,6 +36,7 @@ function fillRecordsCategories(){
         .then(function (myJson) {
             var cat_select = document.getElementById('categorySelect');
             cat_select.innerHTML = "";
+            cat_select.innerHTML = "<option selected value=\"none\">Choose...</option>";
             for (var i=0; i < myJson.length; i++){
                 var option = document.createElement('option');
                 option.value = myJson[i]["category_id"];
@@ -56,6 +57,7 @@ function fillBudgetsCategories(){
         .then(function (myJson) {
             var cat_select = document.getElementById('categorySelectBudget');
             cat_select.innerHTML = "";
+            cat_select.innerHTML = "<option selected value=\"none\">Choose...</option>";
             for (var i=0; i < myJson.length; i++){
                 if(myJson[i]["category_type"] === "expense"){
                     var option = document.createElement('option');
@@ -69,4 +71,9 @@ function fillBudgetsCategories(){
         .catch(function (e) {
             alert(e.message);
         })
+}
+
+function resetCategoriesInputs(){
+    document.getElementById("categoryName").value="";
+    document.getElementById("categoryType").selectedIndex = "none";
 }

@@ -1,10 +1,12 @@
 <div id="add_btns">
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAccount">Add Account</button>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addAccount"
+        onclick="resetAccInputs();">Add Account</button>
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addRecord"
-            onclick="fillRecordsCategories(); fillRecordsAccounts();">Add Record</button>
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addCategory">Add Category</button>
+            onclick="fillRecordsCategories(); fillRecordsAccounts(); resetRecordInputs();">Add Record</button>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addCategory"
+        onclick="resetCategoriesInputs();">Add Category</button>
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addBudget"
-            onclick="fillBudgetsCategories();">Add Budget</button>
+            onclick="fillBudgetsCategories(); resetBudgetsInputs();">Add Budget</button>
 </div>
 <input type="text" value="" hidden id="magicField">
 <div id="accounts_main"></div>
@@ -28,6 +30,12 @@
     </div>
 </div>
 <div class="avgIncomeExpense">
+    <div class="form-group">
+        <label for="accSelect">Account</label>
+        <select id="accSelectAvg" class="form-control" onchange="avgIncome();">
+            <option selected value="0">All</option>
+        </select>
+    </div>
     <div id="avgIncome" style="width: 30%; height: 50vh; display: inline-block; vertical-align: top; text-align: center; margin: 20px 20px 20px 20px;">
         <div class="card text-white bg-info mb-3 mt-3" style="max-width: 18rem;">
             <div class="card-header">Avg. Income</div>
@@ -179,7 +187,7 @@
                 <div class="form-group">
                     <label for="accSelect">Account</label>
                     <select id="accSelect" class="form-control">
-                        <option selected value="none">Choose...</option>
+
                     </select>
                     <p class="form-text" id="accSelectAlert"></p>
                 </div>

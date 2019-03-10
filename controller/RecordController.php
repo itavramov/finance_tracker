@@ -164,7 +164,13 @@ class RecordController{
             $end_date   = $_POST["end_date"];
         }
         $type = $_POST["type"];
-        $avg_income = RecordDAO::getAverage($user_id,$start_date,$end_date,$type);
+        if(empty($_POST["acc_id"])){
+            $acc_id = 0;
+        }
+        else{
+            $acc_id = $_POST["acc_id"];
+        }
+        $avg_income = RecordDAO::getAverage($user_id,$start_date,$end_date,$type, $acc_id);
         echo json_encode($avg_income);
     }
 }

@@ -38,14 +38,6 @@ class AccountController implements Editable{
 
     }
 
-    function listAllAccounts(){
-        $user_id = $_SESSION["user_id"];
-
-        $arr = AccountDAO::getAllAccountsById($user_id);
-
-        echo json_encode($arr);
-    }
-
     public function edit(){
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
 

@@ -163,4 +163,11 @@ function avgExpense(){
         })
 }
 
-
+function resetRecordInputs(){
+    document.getElementById("recordName").value="";
+    document.getElementById("recordDesc").value="";
+    document.getElementById("amount").value="";
+    document.getElementById("categorySelect").selectedIndex = "none";
+    document.getElementById("accSelect").selectedIndex = "none";
+    document.getElementById("balance").value="";
+}
