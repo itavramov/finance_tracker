@@ -298,6 +298,7 @@ function resetAccInputs() {
     document.getElementById("acc_currency").selectedIndex = "none";
     document.getElementById("balance").value = "";
 }
+
 function showAccountInfo() {
     var acc_id         = document.getElementById('magicField').value;
     var newAccName     = document.getElementById("new_acc_name");

@@ -47,8 +47,10 @@ class UserController implements Editable {
                                 PASSWORD_BCRYPT, ['cost'=>12]), $image_url);
                         //var_dump($user);
                         $result["success"] = UserDAO::addUser($user);
-                        //header('Location: view/login.html');
-                        echo json_encode($result);
+                        $_SESSION["logged"] = true;
+                        $_SESSION["email"] = $email;
+                        $_SESSION["user_id"] = UserDAO::getIdByEmail($email);
+                        header("Location: view/dashboard.html");
                     }
                 }else{
                     throw new \Exception("Invalid credentials...");
@@ -132,6 +134,23 @@ class UserController implements Editable {
             }else{
                 throw new \Exception("Empty credentials...");
             }
+        }
+    }
+
+    function checkUserExists(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = $_POST["email"];
+
+            if(UserDAO::getIdByEmail($email)){
+                $response["message"] = true;
+            }
+            else{
+                $response["message"] = false;
+            }
+            echo json_encode($response);
+        }
+        else{
+            header("HTTP/1.0 404 Not Found");
         }
     }
 }
