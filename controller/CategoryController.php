@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: boree
- * Date: 2/26/2019
- * Time: 2:34 PM
- */
 
 namespace controller;
-
 
 use model\Category;
 use model\DAO\CategoryDAO;
@@ -29,7 +22,7 @@ class CategoryController{
             }
         }
         else{
-            $arr["success"] = false;
+            header("HTTP/1.0 404 Not Found");
         }
         echo json_encode($arr);
     }

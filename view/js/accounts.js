@@ -247,9 +247,7 @@ function editAccount() {
         body:"acc_id=" + acc_id + "&acc_name=" + acc_name + "&acc_type=" + acc_type +
           "&acc_currency=" + acc_currency + "&balance=" + balance
     })
-        .then(function (response) {
-            return response.json();
-        })
+        .then(handleErrors)
         .then(function (myJson) {
             if (myJson.success === "done"){
                 fillAccounts();
@@ -260,6 +258,7 @@ function editAccount() {
         })
         .catch(function (e) {
             alert(e.message);
+            location.href="./404.html";
         })
 }
 
@@ -272,9 +271,7 @@ function deleteAccount() {
             headers: {'Content-type': 'application/x-www-form-urlencoded'},
             body:"acc_id=" + acc_id
         })
-            .then(function (response) {
-                return response.json();
-            })
+            .then(handleErrors)
             .then(function (myJson) {
                 if (myJson.success === "done"){
                     document.getElementById("deleteConf").value = "";
@@ -286,6 +283,7 @@ function deleteAccount() {
             })
             .catch(function (e) {
                 alert(e.message);
+                location.href="./404.html";
             })
     }else {
         alert("Please type DELETE correctly!");
@@ -311,9 +309,7 @@ function showAccountInfo() {
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
         body:"acc_id=" + acc_id
     })
-        .then(function (response) {
-            return response.json();
-        })
+        .then(handleErrors)
         .then(function (myJson) {
             newAccName.value          = myJson.acc_name;
             newAccType.value          = myJson.acc_type;
@@ -322,5 +318,6 @@ function showAccountInfo() {
         })
         .catch(function (e) {
             alert(e.message);
+            location.href="./404.html";
         })
 }

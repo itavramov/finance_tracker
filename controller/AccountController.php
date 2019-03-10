@@ -64,7 +64,7 @@ class AccountController implements Editable{
             }
 
         }else{
-            $arr["success"] = "fail";
+            header("HTTP/1.0 404 Not Found");
         }
         echo json_encode($arr);
     }
@@ -78,7 +78,7 @@ class AccountController implements Editable{
                 $arr["success"] = "fail";
             }
         }else{
-            $arr["success"] = "fail";
+            header("HTTP/1.0 404 Not Found");
         }
         echo json_encode($arr);
     }
