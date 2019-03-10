@@ -115,7 +115,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#" id="crypto">Crypto Converter</a></li>
-                        <li><a href="#">Fiat Converter</a></li>
+                        <li><a href="#" id="fiat">Fiat Converter</a></li>
                     </ul>
                 </li>
             </ul>
@@ -250,6 +250,12 @@
     $('#crypto').click(function () {
         $('#main').load('cryptoConverter.html');
     })
+    $('#fiat').click(function () {
+        $('#main').load('fiatConverter.html');
+        getAllCurrencies();
+        changeCurrencyName('curr_select_1','curr_text_1','hidden_id_1');
+        changeCurrencyName('curr_select_2','curr_text_2','hidden_id_2');
+    })
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
@@ -271,5 +277,7 @@
 <script src="js/cryptoConverter.js"></script>
 <script src="js/handleErrors.js"></script>
 <script src="js/getCurrentDate.js"></script>
+<script src="js/fiatConverter.js"></script>
+
 </body>
 </html>
