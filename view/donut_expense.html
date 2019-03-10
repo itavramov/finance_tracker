@@ -12,6 +12,15 @@
             <li class="list-group-item">
                 <input type="text" name="daterange" id="date_donut" />
             </li>
+            <li class="list-group-item">Select Account:</li>
+            <li class="list-group-item">
+                <div class="form-group">
+                    <label for="accSelectDonut">Accounts</label>
+                    <select id="accSelectDonut" class="form-control" onchange="changeAccDonut(this.value);">
+                        <option selected value="0">All</option>
+                    </select>
+                </div>
+            </li>
             <li class="list-group-item">
                 <div id="donut_legend"></div>
             </li>
@@ -36,8 +45,12 @@
             opens: 'left',
             "startDate" : arr.start_date,
             "endDate" : arr.end_date
-        }, function(start, end, label) {
-            ExpenseDonut(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
+        }, function(start, end) {
+            var acc_id = document.getElementById("accSelectDonut").value;
+            if(!acc_id){
+                acc_id = 0;
+            }
+            ExpenseDonut(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'), acc_id);
         });
 
     })

@@ -70,7 +70,8 @@ class RecordDAO extends Connection {
 
     static function getAllRecordsByUser($user_id){
 
-        $records_query = "SELECT  r.record_name, 
+        $records_query = "SELECT  a.acc_name,
+                                  r.record_name, 
                                   r.record_desc, 
                                   r.amount, 
                                   r.action_date, 
@@ -91,7 +92,7 @@ class RecordDAO extends Connection {
         return $result;
     }
 
-    static function sumAllExpenses($user_id, $start_date, $end_date){
+    static function sumAllExpenses($user_id, $start_date, $end_date, $acc_id){
         $sum_query = "SELECT category_type, 
                                 SUM(r.amount) as total_sum
                             FROM records r
@@ -99,8 +100,13 @@ class RecordDAO extends Connection {
                             JOIN accounts a ON (a.acc_id = r.acc_id)
                             JOIN users u ON (u.user_id = a.user_id)
                             WHERE u.user_id = ? AND r.action_date BETWEEN STR_TO_DATE(?, '".Constants::DATE_FORMAT."') AND
-                                  STR_TO_DATE(?, '".Constants::DATE_FORMAT."')
-                            GROUP BY category_type";
+                                  STR_TO_DATE(?, '".Constants::DATE_FORMAT."')";
+
+        if($acc_id !== "0"){
+            $sum_query .= " AND r.acc_id = " . intval($acc_id);
+        }
+
+        $sum_query .= " GROUP BY s.category_type";
 
         $stmt = self::$conn->prepare($sum_query);
         $stmt->execute(array($user_id, $start_date, $end_date));
@@ -109,15 +115,21 @@ class RecordDAO extends Connection {
         return $result;
     }
 
-    static function getAllExpensesById($user_id, $start_date, $end_date){
+    static function getAllExpensesById($user_id, $start_date, $end_date, $acc_id){
         $get_query = "SELECT c.category_name,SUM(r.amount) AS sum 
                       FROM records AS r 
                       JOIN categories AS c ON (c.category_id = r.category_id)
                       JOIN accounts AS a ON(a.acc_id = r.acc_id)
                       WHERE a.user_id = ? AND c.category_type = 'expense' 
                       AND r.action_date BETWEEN STR_TO_DATE(?, '".Constants::DATE_FORMAT."') AND
-                                  STR_TO_DATE(?, '".Constants::DATE_FORMAT."')
-                      GROUP BY c.category_id";
+                                  STR_TO_DATE(?, '".Constants::DATE_FORMAT."')";
+
+        if($acc_id !== "0"){
+            $get_query .= " AND r.acc_id = " . intval($acc_id);
+        }
+
+        $get_query .= " GROUP BY c.category_id";
+
         $stmt   = self::$conn->prepare($get_query);
         $stmt->execute(array($user_id,$start_date,$end_date));
         //TODO VALIDATION
@@ -144,26 +156,41 @@ class RecordDAO extends Connection {
         return $result;
     }
 
-    static function getAverage($user_id, $start_date, $end_date, $type, $acc_id){
+    static function getAverageIncome($user_id, $acc_id){
 
         $query = "SELECT ROUND(AVG(r.amount),2) AS average FROM records AS r 
                       JOIN categories AS c ON (c.category_id = r.category_id)
                       JOIN accounts AS a ON(a.acc_id = r.acc_id)
-                      WHERE a.user_id = ? AND c.category_type = ?
-                      AND r.action_date BETWEEN STR_TO_DATE(?, '".Constants::DATE_FORMAT."')
-                      AND STR_TO_DATE(?, '".Constants::DATE_FORMAT."')";
+                      WHERE a.user_id = ? AND c.category_type = 'income'";
 
-        if($acc_id !== 0){
-            $query .= " AND a.acc_id = " . intval($acc_id);
+        if($acc_id !== "0"){
+            $query .= " AND r.acc_id = " . intval($acc_id);
         }
         $stmt  = self::$conn->prepare($query);
-        $stmt->execute(array($user_id,$type,$start_date,$end_date));
+        $stmt->execute(array($user_id));
         $result = [];
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $result;
     }
 
-    static function getAllRecordsByUserFiltered($user_id, $start_date, $end_date){
+    static function getAverageExpense($user_id, $acc_id){
+
+        $query = "SELECT ROUND(AVG(r.amount),2) AS average FROM records AS r 
+                      JOIN categories AS c ON (c.category_id = r.category_id)
+                      JOIN accounts AS a ON(a.acc_id = r.acc_id)
+                      WHERE a.user_id = ? AND c.category_type = 'expense'";
+
+        if($acc_id !== "0"){
+            $query .= " AND a.acc_id = " . intval($acc_id);
+        }
+        $stmt  = self::$conn->prepare($query);
+        $stmt->execute(array($user_id));
+        $result = [];
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    static function getAllRecordsByUserFiltered($user_id, $start_date, $end_date, $acc_id){
 
         $records_query = "SELECT  r.record_name, 
                                   r.record_desc, 
@@ -178,7 +205,9 @@ class RecordDAO extends Connection {
                             WHERE u.user_id = ? AND r.action_date BETWEEN STR_TO_DATE(?, '".Constants::DATE_FORMAT."') AND
                                   STR_TO_DATE(?, '".Constants::DATE_FORMAT."')";
 
-
+        if($acc_id !== "0"){
+            $records_query .= " AND r.acc_id = " . intval($acc_id);
+        }
 
         $stmt = self::$conn->prepare($records_query);
         $stmt->execute(array($user_id, $start_date, $end_date));

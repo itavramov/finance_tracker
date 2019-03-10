@@ -68,6 +68,7 @@ class AccountController implements Editable{
         }
         echo json_encode($arr);
     }
+
     public function deleteAccount(){
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             $acc_id  = trim($_POST["acc_id"]);

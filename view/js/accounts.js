@@ -234,6 +234,69 @@ function fillAvgAccounts(){
         })
 }
 
+function fillCashFlowAccounts(){
+    fetch("../index.php?target=account&action=allUserAccounts")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            var cat_select_avg = document.getElementById('accSelectCashFlow');
+            cat_select_avg.innerHTML = "";
+            cat_select_avg.innerHTML = "<option selected value=\"0\">All</option>";
+            for (var i=0; i < myJson.length; i++){
+                var option = document.createElement('option');
+                option.value = myJson[i]["acc_id"];
+                option.text = myJson[i]["acc_name"];
+                cat_select_avg.options.add(option,1);
+            }
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
+
+function fillTrendAccounts(){
+    fetch("../index.php?target=account&action=allUserAccounts")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            var cat_select_avg = document.getElementById('accSelectTrend');
+            cat_select_avg.innerHTML = "";
+            cat_select_avg.innerHTML = "<option selected value=\"0\">All</option>";
+            for (var i=0; i < myJson.length; i++){
+                var option = document.createElement('option');
+                option.value = myJson[i]["acc_id"];
+                option.text = myJson[i]["acc_name"];
+                cat_select_avg.options.add(option,1);
+            }
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
+
+function fillDonutAccounts(){
+    fetch("../index.php?target=account&action=allUserAccounts")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myJson) {
+            var cat_select_avg = document.getElementById('accSelectDonut');
+            cat_select_avg.innerHTML = "";
+            cat_select_avg.innerHTML = "<option selected value=\"0\">All</option>";
+            for (var i=0; i < myJson.length; i++){
+                var option = document.createElement('option');
+                option.value = myJson[i]["acc_id"];
+                option.text = myJson[i]["acc_name"];
+                cat_select_avg.options.add(option,1);
+            }
+        })
+        .catch(function (e) {
+            alert(e.message);
+        })
+}
+
 function editAccount() {
     var acc_id       = document.getElementById('magicField').value;
     var acc_name     = document.getElementById('new_acc_name').value;

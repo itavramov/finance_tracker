@@ -44,6 +44,12 @@ class RecordController{
     }
     function getSumTotal(){
         $user_id = $_SESSION["user_id"];
+        if(empty($_POST["acc_id"])){
+            $acc_id = "0";
+        }
+        else{
+            $acc_id = $_POST["acc_id"];
+        }
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
             $start_date = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
             $end_date   = date(Constants::DATE_FORMAT_PHP);
@@ -51,16 +57,23 @@ class RecordController{
             $start_date = $_POST["start_date"];
             $end_date   = $_POST["end_date"];
         }
-
-        $sum = RecordDAO::sumAllExpenses($user_id, $start_date, $end_date);
-        if(empty($sum)){
-            $sum = array(["category_type"=>"expense","total_sum"=>"0"],
-                ["category_type"=>"income","total_sum"=>"0"]);
+        $sum = RecordDAO::sumAllExpenses($user_id, $start_date, $end_date, $acc_id);
+        if(empty($sum[0]["total_sum"])){
+            $sum[0]["total_sum"] = "0";
+        }
+        if(empty($sum[0]["total_sum"])){
+            $sum[1]["total_sum"] = "0";
         }
         echo json_encode($sum);
     }
     function chartExpenses(){
         $user_id  = $_SESSION["user_id"];
+        if(empty($_POST["acc_id"])){
+            $acc_id = "0";
+        }
+        else{
+            $acc_id = $_POST["acc_id"];
+        }
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
             $start_date = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
             $end_date   = date(Constants::DATE_FORMAT_PHP);
@@ -69,7 +82,7 @@ class RecordController{
             $end_date   = $_POST["end_date"];
         }
 
-        $expenses = RecordDAO::getAllExpensesById($user_id,$start_date,$end_date);
+        $expenses = RecordDAO::getAllExpensesById($user_id,$start_date,$end_date, $acc_id);
         $labels   = [];
         $data     = [];
         $arr      = [];
@@ -93,9 +106,14 @@ class RecordController{
         echo json_encode($arr);
     }
 
-
     function listIncomesAndExpense(){
         $user_id = $_SESSION["user_id"];
+        if(empty($_POST["acc_id"])){
+            $acc_id = "0";
+        }
+        else{
+            $acc_id = $_POST["acc_id"];
+        }
         if(empty( $_POST["start_date"])){
             $_POST["start_date"] = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
         }
@@ -103,7 +121,8 @@ class RecordController{
             $_POST["end_date"] = date(Constants::DATE_FORMAT_PHP);
         }
 
-        $allRecords = RecordDAO::getAllRecordsByUserFiltered($user_id, $_POST["start_date"], $_POST["end_date"]);
+        $allRecords = RecordDAO::getAllRecordsByUserFiltered($user_id, $_POST["start_date"], $_POST["end_date"],
+            $acc_id);
 
         $labels_expense = [];
         $labels_income = [];
@@ -132,6 +151,12 @@ class RecordController{
 
     function radarDiagramExpenses(){
         $user_id  = $_SESSION["user_id"];
+        if(empty($_POST["acc_id"])){
+            $acc_id = "0";
+        }
+        else{
+            $acc_id = $_POST["acc_id"];
+        }
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
             $start_date = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
             $end_date   = date(Constants::DATE_FORMAT_PHP);
@@ -139,7 +164,7 @@ class RecordController{
             $start_date = $_POST["start_date"];
             $end_date   =  $_POST["end_date"];
         }
-        $first_compare_period = RecordDAO::getAllExpensesById($user_id, $start_date, $end_date);
+        $first_compare_period = RecordDAO::getAllExpensesById($user_id, $start_date, $end_date, $acc_id);
         $labels   = [];
         $data     = [];
         $arr      = [];
@@ -154,23 +179,19 @@ class RecordController{
 
         echo json_encode($arr);
     }
+
     function averageIncomeInfo(){
         $user_id  = $_SESSION["user_id"];
-        if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
-            $start_date = date('Y-m-d', strtotime('-1 months'));
-            $end_date   = date("Y-m-d");
-        }else{
-            $start_date = $_POST["start_date"];
-            $end_date   = $_POST["end_date"];
-        }
-        $type = $_POST["type"];
-        if(empty($_POST["acc_id"])){
-            $acc_id = 0;
-        }
-        else{
-            $acc_id = $_POST["acc_id"];
-        }
-        $avg_income = RecordDAO::getAverage($user_id,$start_date,$end_date,$type, $acc_id);
+        $acc_id = $_POST["acc_id"];
+        //var_dump($acc_id);
+        $avg_income = RecordDAO::getAverageIncome($user_id, $acc_id);
         echo json_encode($avg_income);
+    }
+
+    function averageExpenseInfo(){
+        $user_id  = $_SESSION["user_id"];
+        $acc_id = $_POST["acc_id"];
+        $avg_expense = RecordDAO::getAverageExpense($user_id, $acc_id);
+        echo json_encode($avg_expense);
     }
 }
