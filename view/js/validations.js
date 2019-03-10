@@ -24,6 +24,7 @@ function loginValidation() {
 }
 
 function registerValidation(form){
+
     var errors = true;
     var firstNameErr = document.getElementById("firstNameErr");
     var lastNameErr = document.getElementById("lastNameErr");
@@ -65,7 +66,19 @@ function registerValidation(form){
         emailErr.innerHTML = "<div class='mess'>E-mail is not valid!</div>";
         errors = false;
     }else{
-        emailErr.innerHTML = "";
+        var fetchResult = checkUserExists(form.email.value.trim());
+        var promise = Promise.resolve(fetchResult);
+        promise.then(function(value){
+            if(value){
+                emailErr.innerHTML = "<div class='mess'>User already exists!</div>";
+            }
+            else{
+                emailErr.innerHTML = "";
+            }
+        })
+        if(promise){
+            errors = false;
+        }
     }
 
     if(form.age.value.trim() === ""){
@@ -442,6 +455,26 @@ function addCategorySubmit(){
 }
 
 //HELPING VALIDATION FUNCTIONS
+function checkUserExists(email){
+    return fetch('../index.php?target=user&action=checkUserExists',{
+        method: "POST",
+        headers: {'Content-type': 'application/x-www-form-urlencoded'},
+        body: "email=" + email
+    })
+        .then(handleErrors)
+        .then(function (myJson) {
+            if(myJson.message === true){
+                return true;
+            }
+            else{
+                return false;
+            }
+        })
+        .catch(function (e) {
+            location.href="./500.html";
+        })
+}
+
 function validateEmail(email) {
     var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(email);

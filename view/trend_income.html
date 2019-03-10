@@ -29,9 +29,12 @@
     </div>
 </div>
 <script>
+    var arr = getCurrDate();
     $(function() {
         $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
+            opens: 'left',
+            "startDate" : arr.start_date,
+            "endDate" : arr.end_date
         }, function(start, end, label) {
             //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
             incomeVsExpenseLineChart(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
