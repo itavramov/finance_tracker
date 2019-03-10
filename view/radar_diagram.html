@@ -11,11 +11,11 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item">First Compare Period:</li>
             <li class="list-group-item">
-            <input type="text" name="daterange1" value="01/01/2018 - 01/15/2018" />
+            <input type="text" id="datepicker1" name="daterange1"  />
             </li>
             <li class="list-group-item">Second Compare Period:</li>
             <li class="list-group-item">
-                <input type="text" name="daterange2" value="01/01/2018 - 01/15/2018" />
+                <input type="text" name="daterange2" value="01/01/2018 - 01/15/2018"  />
             </li>
         </ul>
     </div>
@@ -32,6 +32,39 @@
     </div>
 </div>
 <script>
+    var CurrentDate = new Date();
+    var newDate = new Date();
+    var x = 1;
+    newDate.setMonth(CurrentDate.getMonth() - x);
+    var month = newDate.getUTCMonth() + 1;
+    var day = newDate.getUTCDate();
+    var year = newDate.getUTCFullYear();
+
+    var curr_month = CurrentDate.getUTCMonth() + 1;
+    var curr_day = newDate.getUTCDate();
+    var curr_year = newDate.getUTCFullYear();
+
+    if(month < 9){
+        month = "0" + month;
+    }
+    if(day < 9){
+        day = "0" + day;
+    }
+
+    if(curr_month < 9){
+        curr_month = "0" + curr_month;
+    }
+    if(curr_day < 9){
+        curr_day = "0" + curr_day;
+    }
+    var start_date = month + "/" + day + "/" +  year;
+    var end_date   = curr_month + "/" +  curr_day+ "/" + curr_year;
+
+
+    // $(document).ready(function() {
+    //     $('#datepicker1').datepicker().datepicker('setDate', 'today');
+    // });​
+
     Chart.defaults.scale.ticks.beginAtZero = true;
     var chart  = document.getElementById("radarDiagram");
     var labels = [];
@@ -39,20 +72,39 @@
         {},
         {}
     ];
-
-        $('input[name="daterange1"]').daterangepicker({
-            opens: 'left'
-        }, function(start, end, label) {
-            var start_date = start.format('YYYY-MM-DD');
-            var end_date = end.format('YYYY-MM-DD');
-            var radarDiagram = new Chart(chart,{
-                type: 'radar',
-                data:{
-                    labels: labels,
-                    datasets: data,
-                }
-            });
-            testingRadar(start_date,end_date,radarDiagram);
+    $('input[name="daterange1"]').daterangepicker({
+        opens: 'left',
+        "startDate": start_date,
+        "endDate": "03/10/2019",
+    }, function(start, end, label) {
+        var start_date = start.format('YYYY-MM-DD');
+        var end_date = end.format('YYYY-MM-DD');
+        var radarDiagram = new Chart(chart,{
+            type: 'radar',
+            data:{
+                labels: labels,
+                datasets: data,
+            }
         });
+        firstCompareRadar(start_date,end_date,radarDiagram);
+    });
+
+    $('input[name="daterange2"]').daterangepicker({
+        opens: 'left',
+        "startDate": start_date,
+        "endDate": "03/10/2019",
+    }, function(start, end, label) {
+        var start_date = start.format('YYYY-MM-DD');
+        var end_date = end.format('YYYY-MM-DD');
+        var radarDiagram = new Chart(chart,{
+            type: 'radar',
+            data:{
+                labels: labels,
+                datasets: data,
+            }
+        });
+        secondCompareRadar(start_date,end_date,radarDiagram);
+    });
+
 
 </script>
