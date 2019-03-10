@@ -7,9 +7,7 @@ function addCategory(){
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
         body: "cat_name=" + cat_name + "&cat_type=" + cat_type
     })
-        .then(function (response) {
-            return response.json();
-        })
+        .then(handleErrors)
         .then(function (myJson) {
             if(myJson.success === true){
                 var h = document.createElement("H1");
@@ -26,6 +24,7 @@ function addCategory(){
         })
         .catch(function (e) {
             alert(e.message);
+            location.href="./404.html";
         })
 }
 

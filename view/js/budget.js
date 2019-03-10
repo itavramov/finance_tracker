@@ -129,9 +129,7 @@ function deleteBudget() {
             headers: {'Content-type': 'application/x-www-form-urlencoded'},
             body:"budget_id=" + budget_id
         })
-            .then(function (response) {
-                return response.json();
-            })
+            .then(handleErrors)
             .then(function (myJson) {
                 if (myJson.success === "done"){
                     alert("You just deleted budget!");
@@ -142,6 +140,7 @@ function deleteBudget() {
             })
             .catch(function (e) {
                 alert(e.message);
+                location.href="./404.html";
             })
     }else {
         alert("Please type DELETE correctly!");
