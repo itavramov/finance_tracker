@@ -234,10 +234,12 @@
     $('#donut_btn').click(function () {
         $('#main').load('donut_expense.html');
         defaultExpenseDonut();
+        fillDonutAccounts();
     })
     $('#trend_btn').click(function () {
         $('#main').load('trend_income.html');
         defaultIncomeVsExpense();
+        fillTrendAccounts();
     })
     $('#radar_btn').click(function () {
         $('#main').load('radar_diagram.html');
@@ -246,6 +248,7 @@
     $('#flow_btn').click(function () {
         $('#main').load('cash_flow.html');
         cash();
+        fillCashFlowAccounts();
     })
     $('#crypto').click(function () {
         $('#main').load('cryptoConverter.html');

@@ -31,8 +31,8 @@
 </div>
 <div class="avgIncomeExpense">
     <div class="form-group">
-        <label for="accSelect">Account</label>
-        <select id="accSelectAvg" class="form-control" onchange="avgIncome();">
+        <label for="accSelect">Accounts</label>
+        <select id="accSelectAvg" class="form-control" onchange="avgIncome(this.value); avgExpense(this.value);">
             <option selected value="0">All</option>
         </select>
     </div>

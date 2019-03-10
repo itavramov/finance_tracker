@@ -43,7 +43,8 @@ function fillRecordsTable() {
                     {
                         data: recordSet,
                         columns: [
-                            {title: "Name"},
+                            {title: "Account Name"},
+                            {title: "Record Name"},
                             {title: "Description"},
                             {title: "Amount"},
                             {title: "Date"},
@@ -125,11 +126,15 @@ function getLastFiveRecords() {
         })
 }
 
-function avgIncome(){
+function avgIncome(acc_id){
+    if(!acc_id){
+        acc_id = 0;
+    }
+    console.log(acc_id);
     fetch("../index.php?target=record&action=averageIncomeInfo",{
         method: "POST",
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
-        body:"&type=income"
+        body:"acc_id=" + acc_id
     })
         .then(function (response) {
             return response.json();
@@ -144,11 +149,14 @@ function avgIncome(){
         })
 }
 
-function avgExpense(){
-    fetch("../index.php?target=record&action=averageIncomeInfo",{
+function avgExpense(acc_id){
+    if(!acc_id){
+        acc_id = 0;
+    }
+    fetch("../index.php?target=record&action=averageExpenseInfo",{
         method: "POST",
         headers: {'Content-type': 'application/x-www-form-urlencoded'},
-        body:"&type=expense"
+        body:"acc_id=" + acc_id
     })
         .then(function (response) {
             return response.json();
