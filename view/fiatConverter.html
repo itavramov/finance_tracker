@@ -1,0 +1,43 @@
+<div class="row ml-5">
+    <h3 class="text-center display-block" >Currency Converter:</h3>
+</div>
+<br>
+<div class="form-row">
+    <div class="col">
+        <label class="mr-sm-2" id="curr_name_1" >Currency Name1</label>
+        <select class="custom-select mr-sm-2" id="curr_select_1"  onchange="changeCurrencyName('curr_select_1','curr_name_1'
+        ,'hidden_id_1')">
+        </select>
+    </div>
+
+    <div class="col">
+        <label class="mr-sm-2" id="curr_name_2">Currency Name2</label>
+        <select class="custom-select mr-sm-2" id="curr_select_2" onchange="changeCurrencyName('curr_select_2',
+        'curr_name_2','hidden_id_2')">
+        </select>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">amount</span>
+            </div>
+            <input type="number" class="form-control" id="curr_input_1" onkeyup="convert('curr_input_1')">
+        </div>
+    </div>
+    <span class="input-group-text mb-3">< = ></span>
+    <div class="col">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">amount</span>
+            </div>
+            <input type="number" class="form-control" id="curr_input_2" onkeyup="convert('curr_input_2')" >
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hidden_id_1">
+<input type="hidden" id="hidden_id_2">
+<script>
+</script>
