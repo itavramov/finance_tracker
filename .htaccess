@@ -1,4 +1,4 @@
-#RewriteEngine on
+RewriteEngine on
 #
 ###if url contains uploads, pass it
 ##RewriteRule ^uploads/(.*)$ - [L]
@@ -9,3 +9,4 @@
 ##if url contains api query, redirect to index.php front controller
 #RewriteRule ^.*$ index.php [NC]
 
+ErrorDocument 404 view/404.html
