@@ -88,7 +88,7 @@ function convert(actionInput) {
                 for (var value2 in myJson){
                     if (value2 === pairTwo){
                         firstVal = secondVal*myJson[value2];
-                        document.getElementById("curr_input_1").value = secondVal;
+                        document.getElementById("curr_input_1").value = firstVal;
                         console.log(secondVal);
                     }
                 }
