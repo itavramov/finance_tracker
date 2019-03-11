@@ -40,7 +40,6 @@
 </div>
 <script>
     var arr = getCurrDate();
-
     $(function() {
         $('input[name="daterange"]').daterangepicker({
             opens: 'left',
@@ -51,9 +50,8 @@
             if(!acc_id){
                 acc_id = 0;
             }
-           
+
             ExpenseDonut(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'), acc_id);
         });
-
     })
 </script>
