@@ -36,7 +36,7 @@ class CategoryDAO extends Connection{
         try{
             $stmt = self::$conn->prepare("SELECT category_id, category_name, category_type 
                                                     FROM categories 
-                                                    WHERE user_id = ?");
+                                                    WHERE user_id = ? OR user_id IS NULL ");
             $stmt->execute(array($user_id));
             $categories = [];
             $categories = $stmt->fetchAll(\PDO::FETCH_ASSOC);

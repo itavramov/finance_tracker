@@ -21,6 +21,7 @@ class UserController implements Editable {
             $password_1 = trim($_POST["password_1"]);
             $password_2 = trim($_POST["password_2"]);
             $user_image = $_FILES["user_image"]["tmp_name"];
+            $image_url = "uploads/user_image/noPicture.png";
 
 
             //$image_url = "view/uploads/user_image/noPicture.png";
@@ -105,13 +106,14 @@ class UserController implements Editable {
 
             //$image_url = "view/uploads/user_image/noPicture.png";
             if (!empty($first_name) && !empty($last_name) && !empty($email) && !empty($age)){
-                    if (empty($_FILES["user_image"]["tmp_name"])){
-                        //TODO MORE VALIDATIONS
-                        $image_url = "uploads/user_image/default.png";
-                    }else{
-                        if(move_uploaded_file($image_url, "view/uploads/user_image/". $first_name.time() . ".jpg")){
-                            $image_url = "uploads/user_image/". $first_name.time() . ".jpg";
-                        }
+                if (empty($_FILES["user_image"]["tmp_name"])){
+                    $arr = UserDAO::getInfoById($user_id);
+                    $image_url = $arr["picture"];
+                }
+                else{
+                    if(move_uploaded_file($image_url, "view/uploads/user_image/". $first_name.time() . ".jpg")){
+                        $image_url = "uploads/user_image/". $first_name.time() . ".jpg";
+                    }
                 }
 
             $cleanVars = DataValidator::validateUserEdit($email,$first_name,$last_name,$age);
@@ -131,7 +133,8 @@ class UserController implements Editable {
                 }else{
                     throw new \Exception("Invalid credentials...");
                 }
-            }else{
+            }
+            else{
                 throw new \Exception("Empty credentials...");
             }
         }

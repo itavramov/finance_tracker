@@ -148,6 +148,7 @@ function defaultExpenseDonut(){
 
 function changeAccDonut(acc_id){
     var res = document.getElementById("date_donut").value.split(" ");
+    console.log(res);
     var res_start_date = new Date(res[0]);
     var res_end_date = new Date(res[2]);
     var start_month = res_start_date.getMonth()+1;

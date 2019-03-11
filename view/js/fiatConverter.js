@@ -9,6 +9,7 @@ function getAllCurrencies() {
             return response.json();
         })
         .then(function (myJson) {
+            console.log(myJson);
             var results = myJson.results;
             for (var object in results){
                 var currencySelect1 = document.getElementById("curr_select_1");
