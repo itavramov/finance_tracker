@@ -182,6 +182,7 @@ function addAccount() {
             if(myJson.success === true){
                 alert("You successfuly added an account!");
                 fillAccounts();
+                fillAvgAccounts();
             }
             else{
                 alert("Something went wrong!");

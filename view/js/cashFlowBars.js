@@ -16,7 +16,7 @@ function cashFlowBars(start_date, end_date, acc_id){
 
             document.getElementById("cash_flow_value").innerHTML = myJson[1]['total_sum'] - myJson[0]['total_sum'] + "лв.";
 
-            if(myJson[0]['total_sum'] > myJson[1]['total_sum']){
+            if(parseInt(myJson[0]['total_sum']) > parseInt(myJson[1]['total_sum'])){
                 document.getElementById('progressBarExpense').innerHTML = myJson[0]['total_sum'];
                 $('#progressBarExpense').css("width", "100%");
             }
@@ -25,7 +25,7 @@ function cashFlowBars(start_date, end_date, acc_id){
                 $('#progressBarExpense').css("width", (myJson[0]['total_sum']/myJson[1]['total_sum'])*100 + "%");
             }
 
-            if(myJson[1]['total_sum']>myJson[0]["total_sum"]){
+            if(parseInt(myJson[1]['total_sum']) > parseInt(myJson[0]['total_sum'])){
                 document.getElementById('progressBarIncome').innerHTML = myJson[1]['total_sum'];
                 $('#progressBarIncome').css("width", "100%");
             }
@@ -46,6 +46,18 @@ function cash(){
             return response.json();
         })
         .then(function (myJson) {
+            if(myJson[1] === undefined){
+                if(myJson[0]["category_type"] === "income"){
+                    var array = {category_type:"expense", total_sum:"0"};
+                    myJson.splice(0, 0, array);
+                    console.log(myJson);
+                }
+                else{
+                    var array = {category_type:"income", total_sum:"0"};
+                    myJson.push(array);
+                    console.log(myJson);
+                }
+            }
             document.getElementById("cash_flow_value").innerHTML = "";
             document.getElementById('progressBarExpense').innerHTML = "";
             $('#progressBarExpense').css("width", "0%");
@@ -54,7 +66,7 @@ function cash(){
 
             document.getElementById("cash_flow_value").innerHTML = myJson[1]['total_sum'] - myJson[0]['total_sum'] + " лв.";
 
-            if(myJson[0]['total_sum'] > myJson[1]['total_sum']){
+            if(parseInt(myJson[0]['total_sum']) > parseInt(myJson[1]['total_sum'])){
                 document.getElementById('progressBarExpense').innerHTML = myJson[0]['total_sum'];
                 $('#progressBarExpense').css("width", "100%");
             }
@@ -63,7 +75,7 @@ function cash(){
                 $('#progressBarExpense').css("width", (myJson[0]['total_sum']/myJson[1]['total_sum'])*100 + "%");
             }
 
-            if(myJson[1]['total_sum']>myJson[0]["total_sum"]){
+            if(parseInt(myJson[1]['total_sum']) > parseInt(myJson[0]['total_sum'])){
                 document.getElementById('progressBarIncome').innerHTML = myJson[1]['total_sum'];
                 $('#progressBarIncome').css("width", "100%");
             }
@@ -110,6 +122,18 @@ function changeAccCashFlow(acc_id){
             return response.json();
         })
         .then(function (myJson) {
+            if(myJson[1] === undefined){
+                if(myJson[0]["category_type"] === "income"){
+                    var array = {category_type:"expense", total_sum:"0"};
+                    myJson.splice(0, 0, array);
+                    console.log(myJson);
+                }
+                else{
+                    var array = {category_type:"income", total_sum:"0"};
+                    myJson.push(array);
+                    console.log(myJson);
+                }
+            }
             document.getElementById("cash_flow_value").innerHTML = "";
             document.getElementById('progressBarExpense').innerHTML = "";
             $('#progressBarExpense').css("width", "0%");
@@ -118,7 +142,7 @@ function changeAccCashFlow(acc_id){
 
             document.getElementById("cash_flow_value").innerHTML = myJson[1]['total_sum'] - myJson[0]['total_sum'] + "лв.";
 
-            if(myJson[0]['total_sum'] > myJson[1]['total_sum']){
+            if(parseInt(myJson[0]['total_sum']) > parseInt(myJson[1]['total_sum'])){
                 document.getElementById('progressBarExpense').innerHTML = myJson[0]['total_sum'];
                 $('#progressBarExpense').css("width", "100%");
             }
@@ -127,7 +151,7 @@ function changeAccCashFlow(acc_id){
                 $('#progressBarExpense').css("width", (myJson[0]['total_sum']/myJson[1]['total_sum'])*100 + "%");
             }
 
-            if(myJson[1]['total_sum']>myJson[0]["total_sum"]){
+            if(parseInt(myJson[1]['total_sum']) > parseInt(myJson[0]['total_sum'])){
                 document.getElementById('progressBarIncome').innerHTML = myJson[1]['total_sum'];
                 $('#progressBarIncome').css("width", "100%");
             }

@@ -60,8 +60,8 @@
 
     $('input[name="daterange2"]').daterangepicker({
         opens: 'left',
-        "startDate": start_date,
-        "endDate": end_date,
+        "startDate": arr.start_date,
+        "endDate": arr.end_date,
     }, function(start, end, label) {
         var start_date = start.format('YYYY-MM-DD');
         var end_date = end.format('YYYY-MM-DD');

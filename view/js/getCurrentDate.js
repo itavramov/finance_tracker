@@ -8,7 +8,7 @@ function getCurrDate(){
     var year = newDate.getUTCFullYear();
 
     var curr_month = CurrentDate.getUTCMonth() + 1;
-    var curr_day = newDate.getUTCDate();
+    var curr_day = newDate.getUTCDate() + 1;
     var curr_year = newDate.getUTCFullYear();
 
     if(month < 9){

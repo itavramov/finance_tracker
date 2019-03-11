@@ -52,12 +52,13 @@ class RecordController{
         }
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
             $start_date = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
-            $end_date   = date(Constants::DATE_FORMAT_PHP);
+            $end_date   = date(Constants::DATE_FORMAT_PHP, strtotime('+1 days'));
         }else{
             $start_date = $_POST["start_date"];
             $end_date   = $_POST["end_date"];
         }
         $sum = RecordDAO::sumAllExpenses($user_id, $start_date, $end_date, $acc_id);
+
         if(empty($sum[0]["total_sum"])){
             $sum[0]["total_sum"] = "0";
         }
@@ -76,7 +77,7 @@ class RecordController{
         }
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
             $start_date = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
-            $end_date   = date(Constants::DATE_FORMAT_PHP);
+            $end_date   = date(Constants::DATE_FORMAT_PHP, strtotime('+1 days'));
         }else{
             $start_date = $_POST["start_date"];
             $end_date   = $_POST["end_date"];
@@ -118,7 +119,7 @@ class RecordController{
             $_POST["start_date"] = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
         }
         if(empty( $_POST["end_date"])){
-            $_POST["end_date"] = date(Constants::DATE_FORMAT_PHP);
+            $_POST["end_date"] = date(Constants::DATE_FORMAT_PHP, strtotime('+1 days'));
         }
 
         $allRecords = RecordDAO::getAllRecordsByUserFiltered($user_id, $_POST["start_date"], $_POST["end_date"],
@@ -159,7 +160,7 @@ class RecordController{
         }
         if(empty( $_POST["start_date"]) && empty( $_POST["end_date"])){
             $start_date = date(Constants::DATE_FORMAT_PHP, strtotime('-1 months'));
-            $end_date   = date(Constants::DATE_FORMAT_PHP);
+            $end_date   = date(Constants::DATE_FORMAT_PHP, strtotime('+1 days'));
         }else{
             $start_date = $_POST["start_date"];
             $end_date   =  $_POST["end_date"];

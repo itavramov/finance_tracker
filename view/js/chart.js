@@ -9,6 +9,13 @@ function ExpenseDonut(start_date, end_date, acc_id) {
         })
         .then(function (myJson) {
 
+            $('#donutChart').remove();
+            var container = document.getElementById("compareDiagram");
+            var new_chart = document.createElement("canvas");
+            new_chart.id = "donutChart";
+
+            container.appendChild(new_chart);
+
             var ict_unit = [];
             var efficiency = [];
             var coloR = [];
@@ -92,9 +99,8 @@ function defaultExpenseDonut(){
                 coloR.push(dynamicColors());
             }
 
-            $('#results-graph').remove();
-
             var ctx = document.getElementById("donutChart");
+
             var data_arr = {
                 datasets: [{
                     data: myJson[1],
@@ -172,6 +178,13 @@ function changeAccDonut(acc_id){
             return response.json();
         })
         .then(function (myJson) {
+
+            $('#donutChart').remove();
+            var container = document.getElementById("compareDiagram");
+            var new_chart = document.createElement("canvas");
+            new_chart.id = "donutChart";
+
+            container.appendChild(new_chart);
 
             var ict_unit = [];
             var efficiency = [];
@@ -285,7 +298,13 @@ function incomeVsExpenseLineChart(start_date, end_date, acc_id) {
         })
         .then(function (myJson) {
 
-            document.getElementById("incomeVsExpenseLineChart").innerHTML = "";
+            $('#incomeVsExpenseLineChart').remove();
+            var container = document.getElementById("compareDiagram");
+            var new_chart = document.createElement("canvas");
+            new_chart.id = "incomeVsExpenseLineChart";
+
+            container.appendChild(new_chart);
+
             var ctx = document.getElementById("incomeVsExpenseLineChart");
 
             var secondDiagram = new Chart(ctx, {
@@ -354,7 +373,13 @@ function changeAccTrend(acc_id){
         })
         .then(function (myJson) {
 
-            document.getElementById("incomeVsExpenseLineChart").innerHTML = "";
+            $('#incomeVsExpenseLineChart').remove();
+            var container = document.getElementById("compareDiagram");
+            var new_chart = document.createElement("canvas");
+            new_chart.id = "incomeVsExpenseLineChart";
+
+            container.appendChild(new_chart);
+
             var ctx = document.getElementById("incomeVsExpenseLineChart");
 
             var secondDiagram = new Chart(ctx, {
